@@ -25,7 +25,7 @@
         width: 100%;
         margin-bottom: 20px;
     }
-
+    
     /*make the input boxes look like text boxes*/
     input[type=text], input[type=password], input[type=email] {
         width: 95%;
