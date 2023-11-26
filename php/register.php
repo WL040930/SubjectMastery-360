@@ -3,48 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="../css/register.css">
+    <title>Register Your Account</title>
 </head>
 
+<style>
+    body{
+        background-color: #B3D2F2;
+    }
+
+    /*Center container in the middle of the page and leave 100px from top and bottom of the page */
+    #container {
+        margin: 100px auto 100px;
+        width: 500px;
+        border: 1px solid black;
+        padding: 7px;
+        border-radius: 7px; 
+        background-color: #B3EBF2;
+    }
+
+    .inp-box {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    input[type=text], input[type=password], input[type=email] {
+        width: 95%;
+        padding: 10px;
+        margin: 5px 5px 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+        border-radius: 7px;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+
+</style>
+
 <body>
-    <!--
-        Make a register page which the form is in the middle of the page, and it is covered by a border
-    -->
-    <div class="container">
-        <h1>Register Your Account</h1>
-        <form action="#" method="post">
-            <div class="input">
-                <label for="username">Username: </label>
-                <input type="text" name="username" id="username" placeholder="Username" required>
+    <div id="container">
+        <h1>Register Your Acount</h1>
+        <div><p>Register your account here by filling in your information</p></div>
+        <br>
+        <form action="login.php" method="post" onsubmit="return validate_password()">
+
+            <div class="inp-box">
+                <label for="Username">Username: </label>
+                <input type="text" name="username" id="Username" placeholder="Enter Username" required>
             </div>
-            <div class="input">
+
+            <div class="inp-box">
                 <label for="first_name">First Name: </label>
-                <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                <input type="text" name="first_name" id="first_name" placeholder="Enter First Name" required>
             </div>
-            <div class="input">
+
+            <div class="inp-box">
                 <label for="last_name">Last Name: </label>
-                <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+                <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" required>
             </div>
-            <div class="input">
+
+            <div class="inp-box">
                 <label for="email">Email: </label>
-                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="email" name="email" id="email" placeholder="Enter Email" required>
             </div>
-            <div class="input">
+
+            <div class="inp-box">
+                <label for="institute_name">Institute name: </label>
+                <input type="text" name="institute_name" id="institute_name" placeholder="Enter Institute Name">
+            </div>
+
+            <div class="inp-box">
                 <label for="password">Password: </label>
-                <input type="password" name="password" id="password" placeholder="Password" required>
+                <input type="password" name="password" id="password" placeholder="Enter Password" required>
             </div>
-            <div class="input">
+
+            <div class="inp-box">
                 <label for="confirm_password">Confirm Password: </label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Enter Confirm Password" required>
             </div>
-            <div class="input">
+
+            <div class="validate-message"></div>
+            <div class="inp-box">
                 <input type="submit" name="submit" value="Register">
             </div>
-            <div class="input">
-                <a href="login.php">Already have an account? Login here.</a>
+
+            <div class="inp-box">
+                Already have an account? <a href="login.php">Login here.</a>
             </div>
         </form>
+    </div>
+
+    <script>
+        function validate_password(){
+            var password = document.getElementById("password").value;
+            var confirm_password = document.getElementById("confirm_password").value;
+            var validatemessage = document.getElementsByClassName("validate-message")[0];
+            if(password != confirm_password){
+                validatemessage.textContent = "Password and Confirm Password must match.";
+                validatemessage.style.color = "red";
+                return false;
+            } else {
+                validatemessage.textContent = "";
+            }
+        }
+
+    </script>
 
 </body>
 </html>
