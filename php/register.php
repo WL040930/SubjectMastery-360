@@ -4,55 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Your Account</title>
+    <link rel="stylesheet" href="../css/register.css">
 </head>
-
-<style>
-    body{
-        background-color: #B3D2F2;
-    }
-
-    /*Center container in the middle of the page and leave 100px from top and bottom of the page */
-    #container {
-        margin: 100px auto 100px;
-        width: 500px;
-        border: 1px solid black;
-        padding: 7px;
-        border-radius: 7px; 
-        background-color: #B3EBF2;
-    }
-
-    .inp-box {
-        margin-bottom: 20px;
-        width: 100%;
-    }
-
-    input[type=text], input[type=password], input[type=email] {
-        width: 95%;
-        padding: 10px;
-        margin: 5px 5px 22px 0;
-        display: inline-block;
-        border: none;
-        background: #f1f1f1;
-        border-radius: 7px;
-    }
-
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-
-</style>
 
 <body>
     <div id="container">
@@ -106,41 +59,6 @@
             </div>
         </form>
     </div>
-
-    <script>
-        function validate_password() {
-            var password = document.getElementById("password").value;
-            var confirm_password = document.getElementById("confirm_password").value;
-            var validate_message = document.getElementsByClassName("validate-message")[0];
-
-            var uppercase = /[A-Z]/;
-            var lowercase = /[a-z]/;
-            var specialcharacter = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-            var number = /[0-9]/;
-            var length = /.{8,}/;
-
-            if (
-                password.match(uppercase) &&
-                password.match(lowercase) &&
-                password.match(specialcharacter) &&
-                password.match(number) &&
-                password.match(length)
-            ) {
-                if (password === confirm_password) {
-                    validate_message.textContent = "";
-                } else {
-                    validate_message.textContent = "Password and Confirm Password must match.";
-                    validate_message.style.color = "red";
-                    return false;
-                }
-            } else {
-                validate_message.textContent =
-                    "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
-                validate_message.style.color = "red";
-                return false;
-            }
-        }
-    </script>
-
+    <script src="../script/password_validation.js"></script>
 </body>
 </html>
