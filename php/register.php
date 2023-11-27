@@ -16,7 +16,7 @@
 
             <div class="inp-box">
                 <label for="Username">Username: </label>
-                <input type="text" name="username" id="Username" placeholder="Enter Username" required>
+                <input type="text" name="username" id="username" placeholder="Enter Username" required>
             </div>
 
             <div class="inp-box">
