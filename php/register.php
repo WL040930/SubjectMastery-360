@@ -12,7 +12,7 @@
         <h1>Register Your Acount</h1>
         <div><p>Register your account here by filling in your information</p></div>
         <br>
-        <form action="login.php" method="post" onsubmit="return validate_password()">
+        <form action="login.php" method="post" onsubmit="return register_validation()">
 
             <div class="inp-box">
                 <label for="Username">Username: </label>

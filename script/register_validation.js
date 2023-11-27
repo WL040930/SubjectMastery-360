@@ -1,4 +1,4 @@
-function validate_password() {
+function register_validation() {
     var password = document.getElementById("password").value;
     var confirm_password = document.getElementById("confirm_password").value;
     var validate_message = document.getElementsByClassName("validate-message")[0];
