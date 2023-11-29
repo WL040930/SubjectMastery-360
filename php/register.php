@@ -60,6 +60,6 @@
             </div>
         </form>
     </div>
-    <script src="../script/password_validation.js"></script>
+    <script src="../script/register_validation.js"></script>
 </body>
 </html>
