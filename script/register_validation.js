@@ -10,8 +10,6 @@ function register_validation() {
     var number = /[0-9]/;
     var length = /.{8,}/;
     var username_length = /.{5,11}/;
-    var not_null = /.{1,}/
-
 
     if (username.match(username_length)) {
         if (
