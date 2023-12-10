@@ -1,23 +1,52 @@
-body{
-    background-color: #B3D2F2;
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/*Center container in the middle of the page and leave 100px from top and bottom of the page */
+header {
+    width: 100%;
+    background-color: lightgray;
+    text-align: center;
+    padding: 20px;
+}
+
 #container {
-    margin: 100px auto 100px;
-    width: 500px;
-    border: 1px solid black;
-    padding: 7px;
-    border-radius: 7px; 
-    background-color: #B3EBF2;
+    margin: 10%;
+    width: 80%;
+    overflow: hidden; 
 }
 
-.inp-box {
+#header {
+    width: 100%;
+    height: auto;
+}
+
+#data-entry,
+#submit-field {
+    width: 50%;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    padding: 20px; 
+}
+
+#submit-field {
+    height: 745.95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column
+}
+
+.box {
     margin-bottom: 20px;
     width: 100%;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text],
+input[type=password],
+input[type=email] {
     width: 95%;
     padding: 10px;
     margin: 5px 5px 22px 0;
@@ -40,4 +69,14 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #45a049;
+}
+
+
+#reset {
+    clear: both;
+}
+
+input[type="submit"], #login-text {
+    padding: 10px;
+    margin-top: 10px;
 }
