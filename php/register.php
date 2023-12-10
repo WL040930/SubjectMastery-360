@@ -1,5 +1,17 @@
 <?php
+
+    $path = "#";
     //connection database
+
+    if(isset($_POST['submit'])) {
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
+        if ($password == $confirm_password) {
+            $path = "feedbackbutton.php";
+        } else {
+            echo "Password not match";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +36,7 @@
         </div>
 
         <div id="data-entry">
-            <form action="" method="post">
+            <form action="<?php echo $path; ?>" method="post">
                 <div class="box">
                     <label for="username">Username: <font color="red">*</font></label>
                     <input type="text" name="username" id="username" placeholder="Username" required>
