@@ -26,27 +26,27 @@
         <div id="data-entry">
             <form action="" method="post">
                 <div class="box">
-                    <label for="username">Username: </label>
+                    <label for="username">Username: <font color="red">*</font></label>
                     <input type="text" name="username" id="username" placeholder="Username" required>
                 </div>
                 <div class="box">
-                    <label for="firstname">First Name: </label>
+                    <label for="firstname">First Name: <font color="red">*</font></label>
                     <input type="text" name="firstname" id="firstname" placeholder="First Name" required>
                 </div>
                 <div class="box">
-                    <label for="lastname">Last Name: </label>
+                    <label for="lastname">Last Name: <font color="red">*</font></label>
                     <input type="text" name="lastname" id="lastname" placeholder="Last Name" required>
                 </div>
                 <div class="box">
-                    <label for="email">Email Address: </label>
+                    <label for="email">Email Address: <font color="red">*</font></label>
                     <input type="email" name="email" id="email" placeholder="Email" required>
                 </div>
                 <div class="box">
-                    <label for="password">Password: </label>
+                    <label for="password">Password: <font color="red">*</font></label>
                     <input type="password" name="password" id="password" placeholder="Password" required>
                 </div>
                 <div class="box">
-                    <label for="confirm_password">Confirm Password: </label>
+                    <label for="confirm_password">Confirm Password: <font color="red">*</font></label>
                     <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
                 </div>
                 <div class="box">
