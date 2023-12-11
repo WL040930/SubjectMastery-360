@@ -2,10 +2,10 @@ body{
     background-color: #B3D2F2;
 }
 
+/*Center container in the middle of the page and leave 100px from top and bottom of the page */
 #container {
     margin: 100px auto 100px;
-    width: 50%;
-    height: auto;
+    width: 500px;
     border: 1px solid black;
     padding: 7px;
     border-radius: 7px; 
