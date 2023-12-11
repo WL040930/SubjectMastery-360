@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Your Account</title>
     <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/feedbackbutton.css">
     <link rel="icon" href="###"> <!--put icon here-->
+
 </head>
 
 <body>
@@ -60,6 +62,13 @@
             </div>
         </form>
     </div>
+
+    <div id="feedback">
+        <a href="feedback.php" id="feedback-link">
+            <img src="../image/feedback.png" alt="Feedback" title="Click Here to Leave Feedback" id="feedback-image">
+        </a>
+    </div>
+
     <script src="../script/register_validation.js"></script>
 </body>
 </html>
