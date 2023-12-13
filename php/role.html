@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+
+    #container {
+        width: 70%;
+        height: auto;
+        margin: 0 auto;
+        background-color: aqua;
+    }
+
+    #student {
+        width: 50%; 
+        height: auto;
+        float: left;
+        background-color: blueviolet;
+    }
+
+    #teacher {
+        width: 50%;
+        height: auto;
+        float: right;
+        background-color: chartreuse;
+    }
+
+    #close {
+        clear: both;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>Please Select Your Role</h1>
+        </div>
+
+        <form action="post">
+        <div id="student">
+            <input type="radio" name="role" value="student">Student<br>
+        </div>
+
+        <div id="teacher">
+            <input type="radio" name="role" value="teacher">Teacher<br>
+        </div>
+
+        <div id="close"></div>
+    </div>        
+
+        <div id="btnSubmit">
+            <input type="submit" value="Next" name="btnNext">
+        </div>
+        </form>
+</body>
+</html>

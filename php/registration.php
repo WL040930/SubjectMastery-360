@@ -1,7 +1,6 @@
 <?php
 
     include "dbconn.php"; 
-    session_start();
 
 ?>
 
@@ -10,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Your Account</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="../css/register.css">
     <link rel="stylesheet" href="../css/feedbackbutton.css">
     <link rel="icon" href="../image/logo.png"> <!--put icon here-->
@@ -93,11 +92,11 @@
         $query = "INSERT INTO `user`(`username`, `user_first_name`, `user_last_name`, `email_address`, `password`, `institute_name`) VALUES ('$username','$first_name','$last_name','$email','$password','$institute_name')";
         if(mysqli_query($connection, $query)){
             echo "<script>alert('Registration Successful!')</script>";
-            header(Location: "feedbackbutton.php");
+            header("location:feedbackbutton.php");
         } else {
             echo "<script>alert('Registration Failed!')</script>";
         }
-        }
+    }
     
 
 ?> 
