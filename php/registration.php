@@ -97,7 +97,7 @@
         } else {
             echo "<script>alert('Registration Failed!')</script>";
         }
-        }
+    }
     
 
 ?> 
