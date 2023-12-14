@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#container {
+    width: 600px;
+    height: auto;
+    background-color: aquamarine; 
+}
+
+#header {
+    width: 100%;
+    height: 100px;
+    background-color: aquamarine;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+#input{
+    width: 100%;
+    height: 300px;
+    background-color: aquamarine;
+    /* border: 1px solid black; */
+    margin: 0 auto;
+}
+
+#input table{
+    width: 100%;
+    margin-top: 20px;
+    border-spacing: 3em;
+}
+
+
+#submit {
+    align-items: center;
+}
+
+#sign-up {
+    float: left;
+}
+
+#forgot-password {
+    float: right;
+}
