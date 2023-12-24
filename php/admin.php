@@ -4,7 +4,7 @@
     session_start();
     if(isset($_SESSION['admin']) == null) {
         echo "<script>alert('Authorized Access only!')</script>";
-        echo "<script>window.location.href='../login.php';</script>";
+        echo "<script>window.location.href='login.php';</script>";
     } else {
 
 ?>
@@ -14,51 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Main Page - Admin</title>
+    <link rel="stylesheet" href="../css/adminmenu.css">
 </head>
-
-<style>
-    /* Make the ul into menu bar and make it looks nice */
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #111;
-    }
-
-    .active {
-        background-color: #4CAF50;
-    }
-
-    /* split the space between menu section equally */
-    ul {
-        display: flex;
-        justify-content: space-around;
-    }
-    ul li {
-        flex: 1;
-    }
-    ul li a {
-        flex: 1;
-    }
-</style>
 
 
 <body>
