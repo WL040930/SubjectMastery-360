@@ -1,7 +1,8 @@
 <?php
 
     include "dbconn.php"; 
-    session_start();
+    include "admin-menu.php"; 
+    include "admin-session.php"; 
     $id = $_GET['id'];
 ?>
 
@@ -11,20 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Profile</title>
-    <link rel="stylesheet" href="../css/adminmenu.css">
 </head>
 <body>
-    <div id="header">
-        <div><img src="../image/logo.png" height="100px"> </div>
-        <div> <h1>Welcome</h1></div>
-    </div>
-    <br>
-    <ul> 
-        <li><a href="manageuser.php" disable>Manage User</a></li>
-        <li><a href="database.php">Database</a></li>
-        <li><a href="adminfeedback.php">Feedback</a></li>
-        <li><a href="logout.php">Logout</a></li>
-    </ul>
     
     <form action="" method="post">
 
@@ -38,7 +27,7 @@
         <table border = "1">
             <tr>
                 <td colspan="2">
-                    profile picture
+                    <img src="display-profile-picture.php?id=' . $id . '" alt="Profile Picture" style="max-width: 200px; max-height: 200px;"></td>
                 </td>
             </tr>
             <tr>
@@ -66,10 +55,9 @@
                 <td> <input type="text" name="institute" value="<?php echo $row['institute_name'];?>"></td>
             </tr>
         </table>
-
         <input type="submit" name="submit" value="submit">
     </form>
-    
+    <a href="admin-manageuser.php"><button type="button">Back</button></a>
     <?php } ?>
 
 </body>
@@ -78,7 +66,23 @@
 <?php
 
     if(isset($_POST['submit'])){
-        
+        $username = $_POST['username']; 
+        $firstname = $_POST['firstname']; 
+        $lastname = $_POST['lastname']; 
+        $password = $_POST['password']; 
+        $institute = $_POST['institute']; 
+        if(!empty($username) && !empty($firstname) && !empty($lastname) && !empty($password)) {
+            $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',`password`='$password',`institute_name`='$institute' WHERE user_id = '$id'"; 
+            if(mysqli_query($connection, $query)) {
+                echo "<script>alert('Record updated Successfully')</script>";
+                echo "<script>window.location.href='admin-manageuser.php';</script>";
+            } else {
+                echo "Record update unsuccessful, please try again.";
+            }
+        } else {
+            echo "Username, First Name, Last Name and Password cannot be null.";
+        }
     }
-
+//CHECK ADMIN PROBLEM 
 ?>
+

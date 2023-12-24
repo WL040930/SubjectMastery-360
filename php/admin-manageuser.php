@@ -1,11 +1,8 @@
 <?php
 
     include "dbconn.php"; 
-    session_start();
-    if(isset($_SESSION['admin']) == null) {
-        echo "<script>alert('Authorized Access only!')</script>";
-        echo "<script>window.location.href='login.php';</script>";
-    } else {
+    include "admin-menu.php"; 
+    include "admin-session.php"; 
 
 ?>
 
@@ -32,18 +29,6 @@
 </style>
 
 <body>
-    <div id="header">
-        <div><img src="../image/logo.png" height="100px"> </div>
-        <div> <h1>Welcome, <?php echo $_SESSION['admin']; } ?></h1></div>
-    </div>
-    <br>
-    <ul> 
-        <li><a href="manageuser.php" disable>Manage User</a></li>
-        <li><a href="database.php">Database</a></li>
-        <li><a href="adminfeedback.php">Feedback</a></li>
-        <li><a href="logout.php">Logout</a></li>
-    </ul>   
-
     <div id="search-box">
         <form action="" method="get">
             <input type="text" name="email" placeholder="Enter Email to Search"> <br>
@@ -62,7 +47,7 @@
 
     <div id="search-result">
         <div id="result-box">
-            <a href="manageprofile.php?id=<?php echo $row['user_id'];?>">
+            <a href="admin-manageprofile.php?id=<?php echo $row['user_id'];?>">
                 <div>
                     <?php echo $row['username'] ; ?>
                 </div>
@@ -76,8 +61,10 @@
 <?php
                     }
                 } else {
-                    echo "<script>alert('Please enter email');</script>";   
+                    echo "No result Found";   
                 }
+            } else {
+                echo "Please Enter Email Address";
             }
         }
     

@@ -1,6 +1,7 @@
 <?php
 
     include "dbconn.php"; 
+    session_start(); 
 
 ?>
 
@@ -88,11 +89,16 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $institute_name = $_POST['institute_name'];
-
         $query = "INSERT INTO `user`(`username`, `user_first_name`, `user_last_name`, `email_address`, `password`, `institute_name`) VALUES ('$username','$first_name','$last_name','$email','$password','$institute_name')";
         if(mysqli_query($connection, $query)){
+            $fetch = "SELECT * FROM `user` WHERE email_address = '$email' AND password='$password'"; 
+            $result = mysqli_query($connection, $fetch); 
+            $row = mysqli_fetch_assoc($result);  
+            $_SESSION['id'] = $row['user_id'];
+            $_SESSION['username'] = $row['username']; 
+            $_SESSION['email'] = $row['email_address'];
             echo "<script>alert('Registration Successful!')</script>";
-            header("location:feedbackbutton.php");
+            header("location:registration-profilepicture.php");
         } else {
             echo "<script>alert('Registration Failed!')</script>";
         }
