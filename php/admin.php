@@ -1,6 +1,6 @@
 <?php
 
-    include "../dbconn.php"; 
+    include "dbconn.php"; 
     session_start();
     if(isset($_SESSION['admin']) == null) {
         echo "<script>alert('Authorized Access only!')</script>";
@@ -63,7 +63,7 @@
 
 <body>
     <div id="header">
-        <div><img src="../../image/logo.png" height="100px"> </div>
+        <div><img src="../image/logo.png" height="100px"> </div>
         <div> <h1>Welcome, <?php echo $_SESSION['admin']; }?></h1></div>
     </div>
     <br>

@@ -16,7 +16,7 @@
             $_SESSION['email'] = $row['email'];
             if($_SESSION['email'] = "admin@gmail.com") {
                 $_SESSION['admin'] = "admin";
-                header("Location: admin/admin.php");
+                header("Location: admin.php");
             } else {
                 header("Location: index.php");
             }
