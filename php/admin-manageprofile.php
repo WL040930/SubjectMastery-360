@@ -27,7 +27,9 @@
         <table border = "1">
             <tr>
                 <td colspan="2">
-                    <img src="display-profile-picture.php?id=' . $id . '" alt="Profile Picture" style="max-width: 200px; max-height: 200px;"></td>
+                    <img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"> <br>
+                    <input type="file" name="profile_picture">
+                </td>
                 </td>
             </tr>
             <tr>

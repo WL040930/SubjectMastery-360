@@ -2,8 +2,8 @@
 
     include "dbconn.php";
     session_start();
-    echo $_SESSION['id'] = "6";
-    $id = "6"; 
+    echo $_SESSION['id'] = "1";
+    $id = "1"; 
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +61,8 @@
         $newImageName = uniqid();
         $newImageName .= '.' . $imageExtension;
 
-        move_uploaded_file($tmpName, '../image/image' . $newImageName);
-        $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '6'";
+        move_uploaded_file($tmpName, '../data/image' . $newImageName);
+        $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '$id'";
         mysqli_query($connection, $query);
         echo
         "

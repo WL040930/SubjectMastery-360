@@ -13,12 +13,12 @@
 <body>
 <?php
       
-      $rows = mysqli_query($connection, "SELECT * FROM user WHERE user_id = '6'");
+      $rows = mysqli_query($connection, "SELECT * FROM user WHERE user_id = '1'");
       ?>
 
       <?php foreach ($rows as $row) : ?>
       <tr>
-        <td> <img src="../image/<?php echo 'image'.$row["profile_picture"]; ?>" width = 200 title="<?php echo $row['profile_picture']; ?>"> </td>
+        <td> <img src="../data/<?php echo 'image'.$row["profile_picture"]; ?>" width = 200 title="<?php echo $row['profile_picture']; ?>"> </td>
       </tr>
       <?php endforeach; ?>
     </table>
