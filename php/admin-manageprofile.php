@@ -15,7 +15,7 @@
 </head>
 <body>
     
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
 
     <?php
         $query = "SELECT * FROM user WHERE user_id = '$id'";
@@ -28,7 +28,7 @@
             <tr>
                 <td colspan="2">
                     <img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"> <br>
-                    <input type="file" name="profile_picture">
+                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
                 </td>
                 </td>
             </tr>
@@ -59,7 +59,8 @@
         </table>
         <input type="submit" name="submit" value="submit">
     </form>
-    <a href="admin-manageuser.php"><button type="button">Back</button></a>
+    <button onclick="goBack()">Back</button>
+    <script src="../script/feature-back.js"></script>
     <?php } ?>
 
 </body>
@@ -73,18 +74,49 @@
         $lastname = $_POST['lastname']; 
         $password = $_POST['password']; 
         $institute = $_POST['institute']; 
+        $image = $_POST['image'];
+
         if(!empty($username) && !empty($firstname) && !empty($lastname) && !empty($password)) {
             $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',`password`='$password',`institute_name`='$institute' WHERE user_id = '$id'"; 
             if(mysqli_query($connection, $query)) {
-                echo "<script>alert('Record updated Successfully')</script>";
-                echo "<script>window.location.href='admin-manageuser.php';</script>";
+                
             } else {
                 echo "Record update unsuccessful, please try again.";
             }
         } else {
             echo "Username, First Name, Last Name and Password cannot be null.";
         }
+
+        if($_FILES["image"]["error"] == 4){
+            echo "<script> alert('Image Does Not Exist'); </script>";
+        }
+        else{
+            $fileName = $_FILES["image"]["name"];
+            $fileSize = $_FILES["image"]["size"];
+            $tmpName = $_FILES["image"]["tmp_name"];
+
+            $validImageExtension = ['jpg', 'jpeg', 'png'];
+            $imageExtension = explode('.', $fileName);
+            $imageExtension = strtolower(end($imageExtension));
+
+            if (!in_array($imageExtension, $validImageExtension) ){
+                echo "<script> alert('Invalid Image Extension');</script>";
+            } else if($fileSize > 1000000){
+                echo " <script> alert('Image Size Is Too Large'); </script>";
+            } else{
+                $newImageName = uniqid();
+                $newImageName .= '.' . $imageExtension;
+
+                move_uploaded_file($tmpName, '../data/image' . $newImageName);
+                $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '$id'";
+                mysqli_query($connection, $query);
+                echo "<script> alert('Successfully Added');</script>";
+                echo "<script>window.location.href='admin-manageuser.php';</script>";;
+            }
+        }
     }
+    
+
 //CHECK ADMIN PROBLEM 
 ?>
 
