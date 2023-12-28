@@ -3,27 +3,33 @@
     include 'dbconn.php';
     session_start();
 
-    if(isset($_POST['btnLogin'])) {
+    if (isset($_POST['btnLogin'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM `user` WHERE email_address = '$email' AND password = '$password'";
-        $result = mysqli_query($connection, $query); 
-        if(mysqli_num_rows($result) == 1) {
+        $query = "SELECT * FROM `user` LEFT JOIN role ON user.role_id = role.role_id WHERE email_address = '$email' AND password = '$password'";
+        $result = mysqli_query($connection, $query);
+    
+        if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['id'] = $row['user_id'];
             $_SESSION['first_name'] = $row['user_first_name'];
             $_SESSION['last_name'] = $row['user_last_name'];
-            $_SESSION['email'] = $row['email'];
-            if($_SESSION['email'] = "admin@gmail.com") {
+            $_SESSION['email'] = $row['email_address'];
+            $_SESSION['role'] = $row['role'];
+    
+            if ($_SESSION['role'] == "admin") { 
                 $_SESSION['admin'] = "admin";
                 header("Location: admin-index.php");
+                exit(); 
             } else {
-                header("Location: index.php");
+                header("Location: feature-usermenu.php");
+                exit();  
             }
         } else {
-            echo "<script>alert('Invalid email or password');</script>"; 
+            echo "<script>alert('Invalid email or password');</script>";
         }
     }
+    
 
 ?>
 

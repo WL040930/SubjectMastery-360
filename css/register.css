@@ -1,43 +1,92 @@
-body{
-    background-color: #B3D2F2;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
-/*Center container in the middle of the page and leave 100px from top and bottom of the page */
 #container {
-    margin: 100px auto 100px;
-    width: 500px;
-    border: 1px solid black;
-    padding: 7px;
-    border-radius: 7px; 
-    background-color: #B3EBF2;
+    width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #000000;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .inp-box {
-    margin-bottom: 20px;
-    width: 100%;
+    margin-bottom: 15px;
 }
 
-input[type=text], input[type=password], input[type=email] {
-    width: 95%;
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
     padding: 10px;
-    margin: 5px 5px 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-    border-radius: 7px;
+    box-sizing: border-box;
+    margin-top: 5px;
 }
 
-input[type=submit] {
+input[type="submit"] {
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+.validate-message {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.inp-box a {
+    color: #333;
+    text-decoration: none;
+}
+
+#feedback {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+#feedback-link {
+    display: block;
+    text-decoration: none;
+}
+
+#feedback-image {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px #888;
+    transition: transform 0.3s ease-in-out;
+}
+
+#feedback-image:hover {
+    transform: scale(1.1);
 }

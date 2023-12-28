@@ -1,0 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: #333;
+    display: flex; /* Use flexbox for horizontal layout */
+}
+
+li {
+    flex-grow: 1; /* Each menu item takes equal width */
+    position: relative;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #555;
+}
+
+ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #555;
+}
+
+li:hover > ul {
+    display: block;
+}
+
+ul ul li {
+    display: block;
+}
+
+ul ul a {
+    padding: 10px;
+}
+
+ul ul ul {
+    left: 100%;
+    top: 0;
+}

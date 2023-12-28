@@ -29,7 +29,7 @@
                 $newImageName .= '.' . $imageExtension;
 
                 move_uploaded_file($tmpName, '../data/image' . $newImageName);
-                $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '1'";
+                $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '7'";
                 mysqli_query($connection, $query);
                 echo "<script> alert('Successfully Added');</script>";
             }

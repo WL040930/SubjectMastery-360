@@ -74,7 +74,7 @@
                     <?php echo $row['feedback_content']; ?>
                 </div>
                 <?php 
-                    echo $fetchid = $row['feedback_id'];
+                    $fetchid = $row['feedback_id'];
                     $fetchquery = "SELECT * FROM feedback_attachment WHERE feedback_id = '$fetchid'"; 
                     $fetchresult = mysqli_query($connection, $fetchquery);
                     if (mysqli_num_rows($fetchresult) > 0) {

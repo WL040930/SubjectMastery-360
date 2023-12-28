@@ -1,13 +1,38 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#header img {
+    height: 80px; /* Adjust the height of the logo as needed */
+}
+
+#header h1 {
+    margin: 0;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #333;
+    overflow: hidden;
+    width: 100%;
 }
 
 li {
     float: left;
+    width: 25%;
 }
 
 li a {
@@ -16,24 +41,14 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-li a:hover:not(.active) {
-    background-color: #111;
+li a:hover {
+    background-color: #555;
 }
 
-.active {
+/* Style for the active link */
+li a.active {
     background-color: #4CAF50;
-}
-
-/* split the space between menu section equally */
-ul {
-    display: flex;
-    justify-content: space-around;
-}
-ul li {
-    flex: 1;
-}
-ul li a {
-    flex: 1;
 }
