@@ -14,23 +14,6 @@
     <link rel="stylesheet" href="../css/usermenu.css">
 </head>
 
-<style>
-    #header {
-        width: 100%;
-    }
-    
-    #image {
-        border-radius: 50%;
-        float: left;
-        width: 10%;  
-    }
-
-    #title {
-        width: 85%; 
-        float: right;
-    }
-</style>
-
 <body>
 
     <div id="header">

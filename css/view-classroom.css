@@ -1,0 +1,41 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#classroom-container {
+    width: calc(25% - 20px); 
+}
+
+/* Style for each classroom column */
+#classroom-column {
+    margin: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #000000;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+    flex-grow: 1; /* Allow classrooms to take full width on smaller screens */
+}
+
+#classroom-column:hover {
+    transform: scale(1.05); /* Enlarge on hover */
+}
+
+/* Style for the classroom image */
+#classroom-column img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Style for the classroom name */
+#classroom-column h2 {
+    margin: 0;
+}
