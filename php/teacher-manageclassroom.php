@@ -218,37 +218,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
         } else {
             echo "Classroom not found.";

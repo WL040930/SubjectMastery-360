@@ -12,7 +12,7 @@ function register_validation() {
     var specialcharacter = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     var number = /[0-9]/;
     var length = /.{8,}/;
-    var username_length = /.{5,11}/;  // Updated the range
+    var username_length = /.{5,11}/;
     var name_length = /.{1,15}/;
 
     if (!username.match(username_length)) {

@@ -22,7 +22,7 @@
                 header("Location: admin-index.php");
                 exit(); 
             } else {
-                header("Location: feature-usermenu.php");
+                header("Location: stu-teac-index.php");
                 exit();  
             }
         } else {

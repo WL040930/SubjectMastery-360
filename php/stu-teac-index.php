@@ -20,7 +20,7 @@
 </head>
 <body>
     <div id="classroom-container">
-        <a href="stu-teac-classroompage?id=<?php echo $row['classroom_id'];?>.php">
+        <a href="stu-teac-classroompage.php?id=<?php echo $row['classroom_id'];?>">
             <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
                 <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
                 <h2><?php echo $row['classroom_name'];?></h2>
