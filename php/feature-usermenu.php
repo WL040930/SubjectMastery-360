@@ -35,7 +35,7 @@
         <ul>
             <li> Classroom
                 <ul>
-                    <li><a href="#">View Classroom</a></li>
+                    <li><a href="stu-teac-viewclassroom.php">View Classroom</a></li>
                     <li><a href="#">Join Classroom</a></li>
                 </ul>
             </li>
@@ -60,9 +60,9 @@
         <ul>
             <li> Classroom
                 <ul>
-                    <li><a href="#">View Classroom</a></li>
-                    <li><a href="#">Create Classroom</a></li>
-                    <li><a href="#">Manage Classroom</a></li>
+                    <li><a href="stu-teac-viewclassroom.php">View Classroom</a></li>
+                    <li><a href="teacher-createclassroom.php">Create Classroom</a></li>
+                    <li><a href="teacher-manageclassroom.php">Manage Classroom</a></li>
                 </ul>
             </li>
             <li> Quiz/Exam

@@ -1,6 +1,7 @@
 <?php
     include "dbconn.php";
-    session_start();
+    include "teacher-session.php";
+    
     // Check if classroom_id is provided in the URL
     if (isset($_GET['id'])) {
         $classroom_id = $_GET['id'];
@@ -27,7 +28,7 @@
         <table>
             <tr>
                 <th>Classroom Name: </th>
-                <td><input type="text" name="name" value="<?php echo $row['classroom_name'];?>"></td>
+                <td><input type="text" name="name" value="<?php echo $row['classroom_name'];?>" required></td>
             </tr>
             <tr>
                 <th>Classroom Description: </th>
@@ -35,7 +36,7 @@
             </tr>
             <tr>
                 <th>Classroom Code: </th>
-                <td><input type="text" name="code" id="code" value="<?php echo $row['classroom_code'];?>" onblur="checkCodeAvailability()"></td>
+                <td><input type="text" name="code" id="code" value="<?php echo $row['classroom_code'];?>" onblur="checkCodeAvailability()" required></td>
             </tr>
             <tr>
                 <th>Classroom Picture: </th>
@@ -162,18 +163,63 @@
         <div id="validation-message"></div>
         <input type="submit" value="Update" name="submit">
     </form>
+    <a href="teacher-addmember.php?id=<?php echo $row['classroom_id'];?>">Click Here to Add Member into Classroom</a>
 </body>
 </html>
 
 <script src="../script/teacher-codevalidation.js"></script>
 
 <?php
+if (isset($_POST['submit'])) {
+    // Form data
+    $classroom_name = $_POST['name'];
+    $classroom_description = $_POST['description'];
+    $classroom_code = $_POST['code'];
+    $classroom_color = $_POST['color'];
 
-    if(isset($_POST['submit'])){
+    // Initialize image variables
+    $newImageName = null;
 
+    // Image processing
+    if ($_FILES["image"]["error"] == 0) {
+        $fileName = $_FILES["image"]["name"];
+        $tmpName = $_FILES["image"]["tmp_name"];
+
+        // Valid image extensions
+        $validImageExtension = ['jpg', 'jpeg', 'png'];
+        $imageExtension = explode('.', $fileName);
+        $imageExtension = strtolower(end($imageExtension));
+
+        if (!in_array($imageExtension, $validImageExtension)) {
+            echo "<script> alert('Invalid Image Extension');</script>";
+        } else {
+            // Move uploaded image to the destination folder
+            $newImageName = uniqid() . '.' . $imageExtension;
+            move_uploaded_file($tmpName, '../data/image/' . $newImageName);
+        }
     }
 
+    // Update classroom information in the 'classroom' table
+    $query = "UPDATE `classroom` SET `classroom_name`='$classroom_name',
+              `classroom_description`='$classroom_description', `classroom_code`='$classroom_code',
+              `classroom_color`='$classroom_color'";
+
+    // Include image information if it exists
+    if ($newImageName) {
+        $query .= ", `classroom_picture`='$newImageName'";
+    }
+
+    $query .= " WHERE `classroom_id`='$classroom_id'";
+
+    mysqli_query($connection, $query);
+
+    echo "<script> alert('Classroom Information Successfully Updated');</script>";
+    echo "<script> window.location.href = 'stu-teac-viewclassroom.php'; </script>";
+}
 ?>
+
+
+
 
 
 
