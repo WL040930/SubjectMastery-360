@@ -53,3 +53,30 @@
         </form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+if ($file['error'] !== 4) {
+            $fileName = $file['name'];
+            $fileSize = $file['size'];
+            $tmpName = $file['tmp_name'];
+
+            $newFileName = uniqid() . '_' . $fileName;
+
+            // Move the uploaded file to the desired directory
+            move_uploaded_file($tmpName, '../data/file' . $newFileName);
+
+            // Update the database with the file information
+            $query = "UPDATE `user` SET `profile_file`='$newFileName' WHERE user_id = '$id'";
+            mysqli_query($connection, $query);
+
+            echo "<script> alert('File Successfully Added');</script>";
+        }
