@@ -8,6 +8,7 @@
         header("Location: logout.php");
         exit();
     }
+    
     $id = $_SESSION['id'];
     $query = "SELECT * FROM classroom_member cm JOIN classroom c ON cm.classroom_id = c.classroom_id WHERE cm.user_id = '$id'";
     $result = mysqli_query($connection, $query);

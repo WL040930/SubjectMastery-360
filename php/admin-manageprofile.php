@@ -3,7 +3,13 @@
     include "dbconn.php"; 
     include "admin-menu.php"; 
     include "admin-session.php"; 
-    $id = $_GET['id'];
+
+    if(!isset($_GET['id'])){
+        header("Location: admin-manageuser.php");
+        exit();
+    } else {
+        $id = $_GET['id'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -73,8 +79,11 @@
         $firstname = $_POST['firstname']; 
         $lastname = $_POST['lastname']; 
         $password = $_POST['password']; 
-        $institute = $_POST['institute']; 
-        $image = $_POST['image'];
+        $institute = $_POST['institute'];
+
+        if(isset($_POST['image'])) {
+            $image = $_POST['image'];
+        }
 
         if(!empty($username) && !empty($firstname) && !empty($lastname) && !empty($password)) {
             $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',`password`='$password',`institute_name`='$institute' WHERE user_id = '$id'"; 
@@ -88,7 +97,9 @@
         }
 
         if($_FILES["image"]["error"] == 4){
-            echo "<script> alert('Image Does Not Exist'); </script>";
+            echo "<script> alert('Successfully Added');</script>";
+            echo "<script>window.location.href='admin-manageuser.php';</script>";
+            exit();
         }
         else{
             $fileName = $_FILES["image"]["name"];
@@ -111,7 +122,7 @@
                 $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '$id'";
                 mysqli_query($connection, $query);
                 echo "<script> alert('Successfully Added');</script>";
-                echo "<script>window.location.href='admin-manageuser.php';</script>";;
+                echo "<script>window.location.href='admin-manageuser.php';</script>";
             }
         }
     }

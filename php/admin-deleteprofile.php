@@ -3,14 +3,23 @@
     include "admin-menu.php";
     include "admin-session.php";
 
-    $id = $_GET['id'];
-    
+    if(!isset($_GET['id'])) {
+        header("Location: admin-database.php");
+        exit();  
+    } else {
+        $id = $_GET['id'];
+    }
+
     $query = "SELECT * FROM `user` LEFT JOIN role ON user.role_id = role.role_id WHERE user_id = '$id'";
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc($result);
 
     // Function to delete user
     function deleteUser($connection, $id) {
+        if($id == "4") {
+            echo "<script> alert('You are not allowed to delete admin. ') </script>"; 
+            exit();
+        }
         $deleteQuery = "DELETE FROM `user` WHERE user_id = '$id'";
         mysqli_query($connection, $deleteQuery);
         // You can add additional logic or redirection after deletion
