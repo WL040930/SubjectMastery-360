@@ -6,7 +6,11 @@
     if (isset($_POST['btnLogin'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM `user` LEFT JOIN role ON user.role_id = role.role_id WHERE email_address = '$email' AND password = '$password'";
+        $query = "SELECT user.*, role.role
+                FROM user
+                JOIN role ON user.role_id = role.role_id
+                WHERE email_address = '$email' AND password = '$password'";
+                
         $result = mysqli_query($connection, $query);
     
         if (mysqli_num_rows($result) == 1) {
@@ -16,9 +20,9 @@
             $_SESSION['last_name'] = $row['user_last_name'];
             $_SESSION['email'] = $row['email_address'];
             $_SESSION['role'] = $row['role'];
-    
-            if ($_SESSION['role'] == "admin") { 
-                $_SESSION['admin'] = "admin";
+            $role = $_SESSION['role']; 
+
+            if ($role == 'admin') { 
                 header("Location: admin-index.php");
                 exit(); 
             } else {

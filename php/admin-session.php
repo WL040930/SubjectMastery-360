@@ -1,7 +1,18 @@
 <?php
-    session_start();
-    if(isset($_SESSION['admin']) == null) {
-        echo "<script>alert('Authorized Access only!')</script>";
-        echo "<script>window.location.href='feature-login.php';</script>";
+
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
+
+    if(!isset($_SESSION['id']) && !isset($_SESSION['role'])) {
+        echo "<script> alert('Please Login First.');</script>";
+        echo "<script> window.location.href='feature-logout.php' </script>";
+    } else {
+        $role = $_SESSION['role'];
+        if($role != 'admin') {
+            echo "<script> alert('You are not authorized to view this page.');</script>";
+            echo "<script> window.location.href='feature-logout.php' </script>";
+        }
+    }
+
 ?>
