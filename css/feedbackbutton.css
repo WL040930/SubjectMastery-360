@@ -1,23 +1,83 @@
-#feedback {
+/* feedbackbutton.css */
+
+button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
     position: fixed;
+    left: 20px;
     bottom: 20px;
-    right: 20px;
-    z-index: 999; /* Ensure the button appears above other elements */
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#feedback-link {
-    display: block;
-    text-decoration: none;
+#newChatContainer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 700px;
 }
 
-#feedback-image {
-    width: 50px; /* Adjust the size of the image as needed */
-    height: auto;
-    border-radius: 50%; /* Make the image circular */
-    box-shadow: 0px 0px 10px 0px #888; /* Add a subtle box shadow */
-    transition: transform 0.3s ease-in-out;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-#feedback-image:hover {
-    transform: scale(1.1); /* Enlarge the button on hover */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type="text"]{
+    width: 600px; 
+    height: 300px;
+}
+
+input {
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Adjust styles as needed */
+
+#image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%
 }
