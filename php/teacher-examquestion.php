@@ -30,7 +30,7 @@
     
     <h1>Add Question - <?php echo $row['exam_title'];?></h1>
     <form action="" method="post" enctype="multipart/form-data" onsubmit ="return validate_mark()">
-        <input type="text" name="question" placeholder="Enter Question" required> <br>
+        <input type="text" name="question" id="question" placeholder="Enter Question" required> <br>
         <input type="text" name="mark" placeholder="mark" id="mark" required> <br>
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"> <br>
         <div id="validation-message"></div> <br>
