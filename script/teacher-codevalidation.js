@@ -7,7 +7,7 @@ function validateCode() {
         validation_message.style.color = "red";
         return false;
     } else {
-        validation_message.textContent = ""; // Clear any previous error messages
+        validation_message.textContent = "";
         return true;
     }
 }

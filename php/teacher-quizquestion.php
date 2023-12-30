@@ -11,11 +11,13 @@
     }
 
     if(isset($_GET['id'])) {
-        $exam_id = $_GET['id'];
+        $quiz_id = $_GET['id'];
+        $query = "SELECT * FROM quiz WHERE quiz_id = '$quiz_id'";
+        $result = mysqli_query($connection, $query);
+        $row = mysqli_fetch_assoc($result);
         
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,13 @@
 </head>
 <body>
     
-    
+    <h1>Add Question - <?php echo $row['quiz_title'];?></h1>
+
+    <?php 
+
+
+
+?>
 
 </body>
 </html>
@@ -38,16 +46,16 @@
         $fetch = "SELECT 
                     cm.*,
                     c.*,
-                    ce.*,
-                    e.*
+                    cq.*,
+                    q.*
                 FROM 
                     classroom_member cm
                 JOIN 
                     classroom c ON cm.classroom_id = c.classroom_id
                 JOIN 
-                    classroom_exam ce ON c.classroom_id = ce.classroom_id
+                    classroom_quiz cq ON c.classroom_id = cq.classroom_id
                 JOIN 
-                    exam e ON ce.exam_id = e.exam_id
+                    quiz q ON cq.quiz_id = q.quiz_id
                 WHERE 
                     cm.user_id = '$user_id';
                 ";
@@ -70,7 +78,7 @@
 
     <?php
         while ($fetch_row = mysqli_fetch_assoc($fetch_result)) {
-            echo "<a href='teacher-addquestion.php?id=".$fetch_row['exam_id']."'>".$fetch_row['exam_title']."</a><br>";
+            echo "<a href='teacher-quizquestion.php?id=".$fetch_row['quiz_id']."'>".$fetch_row['quiz_title']."</a><br>";
         }
     ?>
 </body>

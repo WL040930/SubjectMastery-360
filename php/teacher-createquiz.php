@@ -24,12 +24,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Exam</title>
+    <title>Create Quiz</title>
 </head>
 <body>
     <form action="" method="post">
-        <input type="text" name="exam_name" placeholder="Exam Name" required> <br>
-        <input type="text" name="exam_description" placeholder="Exam Description"> <br>
+        <input type="text" name="quiz_name" placeholder="Quiz Name" required> <br>
+        <input type="text" name="quiz_description" placeholder="Quiz Description"> <br>
         <input type="submit" value="Create" name="submit">
     </form>
 </body>
@@ -38,36 +38,25 @@
 <?php
 
         if(isset($_POST['submit'])) {
-            $name = $_POST['exam_name'];
-            $description = $_POST['exam_description'];
-            $insertExamQuery = "INSERT INTO `exam`(`exam_title`, `exam_description`) 
+            $name = $_POST['quiz_name'];
+            $description = $_POST['quiz_description'];
+            $insertExamQuery = "INSERT INTO `quiz`(`quiz_title`, `quiz_description`) 
                                 VALUES ('$name','$description')";
             
             $insertResult = mysqli_query($connection, $insertExamQuery);
             if ($insertResult) {
-                $exam_id = mysqli_insert_id($connection);
-                $insertClassroomExamQuery = "INSERT INTO `classroom_exam`(`classroom_id`, `exam_id`) 
-                                            VALUES ('$id','$exam_id')";
-                $insertClassroomExamResult = mysqli_query($connection, $insertClassroomExamQuery);
-                if ($insertClassroomExamResult) {
-                    echo "<script> alert('Exam Created Successfully'); </script>";
-                    echo "<script> window.location.href='teacher-examquestion.php?id=$exam_id';</script>";
+                $quiz_id = mysqli_insert_id($connection);
+                $insertClassroomQuizQuery = "INSERT INTO `classroom_quiz`(`classroom_id`, `quiz_id`) 
+                                            VALUES ('$id','$quiz_id')";
+                $insertClassroomQuizResult = mysqli_query($connection, $insertClassroomQuizQuery);
+                if ($insertClassroomQuizResult) {
+                    echo "<script> alert('Quiz Created Successfully'); </script>";
+                    echo "<script> window.location.href='teacher-quizquestion.php?id=$quiz_id'; </script>";
                 } 
             }
         }
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
     // outside the classroom page
@@ -93,7 +82,7 @@
     <ul>
         <?php
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="teacher-createexam.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            echo '<li><a href="teacher-createquiz.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
         }
         ?>
     </ul>
@@ -102,6 +91,8 @@
 
 <?php
 
+        } else {
+            echo "You are not involved in any of the classroom. ";
         }
     }
 

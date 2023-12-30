@@ -68,7 +68,7 @@
             <li> Quiz/Exam
                 <ul>
                     <li><a href="#">Create Quiz</a></li>
-                    <li><a href="#">Create Exam</a></li>
+                    <li><a href="teacher-createexam.php">Create Exam</a></li>
                 </ul>
             </li>
             <li> Report
