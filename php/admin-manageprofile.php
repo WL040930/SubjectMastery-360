@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td>Password</td>
-                <td> <input type="text" name="password" value="<?php echo $row['password']; ?>"></td>
+                <td> <input type="password" name="password" value="<?php echo $row['password']; ?>" disabled></td>
             </tr>
             <tr>
                 <td>Institute Name</td>
@@ -78,22 +78,23 @@
         $username = $_POST['username']; 
         $firstname = $_POST['firstname']; 
         $lastname = $_POST['lastname']; 
-        $password = $_POST['password']; 
         $institute = $_POST['institute'];
 
         if(isset($_POST['image'])) {
             $image = $_POST['image'];
         }
 
-        if(!empty($username) && !empty($firstname) && !empty($lastname) && !empty($password)) {
-            $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',`password`='$password',`institute_name`='$institute' WHERE user_id = '$id'"; 
+        if(!empty($username) && !empty($firstname) && !empty($lastname) ) {
+            $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',`institute_name`='$institute' WHERE user_id = '$id'"; 
             if(mysqli_query($connection, $query)) {
                 
             } else {
                 echo "Record update unsuccessful, please try again.";
+                exit(); 
             }
         } else {
             echo "Username, First Name, Last Name and Password cannot be null.";
+            exit(); 
         }
 
         if($_FILES["image"]["error"] == 4){
