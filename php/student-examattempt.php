@@ -69,6 +69,7 @@
                 $attemptResult = mysqli_query($connection, $attemptQuery);
                 if ($attemptResult) {
                     $new_id = mysqli_insert_id($connection);
+                    $_SESSION['quiz_attempt_started'] = true;
                     header("Location: student-exam.php?id=$new_id"); 
                 } else {
                     echo "<script> alert ('Error Occur. Please try again later. ');</script>";

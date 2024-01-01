@@ -10,6 +10,12 @@
         $quiz_attempt_id = $_GET['id'];
     }
 
+    if (!isset($_SESSION['quiz_attempt_started']) || !$_SESSION['quiz_attempt_started']) {
+        echo "<script>You are not allowed to join the quiz directly</script>";
+        echo "<script>window.location.href='stu-teac-index.php'</script>";
+        exit();
+    }
+
     $fetchQuery = "SELECT * FROM `quiz_attempt` WHERE quiz_attempt_id = '$quiz_attempt_id'";
     $fetchResult = mysqli_query($connection, $fetchQuery);
     if($fetchResult) {
@@ -144,15 +150,10 @@
                 }
             }
         }
-
+        unset($_SESSION['quiz_attempt_started']);
         echo "<script> alert('Answer Submitted Successfully'); </script>";
         echo "<script> window.location.href='stu-teac-index.php'; </script>";
         exit(); 
-    } else {
-        // Redirect the user to the appropriate page if they try to access this script directly
-        echo "<script> alert('You are not allowed to join exam by accessing this script directly !') </script>";
-        echo "<script> window.location.href='stu-teac-index.php'; </script>";
-        exit();
     }
 ?>
 

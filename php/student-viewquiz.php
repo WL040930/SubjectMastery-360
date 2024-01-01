@@ -1,18 +1,15 @@
 <?php
+include "dbconn.php";
+include "student-session.php";
 
-    include "dbconn.php"; 
-    include "student-session.php";
+$user_id = $_SESSION['id'];
 
-    $user_id = $_SESSION['id'];
-
-    $fetchQuery = " SELECT qa.*, q.*
-                    FROM quiz_attempt qa 
-                    JOIN quiz q 
-                    ON qa.quiz_id = q.quiz_id
-                    WHERE user_id = '$user_id'"; 
-    $fetchResult = mysqli_query($connection, $fetchQuery);
-
-
+$fetchQuery = " SELECT qa.*, q.*
+                FROM quiz_attempt qa 
+                JOIN quiz q 
+                ON qa.quiz_id = q.quiz_id
+                WHERE user_id = '$user_id'"; 
+$fetchResult = mysqli_query($connection, $fetchQuery);
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +28,58 @@
         <select name="quiz" id="quiz" onchange="submitForm()">
             <option value="">Select a Quiz</option>
             <?php
-                while ($fetchRow = mysqli_fetch_assoc($fetchResult)){
+                while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
                     echo "<option value='". $fetchRow['quiz_attempt_id']."'>" .$fetchRow['quiz_title'] ."</option>";
                 } 
             ?>
         </select>
     </form>
+    <?php
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
+        // user_id and quiz_attempt_id is retrieved dy 
+        $quiz_attempt_id = $_POST['quiz'];
+        $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
+        $userScore = calculate_user_score($quiz_attempt_id, $user_id);
+        $quiz_title_query = "SELECT q.*, qa.* FROM quiz_attempt qa
+                                JOIN quiz q ON qa.quiz_id = q.quiz_id";
+        $quiz_title_result = mysqli_query($connection, $quiz_title_query);
+        $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
+    ?>
+    
+    <table border="1">
+        <tr>
+            <th>Quiz Attempt ID</th>
+            <td><?php echo $quiz_attempt_id; ?></td>
+        </tr>
+        <tr>
+            <th>Quiz Title</th>
+            <td><?php echo $quiz_title_row['quiz_title']; ?></td>
+        </tr>
+        <tr>
+            <th>Quiz Description</th>
+            <td><?php echo $quiz_title_row['quiz_description']; ?></td>
+        </tr>
+        <tr>
+            <th>Quiz Start Time</th>
+            <td><?php echo $quiz_title_row['quiz_start_time']; ?></td>
+        </tr>
+        <tr>
+            <th>Quiz End Time</th>
+            <td><?php echo $quiz_title_row['quiz_end_time']; ?></td>
+        </tr>
+        <tr>
+            <th>Marks</th>
+            <td><?php echo $userScore. " / ". $totalMark ?></td>
+        </tr>
+    </table>
+
+    <?php
+    $fetchResultQuery = ""; 
+
+    }
+
+    ?>
 
     <script>
         function submitForm() {
@@ -46,10 +89,70 @@
 </body>
 </html>
 
+
 <?php
 
-    function quiz_total_mark(){
-        
-    }
+    function quiz_total_mark($quiz_attempt_id, $user_id) {
+        global $connection;
 
+        // SQL query to calculate the total marks for a specific quiz attempt and user
+        $totalMarkQuery = "
+            SELECT SUM(qq.quiz_mark) AS total_mark
+            FROM quiz_user_answer qua
+            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+            WHERE qua.quiz_attempt_id = ?
+            AND qua.quiz_attempt_id IN (
+                SELECT quiz_attempt_id
+                FROM quiz_attempt
+                WHERE user_id = ?
+            )";
+
+        // Prepare and execute the query
+        $stmt = $connection->prepare($totalMarkQuery);
+        $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+        $stmt->execute();
+        $stmt->bind_result($total_mark);
+        $stmt->fetch();
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the total mark
+        return $total_mark;
+}
+
+?>
+
+
+<?php
+
+    function calculate_user_score($quiz_attempt_id, $user_id) {
+        global $connection;
+
+        // SQL query to calculate the user's score based on correctness of answers
+        $userScoreQuery = "
+            SELECT SUM(qq.quiz_mark * qo.iscorrect) AS user_score
+            FROM quiz_user_answer qua
+            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+            INNER JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+            WHERE qua.quiz_attempt_id = ?
+            AND qua.quiz_attempt_id IN (
+                SELECT quiz_attempt_id
+                FROM quiz_attempt
+                WHERE user_id = ?
+            )";
+
+        // Prepare and execute the query
+        $stmt = $connection->prepare($userScoreQuery);
+        $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+        $stmt->execute();
+        $stmt->bind_result($user_score);
+        $stmt->fetch();
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the user's score
+        return $user_score;
+    }
 ?>
