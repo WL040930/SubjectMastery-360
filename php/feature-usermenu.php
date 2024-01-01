@@ -36,13 +36,13 @@
             <li> Classroom
                 <ul>
                     <li><a href="stu-teac-viewclassroom.php">View Classroom</a></li>
-                    <li><a href="#">Join Classroom</a></li>
+                    <li><a href="student-joinclassroom.php">Join Classroom</a></li>
                 </ul>
             </li>
             <li> Quiz/Exam
                 <ul>
-                    <li><a href="#">Join Quiz</a></li>
-                    <li><a href="#">Join Exam</a></li>
+                    <li><a href="student-quizattempt.php">Join Quiz</a></li>
+                    <li><a href="">Join Exam</a></li>
                 </ul>
             </li>
             <li> Report
