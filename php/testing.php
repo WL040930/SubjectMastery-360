@@ -1,82 +1,76 @@
 <?php
-include "dbconn.php"; // Assuming you have a global variable named $connection for the database connection
 
-function quiz_total_mark($quiz_attempt_id, $user_id) {
-    global $connection;
+include "dbconn.php"; 
 
-    // SQL query to calculate the total marks for a specific quiz attempt and user
+function calculateFullMarks($exam_attempt_id, $connection) {
+    // SQL query to calculate the total marks for a specific exam attempt
     $totalMarkQuery = "
-        SELECT SUM(qq.quiz_mark) AS total_mark
-        FROM quiz_user_answer qua
-        INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-        WHERE qua.quiz_attempt_id = ?
-        AND qua.quiz_attempt_id IN (
-            SELECT quiz_attempt_id
-            FROM quiz_attempt
-            WHERE user_id = ?
-        )";
+        SELECT SUM(eq.exam_marks) AS total_marks
+        FROM exam_question eq
+        INNER JOIN exam_user_answer eua ON eq.exam_question_id = eua.exam_question_id
+        WHERE eua.exam_attempt_id = ?";
 
     // Prepare and execute the query
     $stmt = $connection->prepare($totalMarkQuery);
-    $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+    $stmt->bind_param('i', $exam_attempt_id);
     $stmt->execute();
-    $stmt->bind_result($total_mark);
+    $stmt->bind_result($total_marks);
     $stmt->fetch();
 
     // Close the statement
     $stmt->close();
 
-    // Return the total mark
-    return $total_mark;
+    // Return the total marks
+    return $total_marks;
 }
 
-// Example usage
-$quiz_attempt_id = 2;
-$user_id = 9; // Replace with the actual user ID
-$totalMark = quiz_total_mark($quiz_attempt_id, $user_id);
+function calculateUserMarks($exam_attempt_id, $connection) {
+    // SQL query to check for NULL values among exam_user_marks
+    $checkNullQuery = "
+        SELECT COUNT(*) AS null_count
+        FROM exam_user_answer
+        WHERE exam_attempt_id = ?
+        AND exam_user_marks IS NULL";
 
-// Output the result
-echo "Total Marks for Attempt $quiz_attempt_id: $totalMark";
-?>
+    // Prepare and execute the query
+    $stmt = $connection->prepare($checkNullQuery);
+    $stmt->bind_param('i', $exam_attempt_id);
+    $stmt->execute();
+    $stmt->bind_result($null_count);
+    $stmt->fetch();
 
+    // Close the statement
+    $stmt->close();
 
-<?php
+    // Check if there is at least one NULL value
+    if ($null_count > 0) {
+        return "Not finish marking";
+    }
 
-function calculate_user_score($quiz_attempt_id, $user_id) {
-    global $connection;
-
-    // SQL query to calculate the user's score based on correctness of answers
+    // If no NULL values, proceed to calculate the sum
     $userScoreQuery = "
-        SELECT SUM(qq.quiz_mark * qo.iscorrect) AS user_score
-        FROM quiz_user_answer qua
-        INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-        INNER JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
-        WHERE qua.quiz_attempt_id = ?
-        AND qua.quiz_attempt_id IN (
-            SELECT quiz_attempt_id
-            FROM quiz_attempt
-            WHERE user_id = ?
-        )";
+        SELECT SUM(eua.exam_user_marks) AS user_marks
+        FROM exam_user_answer eua
+        WHERE eua.exam_attempt_id = ?";
 
     // Prepare and execute the query
     $stmt = $connection->prepare($userScoreQuery);
-    $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+    $stmt->bind_param('i', $exam_attempt_id);
     $stmt->execute();
-    $stmt->bind_result($user_score);
+    $stmt->bind_result($user_marks);
     $stmt->fetch();
 
     // Close the statement
     $stmt->close();
 
-    // Return the user's score
-    return $user_score;
+    return $user_marks;
 }
+// Example usage with a provided exam_attempt_id
+$exam_attempt_id = 4; // Replace with the specific exam_attempt_id you want to calculate
 
-// Example usage
-$quiz_attempt_id = 2;
-$user_id = 9; // Replace with the actual user ID
-$userScore = calculate_user_score($quiz_attempt_id, $user_id);
+$full_marks = calculateFullMarks($exam_attempt_id, $connection);
+$user_marks = calculateUserMarks($exam_attempt_id, $connection);
 
-// Output the result
-echo "User's Score for Attempt $quiz_attempt_id: $userScore";
-?>
+echo "Full Marks: $full_marks\n";
+echo "User Marks: $user_marks\n";
+
