@@ -1,15 +1,15 @@
 <?php
-include "dbconn.php";
-include "student-session.php";
+    include "dbconn.php";
+    include "teacher-session.php";
 
-$user_id = $_SESSION['id'];
+    $user_id = $_SESSION['id'];
 
-$fetchQuery = "SELECT qa.*, q.*
-                FROM quiz_attempt qa 
-                JOIN quiz q 
-                ON qa.quiz_id = q.quiz_id
-                WHERE user_id = '$user_id'"; 
-$fetchResult = mysqli_query($connection, $fetchQuery);
+    $fetchQuery = "SELECT qa.*, q.*
+                    FROM quiz_attempt qa 
+                    JOIN quiz q 
+                    ON qa.quiz_id = q.quiz_id
+                    WHERE user_id = '$user_id'"; 
+    $fetchResult = mysqli_query($connection, $fetchQuery);
 ?>
 
 <!DOCTYPE html>

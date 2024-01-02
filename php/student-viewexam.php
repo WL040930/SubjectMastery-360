@@ -18,6 +18,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <form id="examForm" action="" method="post">
@@ -41,6 +42,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         $exam_attempt_id = $_POST['exam'];
         $totalMark = calculateFullMarks($exam_attempt_id, $connection);
         $userScore = calculateUserMarks($exam_attempt_id, $connection); 
+        $wrongmark = $totalMark - $userScore;
         $examTitleQuery = "SELECT e.*, ea.*
         FROM exam_attempt ea 
         JOIN exam e 
@@ -101,11 +103,36 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     }
     
     ?>
+    <canvas id="quizChart" width="400" height="200"></canvas>
     
     <script>
         function submitForm() {
             document.getElementById("examForm").submit();
         }
+    </script>
+        <script>
+        var ctx = document.getElementById('quizChart').getContext('2d');
+        var dataChart = {
+            labels: ['Correct - Mark', 'Incorrect - Mark'],
+            datasets: [{
+                data: [<?php echo $userScore; ?>, <?php echo $wrongmark; ?>],
+                backgroundColor: [
+                    'rgba(75, 192, 75, 0.7)', // Green for correct
+                    'rgba(255, 99, 132, 0.7)' // Red for incorrect
+                ],
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                    'rgba(255, 255, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Create the pie chart with data
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: dataChart,
+        });
     </script>
 </body>
 </html>
