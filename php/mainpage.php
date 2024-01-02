@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="logo_menu">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
