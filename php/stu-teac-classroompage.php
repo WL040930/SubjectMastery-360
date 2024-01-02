@@ -74,6 +74,9 @@
     <div id="newChatContainer">
         <h2>New Chat</h2>
         <form id="newChatForm" method="post" action="#" enctype="multipart/form-data">
+            <label for="chatroom-title">Chat Title:</label>
+            <input type="text" id="chatroom-title" name="chatroom-title" required>
+
             <label for="chat-content">Chat Content:</label>
             <input type="text" id="chat-content" name="chat-content" required>
 
@@ -94,10 +97,11 @@
 
     if(isset($_POST['submit'])) {
         $content = $_POST['chat-content'];
+        $title = $_POST['chatroom-title'];
 
         // Insert chat content into the database
-        $query = "INSERT INTO `chatroom_messages`(`classroom_member_id`, `chatroom_messages_content`, `chatroom_messages_timestamp`) 
-                VALUES ('$classroom_member_id','$content', CURRENT_TIMESTAMP)"; 
+        $query = "INSERT INTO `chatroom_messages`(`classroom_member_id`, `chatroom_messages_content`, `chatroom_title`, `chatroom_messages_timestamp`) 
+                VALUES ('$classroom_member_id', '$content', '$title', CURRENT_TIMESTAMP)";
         $result = mysqli_query($connection, $query);
 
 
@@ -120,7 +124,7 @@
 
                     echo "<script> alert('Successfully Added');</script>";
                 } else {
-                    echo "<script> alert('Error uploading file');</script>";
+                    echo "<script> alert('Successfully Added');</script>";
                 }
             } else {
                 echo "<script> alert('Successfully Added');</script>";
@@ -129,6 +133,8 @@
         } else {
             echo "<script> alert('Error creating chat') </script>";
         }
+        header('Location: stu-teac-classroompage.php?id=' . $_GET['id']);
+        exit(); 
     }
 ?>
 
