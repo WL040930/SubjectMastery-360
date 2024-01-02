@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - SubjectMaster360</title>
-    <link rel="icon" href="icon.png">
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/mainpage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="logo_menu">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
@@ -55,10 +54,10 @@
         <div id="objective">
             <table id="objective_table">
                 <tr class="obj_img">
-                    <th><img src="../image/pic_re.png" alt="objective1" class="obj1"></th>
-                    <th><img src="../image/pic_re.png" alt="objective2" class="obj2"></th>
-                    <th><img src="../image/pic_re.png" alt="objective3" class="obj3"></th>
-                    <th><img src="../image/pic_re.png" alt="objective4" class="obj4"></th>
+                    <th><img src="../image/1.png" alt="objective1" class="obj1"></th>
+                    <th><img src="../image/2.png" alt="objective2" class="obj2"></th>
+                    <th><img src="../image/3.png" alt="objective3" class="obj3"></th>
+                    <th><img src="../image/4.png" alt="objective4" class="obj4"></th>
                 </tr>
                 <tr class="obj_content">
                     <td class="con">

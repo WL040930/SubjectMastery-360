@@ -1,13 +1,13 @@
 /*for all parts*/
 body{
-    background-color: #dbd1a0;
+    background-color: #FFE5E5;
 }
 
 /*logo and website name*/
 #logo_menu{
-width: auto;
-height: 125px;
-margin-left: 13px;
+    width: auto;
+    height: 125px;
+    background-color: #333;
 }
 
 #weblogo{
@@ -25,12 +25,13 @@ margin-left: 13px;
     font-style: italic;
     font-family: 'Playfair Display', serif;
     justify-content: right;
+    color: white;
 }
 
 /*all settings except logo & website name*/
 #all{
     font-family: 'Playfair Display', serif;
-    color: #3D0066;
+    color: black;
 } 
 
 /*menubar*/
@@ -38,28 +39,34 @@ margin-left: 13px;
     height: 90px;
     font-size: 20px;
     float: right;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-right: 35px;
-    background-color: #fbe134;
-    color: #3D0066;
+    background-color: #3D0066;
+    color: white;
     display: flex;
     justify-content: right;
+    border-radius: 10px;
 }
 
 .menubar_content {
     border-spacing: 10px;
-    border: 3px solid #FFCE1F;
-    color: #3D0066;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    color: black;
     width: 100%;
     justify-content: center;
 }
 
+.menu1, .menu2, .menu3{
+    text-decoration: none;
+}
+
 .menu1:visited, .menu2:visited, .menu3:visited{
-    color: #3D0066;
+    color: white;
 }
 
 .menu1:hover, .menu2:hover, .menu3:hover{
-    color: white;
+    color: #a51fff;
 }
 
 /*slogan*/
@@ -74,8 +81,7 @@ margin-left: 13px;
 
 /*login and signup*/
 #login_signup{
-    height: 100px;
-    margin-top: 10px;
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,10 +95,15 @@ margin-left: 13px;
     font-weight: bold;
     border-spacing: 8px;
     margin: 80px;
+    background-color: #3D0066;
+}
+
+.login_button, .register_button{
+    text-decoration: none;
 }
 
 .login_button:visited, .register_button:visited{
-    color: #25364c;
+    color: white;
 }
 
 /*objective*/
@@ -122,14 +133,15 @@ margin-left: 13px;
 }
 
 .con{
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
 }
 
 /*follow and contact*/
 .follow_contact{
     margin-top: 15px;
-    height: 110px;
+    width: 100%;
     border-top: 2px solid black;
+    background-color: #333;
 }
 
 .fol_title, .con_title{
