@@ -38,10 +38,70 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['exam'])) {
         // user_id and exam_attempt_id is retrieved dy 
-        echo $exam_attempt_id = $_POST['exam'];
+        $exam_attempt_id = $_POST['exam'];
+        $totalMark = calculateFullMarks($exam_attempt_id, $connection);
+        $userScore = calculateUserMarks($exam_attempt_id, $connection); 
+        $examTitleQuery = "SELECT e.*, ea.*
+        FROM exam_attempt ea 
+        JOIN exam e 
+        ON ea.exam_id = e.exam_id
+        WHERE ea.exam_attempt_id = $exam_attempt_id";
+
+        $quiz_title_result = mysqli_query($connection, $examTitleQuery);
+        $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
+    
+    ?>
+        <table border="1">
+        <tr>
+            <th>Exam Attempt ID</th>
+            <td><?php echo $exam_attempt_id; ?></td>
+        </tr>
+        <tr>
+            <th>Exam Title</th>
+            <td><?php echo $quiz_title_row['exam_title']; ?></td>
+        </tr>
+        <tr>
+            <th>Exam Description</th>
+            <td><?php echo $quiz_title_row['exam_description']; ?></td>
+        </tr>
+        <tr>
+            <th>Exam Start Time</th>
+            <td><?php echo $quiz_title_row['exam_start_time']; ?></td>
+        </tr>
+        <tr>
+            <th>Exam End Time</th>
+            <td><?php echo $quiz_title_row['exam_end_time']; ?></td>
+        </tr>
+        <tr>
+            <th>Marks</th>
+            <td><?php echo $userScore. " / ". $totalMark ?></td>
+        </tr>
+    </table>
+
+    <?php
+    
+        $fetchExamQuery = "SELECT eua.*, eq.* FROM exam_user_answer eua 
+                            JOIN exam_question eq ON eua.exam_question_id = eq.exam_question_id
+                            WHERE eua.exam_attempt_id = '$exam_attempt_id'";
+        $fetchExamResult = mysqli_query($connection, $fetchExamQuery);
+        $calnum = 1; 
+        while ($row = mysqli_fetch_assoc($fetchExamResult)) {
+    
+    ?>
+
+        <div id="answer-box">
+            <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
+            <p>Question: <?php echo $row['exam_question']; ?> </p>
+            <p>Mark Score: <?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
+            <p>User Answer: <?php echo $row['exam_user_answer']; ?></p>
+        </div>    
+
+    <?php
+        }
     }
     
     ?>
+    
     <script>
         function submitForm() {
             document.getElementById("examForm").submit();
@@ -49,3 +109,71 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     </script>
 </body>
 </html>
+
+
+<?php
+
+    function calculateFullMarks($exam_attempt_id, $connection) {
+        // SQL query to calculate the total marks for a specific exam attempt
+        $totalMarkQuery = "
+            SELECT SUM(eq.exam_marks) AS total_marks
+            FROM exam_question eq
+            INNER JOIN exam_user_answer eua ON eq.exam_question_id = eua.exam_question_id
+            WHERE eua.exam_attempt_id = ?";
+
+        // Prepare and execute the query
+        $stmt = $connection->prepare($totalMarkQuery);
+        $stmt->bind_param('i', $exam_attempt_id);
+        $stmt->execute();
+        $stmt->bind_result($total_marks);
+        $stmt->fetch();
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the total marks
+        return $total_marks;
+    }
+
+    function calculateUserMarks($exam_attempt_id, $connection) {
+        // SQL query to check for NULL values among exam_user_marks
+        $checkNullQuery = "
+            SELECT COUNT(*) AS null_count
+            FROM exam_user_answer
+            WHERE exam_attempt_id = ?
+            AND exam_user_marks IS NULL";
+
+        // Prepare and execute the query
+        $stmt = $connection->prepare($checkNullQuery);
+        $stmt->bind_param('i', $exam_attempt_id);
+        $stmt->execute();
+        $stmt->bind_result($null_count);
+        $stmt->fetch();
+
+        // Close the statement
+        $stmt->close();
+
+        // Check if there is at least one NULL value
+        if ($null_count > 0) {
+            return "Not finish marking";
+        }
+
+        // If no NULL values, proceed to calculate the sum
+        $userScoreQuery = "
+            SELECT SUM(eua.exam_user_marks) AS user_marks
+            FROM exam_user_answer eua
+            WHERE eua.exam_attempt_id = ?";
+
+        // Prepare and execute the query
+        $stmt = $connection->prepare($userScoreQuery);
+        $stmt->bind_param('i', $exam_attempt_id);
+        $stmt->execute();
+        $stmt->bind_result($user_marks);
+        $stmt->fetch();
+
+        // Close the statement
+        $stmt->close();
+
+        return $user_marks;
+    }
+?>
