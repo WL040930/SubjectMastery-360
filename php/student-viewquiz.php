@@ -185,4 +185,6 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         // Return the user's score
         return $user_score;
     }
+
+    //teacher feedback 
 ?>

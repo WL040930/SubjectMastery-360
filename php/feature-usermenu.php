@@ -42,13 +42,13 @@
             <li> Quiz/Exam
                 <ul>
                     <li><a href="student-quizattempt.php">Join Quiz</a></li>
-                    <li><a href="">Join Exam</a></li>
+                    <li><a href="student-examattempt.php">Join Exam</a></li>
                 </ul>
             </li>
             <li> Report
                 <ul>
                     <li>
-                        <a href="#">View Quiz Report</a>
+                        <a href="student-viewquiz.php">View Quiz Report</a>
                         <a href="#">View Exam Report</a>
                     </li>
                 </ul>
