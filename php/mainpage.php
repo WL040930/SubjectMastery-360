@@ -13,13 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
     <!--others font-->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
-    <!--function for objective-->
 </head>
 <body>
     <div id="logo_menu">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
-            <h1>SubjectMaster360</h1>
+            <h1>SubjectMastery360</h1>
         </div>
         <div id="menubar">
             <table class="menubar_content">
