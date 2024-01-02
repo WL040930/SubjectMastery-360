@@ -81,6 +81,11 @@
                 $question_fetch_id = $displayQuestionRow['quiz_question_id'];
         ?>
             No. <?php echo $number; $number = $number + 1; ?> <br>
+            <?php
+                if($displayQuestionRow['quiz_attachment'] != null) {
+                    echo "<img src='../data/image".$displayQuestionRow['quiz_attachment']."'>";
+                }
+            ?>
             <div id="question-text">
                 <?php echo $displayQuestionRow['quiz_question_text'];?>
             </div>
@@ -150,6 +155,10 @@
                 }
             }
         }
+
+        $updateQuery = "UPDATE `quiz_attempt` SET 
+                        `quiz_end_time`= CURRENT_TIMESTAMP WHERE `quiz_attempt_id` = '$quiz_attempt_id'";
+        mysqli_query($connection, $updateQuery);
         unset($_SESSION['quiz_attempt_started']);
         echo "<script> alert('Answer Submitted Successfully'); </script>";
         echo "<script> window.location.href='stu-teac-index.php'; </script>";

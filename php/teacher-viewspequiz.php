@@ -2,13 +2,14 @@
     include "dbconn.php";
     include "teacher-session.php";
 
-    $user_id = $_SESSION['id'];
+    $id = $_SESSION['id'];
 
-    $fetchQuery = "SELECT qa.*, q.*
-                    FROM quiz_attempt qa 
-                    JOIN quiz q 
-                    ON qa.quiz_id = q.quiz_id
-                    WHERE user_id = '$user_id'"; 
+    $fetchQuery = "SELECT cm.*, c.*, cq.*, q.*
+                    FROM classroom_member cm 
+                    JOIN classroom c ON cm.classroom_id = c.classroom_id
+                    JOIN classroom_quiz cq ON c.classroom_id = cq.classroom_id
+                    JOIN quiz q ON cq.quiz_id = q.quiz_id
+                    WHERE user_id = '$id'";
     $fetchResult = mysqli_query($connection, $fetchQuery);
 ?>
 
@@ -22,28 +23,51 @@
 </head>
 <body>
     <form id="quizForm" action="" method="post">
-        <div id="name"><?php echo $_SESSION['first_name']." ".$_SESSION['last_name']; ?></div> <br>
-        
         <!-- Dropdown list of quizzes -->
         Quiz: 
         <select name="quiz" id="quiz" onchange="submitForm()">
             <option value="">Select a Quiz</option>
             <?php
-                while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
-                    echo "<option value='". $fetchRow['quiz_attempt_id']."'>" .$fetchRow['quiz_title'] ."</option>";
-                } 
+            while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
+                echo "<option value='". $fetchRow['quiz_id']."'>" .$fetchRow['quiz_title'] ."</option>";
+            } 
+            ?>
+        </select>
+    </form>
+
+    <?php
+    if(isset($_POST['quiz'])){ 
+        $quiz_id = $_POST['quiz'];
+        // Fetch users for the selected quiz
+        $fetchUsersQuery = "SELECT DISTINCT u.*, qa.*
+                            FROM user u
+                            JOIN quiz_attempt qa ON u.user_id = qa.user_id
+                            WHERE qa.quiz_id = '$quiz_id'";
+        $fetchUsersResult = mysqli_query($connection, $fetchUsersQuery);
+    ?>
+    <!-- Display the second dropdown only if a quiz is selected -->
+    <form action="" method="post" id="userForm">
+        User: 
+        <select name="user" id="user" onchange="submitForm2()">
+            <option value="">Select a User</option>
+            <?php
+            while ($userRow = mysqli_fetch_assoc($fetchUsersResult)) {
+                echo "<option value='". $userRow['quiz_attempt_id']."'>" .$userRow['quiz_attempt_id']." - ".$userRow['username']."</option>";
+            }
             ?>
         </select>
     </form>
     <?php
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
-        // user_id and quiz_attempt_id is retrieved dy 
-        $quiz_attempt_id = $_POST['quiz'];
-        $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
-        $userScore = calculate_user_score($quiz_attempt_id, $user_id);
-        $quiz_title_query = "SELECT q.*, qa.* FROM quiz_attempt qa
-                                JOIN quiz q ON qa.quiz_id = q.quiz_id";
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user'])) {
+        // user_id and quiz_attempt_id are retrieved
+        $quiz_attempt_id = $_POST['user'];
+        $totalMark = quiz_total_mark($quiz_attempt_id); 
+        $userScore = calculate_user_score($quiz_attempt_id);
+        $quiz_title_query = "SELECT q.*, qa.*, u.* FROM quiz_attempt qa
+                                JOIN quiz q ON qa.quiz_id = q.quiz_id
+                                JOIN user u ON qa.user_id = u.user_id";
         $quiz_title_result = mysqli_query($connection, $quiz_title_query);
         $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
     ?>
@@ -52,6 +76,10 @@
         <tr>
             <th>Quiz Attempt ID</th>
             <td><?php echo $quiz_attempt_id; ?></td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td><?php echo $quiz_title_row['username']; ?></td>
         </tr>
         <tr>
             <th>Quiz Title</th>
@@ -73,6 +101,21 @@
             <th>Marks</th>
             <td><?php echo $userScore. " / ". $totalMark ?></td>
         </tr>
+        <tr>
+            <form action="" method="post">
+                <?php
+                $feedback_query = "SELECT * FROM quiz_feedback WHERE quiz_attempt_id = '$quiz_attempt_id'";
+                $feedback_result = mysqli_query($connection, $feedback_query);
+                $feedback_row = mysqli_fetch_assoc($feedback_result);
+                ?>
+                <th>Feedback</th>
+                <td>
+                    <input type="text" name="feedback" value="<?php echo $feedback_row['quiz_feedback_content']; ?>">
+                    <input type="hidden" name="quiz_attempt_id" value="<?php echo $quiz_attempt_id; ?>">
+                    <input type="submit" value="Submit" name="submitfeedback">
+                </td>
+            </form>
+        </tr>
     </table>
 
     <?php
@@ -92,7 +135,7 @@
             } else {
                 $incorrectData++;
             }
-?>
+    ?>
 
     <div id="answer-box">
         <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
@@ -115,6 +158,7 @@
             }
         }
     }
+    
 
     ?>
 
@@ -124,6 +168,10 @@
     <script>
         function submitForm() {
             document.getElementById("quizForm").submit();
+        }
+
+        function submitForm2() {
+            document.getElementById("userForm").submit();
         }
     </script>
     <script>
@@ -149,31 +197,25 @@
             type: 'pie',
             data: dataChart,
         });
-</script>
+    </script>
 </body>
 </html>
 
-
 <?php
 
-    function quiz_total_mark($quiz_attempt_id, $user_id) {
+    function quiz_total_mark($quiz_attempt_id) {
         global $connection;
 
-        // SQL query to calculate the total marks for a specific quiz attempt and user
+        // SQL query to calculate the total marks for a specific quiz attempt
         $totalMarkQuery = "
             SELECT SUM(qq.quiz_mark) AS total_mark
             FROM quiz_user_answer qua
             INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-            WHERE qua.quiz_attempt_id = ?
-            AND qua.quiz_attempt_id IN (
-                SELECT quiz_attempt_id
-                FROM quiz_attempt
-                WHERE user_id = ?
-            )";
+            WHERE qua.quiz_attempt_id = ?";
 
         // Prepare and execute the query
         $stmt = $connection->prepare($totalMarkQuery);
-        $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+        $stmt->bind_param('i', $quiz_attempt_id);
         $stmt->execute();
         $stmt->bind_result($total_mark);
         $stmt->fetch();
@@ -185,7 +227,7 @@
         return $total_mark;
     }
 
-    function calculate_user_score($quiz_attempt_id, $user_id) {
+    function calculate_user_score($quiz_attempt_id) {
         global $connection;
 
         // SQL query to calculate the user's score based on correctness of answers
@@ -194,16 +236,11 @@
             FROM quiz_user_answer qua
             INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
             INNER JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
-            WHERE qua.quiz_attempt_id = ?
-            AND qua.quiz_attempt_id IN (
-                SELECT quiz_attempt_id
-                FROM quiz_attempt
-                WHERE user_id = ?
-            )";
+            WHERE qua.quiz_attempt_id = ?";
 
         // Prepare and execute the query
         $stmt = $connection->prepare($userScoreQuery);
-        $stmt->bind_param('ii', $quiz_attempt_id, $user_id);
+        $stmt->bind_param('i', $quiz_attempt_id);
         $stmt->execute();
         $stmt->bind_result($user_score);
         $stmt->fetch();
@@ -214,4 +251,19 @@
         // Return the user's score
         return $user_score;
     }
+?>
+<?php
+if (isset($_POST['submitfeedback'])) {
+    $feedback = $_POST['feedback'];
+    $quiz_attempt_id = $_POST['quiz_attempt_id']; // Retrieve quiz_attempt_id from the form
+
+    $update_feedback_query = "UPDATE `quiz_feedback` SET `quiz_feedback_content`='$feedback' WHERE quiz_attempt_id = '$quiz_attempt_id'";
+    $update_feedback_result = mysqli_query($connection, $update_feedback_query);
+
+    if ($update_feedback_result) {
+        echo "<script>alert('Feedback Updated Successfully');</script>";
+    } else {
+        echo "<script>alert('Feedback Update Failed');</script>";
+    }
+}
 ?>

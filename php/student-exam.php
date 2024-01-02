@@ -79,6 +79,11 @@
                     $array[] = $displayQuestionRow['exam_user_answer_id'];
             ?>
             No. <?php echo $number; $number = $number + 1; ?> <br>
+            <?php 
+                if($displayQuestionRow['exam_attachment'] != null) {
+                    echo "<img src='../data/image".$displayQuestionRow['exam_attachment']."'>";
+                } 
+            ?>
             <input type="text" value="<?php echo $displayQuestionRow['exam_question']; ?>" disabled><br>
             <input type="text" value="<?php echo $displayQuestionRow['exam_user_answer']; ?>" name="answers[]"><br>
             <?php

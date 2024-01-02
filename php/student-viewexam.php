@@ -3,6 +3,7 @@ include "dbconn.php";
 include "student-session.php";
 
 $user_id = $_SESSION['id'];
+$decline = TRUE; 
 
 $fetchQuery = " SELECT ea.*, e.*
                 FROM exam_attempt ea 
@@ -42,7 +43,12 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         $exam_attempt_id = $_POST['exam'];
         $totalMark = calculateFullMarks($exam_attempt_id, $connection);
         $userScore = calculateUserMarks($exam_attempt_id, $connection); 
-        $wrongmark = $totalMark - $userScore;
+        if($userScore == "Not finish marking"){
+            $decline = FALSE; 
+        } else {
+            $wrongmark = $totalMark - $userScore;
+            $decline = TRUE;
+        }
         $examTitleQuery = "SELECT e.*, ea.*
         FROM exam_attempt ea 
         JOIN exam e 
@@ -110,7 +116,12 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             document.getElementById("examForm").submit();
         }
     </script>
-        <script>
+<?php
+
+if ($decline) {
+    // Execute the JavaScript code only if $decline is false
+    ?>
+    <script>
         var ctx = document.getElementById('quizChart').getContext('2d');
         var dataChart = {
             labels: ['Correct - Mark', 'Incorrect - Mark'],
@@ -134,6 +145,9 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             data: dataChart,
         });
     </script>
+    <?php
+    }
+?>
 </body>
 </html>
 
