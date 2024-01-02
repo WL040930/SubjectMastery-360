@@ -1,13 +1,13 @@
 /*for all parts*/
 body{
-    background-color: #FFE5E5;
+    background-color: #FFF2D8;
 }
 
 /*logo and website name*/
 #logo_menu{
     width: auto;
     height: 125px;
-    background-color: #333;
+    background-color: #EAD7BB;
 }
 
 #weblogo{
@@ -25,7 +25,7 @@ body{
     font-style: italic;
     font-family: 'Playfair Display', serif;
     justify-content: right;
-    color: white;
+    color: black;
 }
 
 /*all settings except logo & website name*/
@@ -41,7 +41,7 @@ body{
     float: right;
     margin-top: 15px;
     margin-right: 35px;
-    background-color: #3D0066;
+    background-color: #BCA37F;
     color: white;
     display: flex;
     justify-content: right;
@@ -66,12 +66,12 @@ body{
 }
 
 .menu1:hover, .menu2:hover, .menu3:hover{
-    color: #a51fff;
+    color: #4c4438;
 }
 
 /*slogan*/
 #slogan {
-    height: 100px;
+    height: 90px;
     text-align: center;
     letter-spacing: 4px;
     display: flex;
@@ -81,21 +81,21 @@ body{
 
 /*login and signup*/
 #login_signup{
-    height: 120px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #login, #register{
-    border: 2px solid #3D5A80;
+    border: 3px solid #7E6E57;
     border-radius: 20px;
     font-size: 30px;
     padding: 8px;
     font-weight: bold;
     border-spacing: 8px;
     margin: 80px;
-    background-color: #3D0066;
+    background-color: #7E6E57;
 }
 
 .login_button, .register_button{
@@ -108,7 +108,7 @@ body{
 
 /*objective*/
 #objective{
-    margin-top: 10px;
+    margin-top: 20px;
     height: 420px;
     justify-content: center;
     align-items: center;
@@ -134,53 +134,4 @@ body{
 
 .con{
     flex-wrap: wrap; 
-}
-
-/*follow and contact*/
-.follow_contact{
-    margin-top: 15px;
-    width: 100%;
-    border-top: 2px solid black;
-    background-color: #333;
-}
-
-.fol_title, .con_title{
-    width: 120px;
-    height: 90px;
-    float: left;
-    margin-left: 15px;
-    margin-top: 20px;
-}
-
-.fol_title_content, .con_title_content{
-    width: 120px;
-    font-size: 18px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    float: left;
-}
-
-.fol_content, .con_content{
-    float: left;
-    width: 500px;
-    margin-left: 10px;
-}
-
-.fol_img1, .fol_img2, .con_img1, .con_img2{
-    width: 40px;
-    height: 40px;
-    float: left;
-}
-
-.fol_con1, .fol_con2, .con_con1, .con_con2{
-    float: left;
-    margin-left: 10px;
-    margin-top: 8px;
-    font-size: 15px;
-    color: black;
-}
-
-.fol_con1:visited, .fol_con2:visited, .con_con1:visited, .con_con2:visited{
-    color: black;
 }
