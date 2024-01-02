@@ -42,8 +42,10 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         $quiz_attempt_id = $_POST['quiz'];
         $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
         $userScore = calculate_user_score($quiz_attempt_id, $user_id);
-        $quiz_title_query = "SELECT q.*, qa.* FROM quiz_attempt qa
-                                JOIN quiz q ON qa.quiz_id = q.quiz_id";
+        $quiz_title_query = "SELECT q.*, qa.*, qf.* FROM quiz_attempt qa
+                                JOIN quiz q ON qa.quiz_id = q.quiz_id
+                                JOIN quiz_feedback qf ON qa.quiz_attempt_id = qf.quiz_attempt_id
+                                WHERE qa.quiz_attempt_id = '$quiz_attempt_id'";
         $quiz_title_result = mysqli_query($connection, $quiz_title_query);
         $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
     ?>
@@ -70,29 +72,55 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             <td><?php echo $quiz_title_row['quiz_end_time']; ?></td>
         </tr>
         <tr>
+        <tr>
             <th>Marks</th>
-            <td><?php echo $userScore. " / ". $totalMark ?></td>
+            <td><?php echo ($userScore !== null ? $userScore : 0) . " / " . $totalMark ?></td>
         </tr>
+        <tr>
+            <th>Feedback</th>
+            <td><?php echo $quiz_title_row['quiz_feedback_content']; ?></td>
+        </tr>
+
     </table>
 
     <?php
-    $fetchResultQuery = "SELECT qq.*, qo.*, qua.* 
-                         FROM quiz_user_answer qua 
-                         JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
-                         JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
-                         WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
-    $fetchResultQueryResult = mysqli_query($connection, $fetchResultQuery);
-    $calnum = 1; 
-    $correctData = 0;
-    $incorrectData = 0;
-    if(mysqli_num_rows($fetchResultQueryResult) > 0) {
-        while($row = mysqli_fetch_assoc($fetchResultQueryResult)) {
-            if ($row['iscorrect'] == true) {
-                $correctData++;
-            } else {
-                $incorrectData++;
-            }
-?>
+        $fetchResultQuery = "SELECT qq.*, qo.*, qua.* 
+                            FROM quiz_user_answer qua 
+                            JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
+                            LEFT JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+                            WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
+
+        $fetchResultQueryResult = mysqli_query($connection, $fetchResultQuery);
+        $calnum = 1; 
+        $correctData = 0;
+        $incorrectData = 0;
+
+        if(mysqli_num_rows($fetchResultQueryResult) > 0) {
+            while($row = mysqli_fetch_assoc($fetchResultQueryResult)) {
+                ?>
+                <div id="answer-box">
+                    <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
+                    <p>Question: <?php echo $row['quiz_question_text']; ?></p>
+                    <p>User Answer: <?php echo $row['option_text']; ?></p>
+                    <?php
+                    if ($row['iscorrect'] == true || ($row['iscorrect'] === null && $row['answer'] === null)) {
+                        echo "CORRECT"; 
+                    } else {
+                        echo "INCORRECT <br>";
+                        $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
+                        $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
+                        $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
+                        echo "Correct Answer: ".$correctAnswerRow['option_text'];
+                    }
+                    ?>
+                </div>
+                <?php
+                if ($row['iscorrect'] == true) {
+                    $correctData++;
+                } else {
+                    $incorrectData++;
+                }
+    ?>
 
     <div id="answer-box">
         <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
