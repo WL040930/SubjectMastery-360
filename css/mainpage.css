@@ -1,0 +1,174 @@
+/*for all parts*/
+body{
+    background-color: #dbd1a0;
+}
+
+/*logo and website name*/
+#logo_menu{
+width: auto;
+height: 125px;
+margin-left: 13px;
+}
+
+#weblogo{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    float: left;
+    justify-content: left;
+}
+
+#webname{
+    float: left;
+    margin-left: 15px;
+    font-size: 20px;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    justify-content: right;
+}
+
+/*all settings except logo & website name*/
+#all{
+    font-family: 'Playfair Display', serif;
+    color: #3D0066;
+} 
+
+/*menubar*/
+#menubar {
+    height: 90px;
+    font-size: 20px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 35px;
+    background-color: #fbe134;
+    color: #3D0066;
+    display: flex;
+    justify-content: right;
+}
+
+.menubar_content {
+    border-spacing: 10px;
+    border: 3px solid #FFCE1F;
+    color: #3D0066;
+    width: 100%;
+    justify-content: center;
+}
+
+.menu1:visited, .menu2:visited, .menu3:visited{
+    color: #3D0066;
+}
+
+.menu1:hover, .menu2:hover, .menu3:hover{
+    color: white;
+}
+
+/*slogan*/
+#slogan {
+    height: 100px;
+    text-align: center;
+    letter-spacing: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*login and signup*/
+#login_signup{
+    height: 100px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login, #register{
+    border: 2px solid #3D5A80;
+    border-radius: 20px;
+    font-size: 30px;
+    padding: 8px;
+    font-weight: bold;
+    border-spacing: 8px;
+    margin: 80px;
+}
+
+.login_button:visited, .register_button:visited{
+    color: #25364c;
+}
+
+/*objective*/
+#objective{
+    margin-top: 10px;
+    height: 420px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#objective_table{
+    height: 350px;
+}
+
+.obj1, .obj2, .obj3, .obj4{
+    width: 150px;
+    height: 150px;
+}
+
+.obj_content{
+    text-align: center;
+}
+
+.bcon{
+    font-size: 20px;
+}
+
+.con{
+    flex-wrap: wrap;
+}
+
+/*follow and contact*/
+.follow_contact{
+    margin-top: 15px;
+    height: 110px;
+    border-top: 2px solid black;
+}
+
+.fol_title, .con_title{
+    width: 120px;
+    height: 90px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+.fol_title_content, .con_title_content{
+    width: 120px;
+    font-size: 18px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    float: left;
+}
+
+.fol_content, .con_content{
+    float: left;
+    width: 500px;
+    margin-left: 10px;
+}
+
+.fol_img1, .fol_img2, .con_img1, .con_img2{
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+
+.fol_con1, .fol_con2, .con_con1, .con_con2{
+    float: left;
+    margin-left: 10px;
+    margin-top: 8px;
+    font-size: 15px;
+    color: black;
+}
+
+.fol_con1:visited, .fol_con2:visited, .con_con1:visited, .con_con2:visited{
+    color: black;
+}
