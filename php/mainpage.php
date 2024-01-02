@@ -6,12 +6,14 @@
     <title>Home - SubjectMaster360</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/mainpage.css">
+    <script src="../script/mainpage.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!--website name font-->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
     <!--others font-->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+    <!--function for objective-->
 </head>
 <body>
     <div id="logo_menu">
@@ -30,13 +32,13 @@
             </table>
         </div>
     </div>
-
+    <br>
     <div id="all">
         <div id="slogan">
             <br>
             <h1>"Empower Your Mind, Master Every Subject"</h1>
         </div>
-
+        <br>
         <div id="login_signup">
             <div>
                 <table id="login">
@@ -51,6 +53,7 @@
                 </table>
             </div>
         </div>
+        <br><br><br>
         <div id="objective">
             <table id="objective_table">
                 <tr class="obj_img">
@@ -61,20 +64,24 @@
                 </tr>
                 <tr class="obj_content">
                     <td class="con">
-                        <b class="bcon">Facilitate Students Learning Process</b>
-                        <p>SubjectMastery360 will centralize the learning materials that students need to study so that they do not have to spend time searching for them.</p>
+                        <br>
+                        <b id="Bcon1" class="bcon" onclick="togglepcon1()">Facilitate Students Learning Process</b><br><br>
+                        <p id="Pcon1" class="pcon">SubjectMastery360 will centralize the learning materials that students need to study so that they do not have to spend time searching for them.</p>
                     </td>
                     <td class="con">
-                        <b class="bcon">Simplifying Sharing Materials Process</b>
-                        <p>SubjectMastery360 offers “classroom” feature which allows teachers to share the study materials such as notes to their students easily.</p>
+                        <br>
+                        <b id="Bcon2" class="bcon" onclick="togglepcon2()">Simplifying Sharing Materials Process</b><br><br>
+                        <p id="Pcon2" class="pcon">SubjectMastery360 offers “classroom” feature which allows teachers to share the study materials such as notes to their students easily.</p>
                     </td>
                     <td class="con">
-                        <b class="bcon">Helps in Analysing & Collecting Data</b>
-                        <p>SubjectMastery360 will automatically generate results graph of the assessment to help teachers in analysing the results of students.</p>
+                        <br>
+                        <b id="Bcon3" class="bcon" onclick="togglepcon3()">Helps in Analysing & Collecting Data</b><br><br>
+                        <p id="Pcon3" class="pcon">SubjectMastery360 will automatically generate results graph of the assessment to help teachers in analysing the results of students.</p>
                     </td>
                     <td class="con">
-                        <b class="bcon">Optimize processes to conserve time & resources.</b>
-                        <p>SubjectMastery360 will automatically generate the reports of each student and overall report for teachers, which will save the time of teachers in generating and writing the reports. </p>
+                        <br>
+                        <b id="Bcon4" class="bcon" onclick="togglepcon4()">Optimize Processes to <br>Save Time & Resources</b><br><br>
+                        <p id="Pcon4" class="pcon">SubjectMastery360 automates student reports, saving teachers time in report generation and writing, providing both individual and overall assessments.</p>
                     </td>
                 </tr>
             </table>

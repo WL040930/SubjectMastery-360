@@ -21,16 +21,16 @@ body{
 #webname{
     float: left;
     margin-left: 15px;
-    font-size: 20px;
+    font-size: 22px;
     font-style: italic;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Exo 2', sans-serif;
     justify-content: right;
     color: black;
 }
 
 /*all settings except logo & website name*/
 #all{
-    font-family: 'Playfair Display', serif;
+    font-family: 'Exo 2', sans-serif;
     color: black;
 } 
 
@@ -71,6 +71,7 @@ body{
 
 /*slogan*/
 #slogan {
+    font-size: 18px;
     height: 90px;
     text-align: center;
     letter-spacing: 4px;
@@ -94,12 +95,13 @@ body{
     padding: 8px;
     font-weight: bold;
     border-spacing: 8px;
-    margin: 80px;
+    margin: 100px;
     background-color: #7E6E57;
 }
 
 .login_button, .register_button{
     text-decoration: none;
+    width: 200px;
 }
 
 .login_button:visited, .register_button:visited{
@@ -108,15 +110,9 @@ body{
 
 /*objective*/
 #objective{
-    margin-top: 20px;
-    height: 420px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-#objective_table{
-    height: 350px;
 }
 
 .obj1, .obj2, .obj3, .obj4{
@@ -128,10 +124,25 @@ body{
     text-align: center;
 }
 
-.bcon{
-    font-size: 20px;
+.con{
+    width: 350px;
 }
 
-.con{
-    flex-wrap: wrap; 
+.bcon{
+    font-size: 30px;
+    cursor: pointer;
 }
+
+.bcon:hover{
+    color: #7E6E57;
+}
+
+.pcon{
+    font-size: 17px;
+    border: 3px solid #7E6E57;
+    border-radius: 10px;
+    background-color: #EAD7BB;
+    padding: 10px;
+    display: none;
+}
+
