@@ -55,10 +55,10 @@
         <div id="objective">
             <table id="objective_table">
                 <tr class="obj_img">
-                    <th><img src="../image/pic_re.png" alt="objective1" class="obj1"></th>
-                    <th><img src="../image/pic_re.png" alt="objective2" class="obj2"></th>
-                    <th><img src="../image/pic_re.png" alt="objective3" class="obj3"></th>
-                    <th><img src="../image/pic_re.png" alt="objective4" class="obj4"></th>
+                    <th><img src="../image/1.png" alt="objective1" class="obj1"></th>
+                    <th><img src="../image/2.png" alt="objective2" class="obj2"></th>
+                    <th><img src="../image/3.png" alt="objective3" class="obj3"></th>
+                    <th><img src="../image/4.png" alt="objective4" class="obj4"></th>
                 </tr>
                 <tr class="obj_content">
                     <td class="con">
