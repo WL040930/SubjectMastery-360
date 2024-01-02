@@ -75,8 +75,38 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     </table>
 
     <?php
-    $fetchResultQuery = ""; 
+    $fetchResultQuery = "SELECT qq.*, qo.*, qua.* 
+                         FROM quiz_user_answer qua 
+                         JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
+                         JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+                         WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
+    $fetchResultQueryResult = mysqli_query($connection, $fetchResultQuery);
+    $calnum = 1; 
+    if(mysqli_num_rows($fetchResultQueryResult) > 0) {
+        while($row = mysqli_fetch_assoc($fetchResultQueryResult)) {
+?>
 
+    <div id="answer-box">
+        <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
+        <p>Question: <?php echo $row['quiz_question_text']; ?></p>
+        <p>User Answer: <?php echo $row['option_text']; ?></p>
+        <?php
+            if ($row['iscorrect'] == TRUE) {
+                echo "CORRECT"; 
+            }
+            else {
+                echo "INCORRECT <br>";
+                $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
+                $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
+                $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
+                echo "Correct Answer: ".$correctAnswerRow['option_text'];
+            }
+        ?>
+    </div>
+
+<?php
+        }
+    }
     }
 
     ?>
