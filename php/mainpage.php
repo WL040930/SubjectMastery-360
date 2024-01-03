@@ -85,8 +85,8 @@
                 </tr>
             </table>
         </div>
+        <br><br>
+        <?php include 'footer.php'; ?>
     </div>
-    <br><br>
-    <?php include 'footer.php'; ?>
 </body>
 </html>
