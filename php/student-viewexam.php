@@ -26,7 +26,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         <div id="name"><?php echo $_SESSION['first_name']." ".$_SESSION['last_name']; ?></div> <br>
         
         <!-- Dropdown list of quizzes -->
-        Quiz: 
+        Exam: 
         <select name="exam" id="exam" onchange="submitForm()">
             <option value="">Select a Exam</option>
             <?php
@@ -50,10 +50,10 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             $decline = TRUE;
         }
         $examTitleQuery = "SELECT e.*, ea.*
-        FROM exam_attempt ea 
-        JOIN exam e 
-        ON ea.exam_id = e.exam_id
-        WHERE ea.exam_attempt_id = $exam_attempt_id";
+                            FROM exam_attempt ea 
+                            JOIN exam e 
+                            ON ea.exam_id = e.exam_id
+                            WHERE ea.exam_attempt_id = $exam_attempt_id";
 
         $quiz_title_result = mysqli_query($connection, $examTitleQuery);
         $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);

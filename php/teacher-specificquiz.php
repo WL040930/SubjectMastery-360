@@ -67,7 +67,8 @@
         $userScore = calculate_user_score($quiz_attempt_id);
         $quiz_title_query = "SELECT q.*, qa.*, u.* FROM quiz_attempt qa
                                 JOIN quiz q ON qa.quiz_id = q.quiz_id
-                                JOIN user u ON qa.user_id = u.user_id";
+                                JOIN user u ON qa.user_id = u.user_id
+                                WHERE qa.quiz_attempt_id = $quiz_attempt_id";
         $quiz_title_result = mysqli_query($connection, $quiz_title_query);
         $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
     ?>
