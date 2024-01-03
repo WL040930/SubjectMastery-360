@@ -13,44 +13,58 @@
         $digit5 = $_POST["digit5"];
         $digit6 = $_POST["digit6"];
         $digit7 = $_POST["digit7"];
-
+    
         $code = $digit1 . $digit2 . $digit3 . $digit4 . $digit5 . $digit6 . $digit7;
-
+    
         $checkQuery = "SELECT * FROM `classroom` WHERE `classroom_code` = '$code'";
         $checkResult = mysqli_query($connection, $checkQuery);
         $rowCheck = mysqli_fetch_assoc($checkResult);
-
+    
         if ($rowCheck) {
             $rowCount = mysqli_num_rows($checkResult);
-
+    
             if ($rowCount == 1) {
                 $classroom_id = $rowCheck['classroom_id'];
+    
+                // Check if the user is already a member of the classroom
+                $membershipCheckQuery = "SELECT * FROM `classroom_member` WHERE `user_id` = '$user_id' AND `classroom_id` = '$classroom_id'";
+                $membershipCheckResult = mysqli_query($connection, $membershipCheckQuery);
+                $existingMembership = mysqli_fetch_assoc($membershipCheckResult);
+    
+                if ($existingMembership) {
+                    echo "<script> alert ('You are already a member of this classroom.'); </script>";
+                    echo "<script> window.location.href = 'stu-teac-classroompage.php?id=$classroom_id'; </script>";
+                    exit();
+                }
+    
+                // If not a member, insert into the classroom_member table
                 $insertQuery = "INSERT INTO `classroom_member`(`user_id`, `classroom_id`) 
                                 VALUES ('$user_id','$classroom_id')";
-                $insertResult = mysqli_query($connection, $insertQuery);    
+                $insertResult = mysqli_query($connection, $insertQuery);
+    
                 if ($insertResult) {
-                    echo "<script> alert ('You have successfully joined the classroom. ');</script>"; 
+                    echo "<script> alert ('You have successfully joined the classroom.'); </script>";
                     echo "<script> window.location.href = 'stu-teac-classroompage.php?id=$classroom_id'; </script>";
                     exit();
                 } else {
-                    echo "<script> alert ('Error Occur. Please try again. ');</script>";
+                    echo "<script> alert ('Error Occurred. Please try again.'); </script>";
                     echo "<script> window.location.href = 'student-joinclassroom.php'; </script>";
                     exit();
                 }
-            } else if($rowCount == 0) {
-                echo "<script> alert ('Invalid Classroom Code. Please Try Again. ');</script>";
+            } else if ($rowCount == 0) {
+                echo "<script> alert ('Invalid Classroom Code. Please Try Again.'); </script>";
                 echo "<script> window.location.href = 'student-joinclassroom.php'; </script>";
                 exit();
             } else if ($rowCount > 1) {
-                echo "<script> alert ('There is an error in the website. Please Contact Admin. ');</script>";
+                echo "<script> alert ('There is an error on the website. Please Contact Admin.'); </script>";
                 echo "<script> window.location.href = 'stu-teac-index.php'; </script>";
-                exit(); 
+                exit();
             }
         } else {
             echo "Error: " . mysqli_error($connection);
         }
-
     }
+    
 ?>
 
 <!DOCTYPE html>

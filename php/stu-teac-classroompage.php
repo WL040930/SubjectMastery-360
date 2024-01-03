@@ -21,6 +21,12 @@
         $classroom_member_id = $sqlrow['classroom_member_id'];
     }
 
+    $classroom_name_fetch = "SELECT c.* 
+                             FROM classroom c 
+                             WHERE `classroom_id` = '$id'";
+    $classroom_name_result = mysqli_query($connection, $classroom_name_fetch); 
+    $classroom_member_row = mysqli_fetch_assoc($classroom_name_result); 
+
 ?>
 
 <!DOCTYPE html>
@@ -28,47 +34,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Chat</title>
+    <title><?php echo $classroom_member_row['classroom_name']; ?></title>
     <link rel="stylesheet" href="../css/classroom-page.css">
 </head>
 
+<style>
+    #chatbox {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+#chatbox a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+#chatbox a:hover {
+    background-color: #e5e5e5;
+}
+
+#chatbox div {
+    margin-bottom: 8px;
+}
+
+#chatbox div:last-child {
+    margin-bottom: 0; /* Remove margin-bottom for the last div to avoid extra spacing */
+}
+
+</style>
 
 <body>
 
-    <div id="chat-container">
-        <div id="basic-information">
-            profile picture
-        </div>
-        <div id="text-box">
-            
-        </div>
-        <div id="picture">
-
-        </div>
-        <div id="comment">
-
-        </div>
-        <div id="reply">
-
-        </div>
+    <?php
+        $chatquery = "SELECT cms.*, cm.*, u.* 
+                      FROM chatroom_messages cms 
+                      JOIN classroom_member cm ON cms.classroom_member_id = cm.classroom_member_id
+                      JOIN user u ON cm.user_id = u.user_id
+                      WHERE cm.classroom_id = '$id'";
+        $chatresult = mysqli_query($connection, $chatquery); 
+        while ($chatrow = mysqli_fetch_assoc($chatresult)) {
+    ?>
+    <div id="chatbox">
+        <a href="stu-teac-chat.php?id=<?php echo $chatrow['chatroom_messages_id']; ?>">
+            <div>
+                <?php echo $chatrow['username']; ?>
+            </div>
+            <div>
+                <?php echo $chatrow['chatroom_title'];  ?>
+            </div>
+            <div>
+                <?php echo $chatrow['chatroom_messages_timestamp'];  ?>
+            </div>
+        </a>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <?php
+        }
+    ?>
     <button onclick="toggleNewChatModal()">New Chat</button>
 
     <div id="newChatContainer">
