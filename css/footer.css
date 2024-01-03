@@ -1,9 +1,8 @@
 /*overall setting*/
 footer {
+    height: 160px;
     width: 100%;
     background-color: #7E6E57;
-    height: 160px;
-    position: absolute;
 }
 
 /*follow*/
@@ -11,7 +10,6 @@ footer {
     height: 160px;
     border-top: 3px solid black;
     background-color: #7E6E57;
-    margin-bottom: 20px;
     color: #FFF2D8;
 }
 
