@@ -1,74 +1,181 @@
 <?php
+    include "dbconn.php";
+    include "teacher-session.php";
 
-require "dbconn.php";
+    $id = $_SESSION['id'];
 
-// Function to calculate the average mark for a specific quiz
-// Function to calculate the average marks for all students/attempts in a specific quiz
-// Function to calculate the total marks for a specific quiz attempt
-// Function to check how many times a specific quiz has been attempted
-function quiz_attempt_count($quiz_id) {
-    global $connection;
+    $fetchQuery = "SELECT cm.*, c.*, cq.*, q.*
+                    FROM classroom_member cm 
+                    JOIN classroom c ON cm.classroom_id = c.classroom_id
+                    JOIN classroom_quiz cq ON c.classroom_id = cq.classroom_id
+                    JOIN quiz q ON cq.quiz_id = q.quiz_id
+                    WHERE user_id = '$id'";
+    $fetchResult = mysqli_query($connection, $fetchQuery);
+?>
 
-    // Fetch the attempt count
-    $attemptCountQuery = "
-        SELECT COUNT(DISTINCT qa.quiz_attempt_id) AS attempt_count
-        FROM quiz_attempt qa
-        WHERE qa.quiz_id = ?";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Quiz Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <form id="quizForm" action="" method="post">
+        <!-- Dropdown list of quizzes -->
+        Quiz: 
+        <select name="quiz" id="quiz" onchange="submitForm()">
+            <option value="">Select a Quiz</option>
+            <?php
+            while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
+                echo "<option value='". $fetchRow['quiz_id']."'>" .$fetchRow['quiz_title'] ."</option>";
+            } 
+            ?>
+        </select>
+    </form>
+    <?php
+    
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
+            $quiz_id = $_POST['quiz'];
+            $titleQuery = "SELECT * FROM quiz WHERE quiz_id = '$quiz_id'";
+            $titleResult = mysqli_query($connection, $titleQuery);
+            $titleRow = mysqli_fetch_assoc($titleResult);
+            $quiz_title = $titleRow['quiz_title'];
+            $numofAttempt = quiz_attempt_count($quiz_id);
+            $totalMark = calculate_total_marks($quiz_id, $connection); 
+            $averageMark = $totalMark / $numofAttempt;
+            $fullMark = calculate_total_possible_marks($quiz_id, $connection); 
+            $percentage = ($averageMark / $fullMark) * 100;
+            $incorrect = 100 - $percentage; 
+    ?>
 
-    $stmt = $connection->prepare($attemptCountQuery);
-    $stmt->bind_param('i', $quiz_id); // 'i' represents an integer type
-    $stmt->execute();
-    $result = $stmt->get_result();
+        <table border="1">
+            <tr>
+                <th>Quiz ID</th>
+                <td><?php echo $quiz_id; ?></td>
+            </tr>
+            <tr>
+                <th>Quiz Title</th>
+                <td><?php echo $quiz_title; ?></td>
+            </tr>
+            <tr>
+                <th>Number of Attempt</th>
+                <th><?php echo $numofAttempt; ?></th>
+            </tr>
+            <tr>
+                <th>Full Marks of the Assessment</th>
+                <td><?php echo $fullMark; ?></td>
+            </tr>
+            <tr>
+                <th>Average Mark</th>
+                <td><?php echo $averageMark; ?></td>
+            </tr>
+            <tr>
+                <th>Percentage</th>
+                <td><?php echo $percentage; ?></td>
+            </tr>
+        </table>
+        <canvas id="quizChart" width="400" height="200"></canvas>
+    <?php
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $attempt_count = $row['attempt_count'];
-    } else {
-        $attempt_count = 0;
+        }
+    
+    ?>
+    
+    <script>
+        function submitForm() {
+            document.getElementById("quizForm").submit();
+        }
+    </script> 
+        <script>
+        var ctx = document.getElementById('quizChart').getContext('2d');
+        var dataChart = {
+            labels: ['Correct Percentage', 'Incorrect Percentage'],
+            datasets: [{
+                data: [<?php echo $percentage; ?>, <?php echo $incorrect; ?>],
+                backgroundColor: [
+                    'rgba(75, 192, 75, 0.7)', // Green for correct
+                    'rgba(255, 99, 132, 0.7)' // Red for incorrect
+                ],
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                    'rgba(255, 255, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Create the pie chart with data
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: dataChart,
+        });
+    </script>
+</body>
+</html>
+
+<?php
+
+    function quiz_attempt_count($quiz_id) {
+        global $connection;
+
+        // Fetch the attempt count
+        $attemptCountQuery = "
+            SELECT COUNT(DISTINCT qa.quiz_attempt_id) AS attempt_count
+            FROM quiz_attempt qa
+            WHERE qa.quiz_id = ?";
+
+        $stmt = $connection->prepare($attemptCountQuery);
+        $stmt->bind_param('i', $quiz_id); // 'i' represents an integer type
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $attempt_count = $row['attempt_count'];
+        } else {
+            $attempt_count = 0;
+        }
+
+        // Close the statement
+        $stmt->close();
+
+        // Return the attempt count for the specific quiz
+        return $attempt_count;
     }
 
-    // Close the statement
-    $stmt->close();
 
-    // Return the attempt count for the specific quiz
-    return $attempt_count;
-}
+    // Function to calculate the total marks of a specific quiz
+    function calculate_total_marks($quiz_id, $db) {
+        $query = "
+        SELECT SUM(qq.quiz_mark) as total_marks
+        FROM quiz_user_answer qua
+        JOIN quiz_attempt qa ON qua.quiz_attempt_id = qa.quiz_attempt_id
+        JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+        JOIN quiz_option qot ON qua.answer = qot.quiz_option_id
+        WHERE qa.quiz_id = ? AND qot.iscorrect = 1
+        ";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $quiz_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['total_marks'];
+    }
 
-// ...
+    function calculate_total_possible_marks($quiz_id, $db) {
+        $query = "
+        SELECT SUM(qq.quiz_mark) as total_marks
+        FROM quiz_question qq
+        WHERE qq.quiz_id = ?
+        ";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $quiz_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        return $row['total_marks'];
+    }
 
-// Usage example
-$quiz_id = 2; // Replace with the actual quiz_id
-$attemptCount = quiz_attempt_count($quiz_id);
-
-// Display the attempt count
-echo "<p>Quiz {$quiz_id} has been attempted {$attemptCount} times</p>";
-
-
-// Function to calculate the total marks of a specific quiz
-function calculate_total_marks($quiz_id, $db) {
-    $query = "
-    SELECT SUM(qq.quiz_mark) as total_marks
-    FROM quiz_user_answer qua
-    JOIN quiz_attempt qa ON qua.quiz_attempt_id = qa.quiz_attempt_id
-    JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-    JOIN quiz_option qot ON qua.answer = qot.quiz_option_id
-    WHERE qa.quiz_id = ? AND qot.iscorrect = 1
-    ";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("i", $quiz_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    return $row['total_marks'];
-}
-
-
-// ...
-
-// Usage example
-$quiz_id = 2; // Replace with the actual quiz_id
-$totalMarks = calculate_total_marks($quiz_id, $connection);
-
-// Display the total marks for the quiz
-echo "<p>Total Marks for Quiz {$quiz_id}: {$totalMarks}</p>";
-
+?>

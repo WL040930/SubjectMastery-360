@@ -72,3 +72,19 @@ $totalMarks = calculate_total_marks($quiz_id, $connection);
 // Display the total marks for the quiz
 echo "<p>Total Marks for Quiz {$quiz_id}: {$totalMarks}</p>";
 
+function calculate_total_possible_marks($quiz_id, $db) {
+    $query = "
+    SELECT SUM(qq.quiz_mark) as total_marks
+    FROM quiz_question qq
+    WHERE qq.quiz_id = ?
+    ";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $quiz_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total_marks'];
+}
+
+$quiz_id = 2; 
+echo calculate_total_possible_marks($quiz_id, $connection);
