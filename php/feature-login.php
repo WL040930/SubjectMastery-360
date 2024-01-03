@@ -8,31 +8,41 @@
         $password = $_POST['password'];
         $query = "SELECT user.*, role.role
                 FROM user
-                JOIN role ON user.role_id = role.role_id
+                LEFT JOIN role ON user.role_id = role.role_id
                 WHERE email_address = '$email' AND password = '$password'";
                 
         $result = mysqli_query($connection, $query);
     
-        if (mysqli_num_rows($result) == 1) {
+        if ($result) {
             $row = mysqli_fetch_assoc($result);
-            $_SESSION['id'] = $row['user_id'];
-            $_SESSION['first_name'] = $row['user_first_name'];
-            $_SESSION['last_name'] = $row['user_last_name'];
-            $_SESSION['email'] = $row['email_address'];
-            $_SESSION['role'] = $row['role'];
-            $role = $_SESSION['role']; 
-
-            if ($role == 'admin') { 
-                header("Location: admin-index.php");
-                exit(); 
+    
+            if ($row) {
+                $_SESSION['id'] = $row['user_id'];
+                $_SESSION['first_name'] = $row['user_first_name'];
+                $_SESSION['last_name'] = $row['user_last_name'];
+                $_SESSION['email'] = $row['email_address'];
+                $_SESSION['role'] = $row['role'];
+                $role = $_SESSION['role'];
+    
+                if ($role == null) {
+                    header("Location: feature-role.php");
+                    exit();
+                } elseif ($role == 'admin') {
+                    header("Location: admin-index.php");
+                    exit();
+                } else {
+                    header("Location: stu-teac-index.php");
+                    exit();
+                }
             } else {
-                header("Location: stu-teac-index.php");
-                exit();  
+                echo "<script>alert('Invalid email or password');</script>";
             }
         } else {
-            echo "<script>alert('Invalid email or password');</script>";
+            // Handle query execution error
+            echo "<script>alert('Error executing the query');</script>";
         }
     }
+    
     
 
 ?>

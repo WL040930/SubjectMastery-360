@@ -1,3 +1,20 @@
+<?php
+
+    include "dbconn.php";
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if(!isset($_SESSION['id'])) {
+        header("Location: feature-logout.php");
+        exit(); 
+    } else {
+        $user_id = $_SESSION['id'];
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +61,7 @@
             <h1>Please Select Your Role</h1>
         </div>
 
-        <form action="post">
+        <form action="" method="post">
         <div id="student">
             <input type="radio" name="role" value="student">Student<br>
         </div>
@@ -62,3 +79,34 @@
         </form>
 </body>
 </html>
+
+<?php
+
+    if(isset($_POST['btnNext'])) {
+        $selectedRole = $_POST['role']; 
+        
+        switch ($selectedRole) {
+            case 'student':
+                $roleId = 1;
+                break;
+            case 'teacher':
+                $roleId = 2;
+                break;
+            default:
+                // Handle other cases if needed
+                break;
+        }
+
+        $insertQuery = "UPDATE `user` SET `role_id`='$roleId' WHERE user_id = '$user_id'";
+        $insertResult = mysqli_query($connection, $insertQuery); 
+        if($insertResult) {
+            $_SESSION['role'] = $selectedRole;
+            header("Location: stu-teac-index.php"); 
+            exit();
+        } else {
+            echo "<script> alert('Please try again later. '); </script>";
+            echo "<script> window.location.href='feature-logout.php'; </script>";
+        }
+    }
+
+?>

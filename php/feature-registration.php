@@ -107,7 +107,7 @@
                     var wantToAddPicture = confirm('Do you want to add a profile picture after registration?');
 
                     if (wantToAddPicture) {
-                        window.location.href='registration-profilepicture.php';
+                        window.location.href='feature-profilepicture.php';
                     } else {
                         window.location.href='feature-login.php';
                     }
