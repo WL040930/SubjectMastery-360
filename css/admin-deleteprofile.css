@@ -1,0 +1,68 @@
+#all{
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;   
+}
+
+/*head content*/
+#title{
+    margin-left: 15px;
+    font-size: 40px;
+    text-decoration: underline;
+    text-align: center;
+    align-items: center;
+}
+
+#user_title{
+
+    margin-left: 55px;
+    text-align: left;
+    align-items: left;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+/*body content*/
+#table{
+    margin-left: 55px;
+    align-items: center;
+    width: 85%;
+}
+
+th {
+    border: 3px solid black;
+    background-color: #5d6471;
+    font-size: 19px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+    width: 25%;
+}
+
+td{
+    background-color: #edf1f7;
+    font-size: 17px;
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 10px;
+    margin-left: 10px;
+    width: 45%;
+}
+
+/*delete button*/
+#delete_button {
+    padding: 8px;
+    font-size: 17px;
+    margin-top: 20px;
+    cursor: pointer;    
+    border: 2px solid black;
+    border-radius: 15px;
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
