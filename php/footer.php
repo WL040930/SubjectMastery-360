@@ -36,6 +36,7 @@
                     <p id="con_con2" target="_blank">Tel: +1300 88 2525</p>
                 </div>
             </div>
+            <br>
             <p id="copyright">&copy; 2024 SubjectMastery360. All rights reserved.</p>
         </footer>
     </div>

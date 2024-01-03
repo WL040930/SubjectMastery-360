@@ -1,5 +1,9 @@
 /*overall setting*/
 footer {
+    /*how to expand the footer to remove the empty space inside the page*/
+
+    margin: 0;
+    padding: 0;
     height: 160px;
     width: 100%;
     background-color: #7E6E57;

@@ -121,6 +121,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    display: flex;
 }
 
 .obj1, .obj2, .obj3, .obj4{
