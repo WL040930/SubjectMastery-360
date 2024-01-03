@@ -50,33 +50,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database</title>
-    <link rel="stylesheet" href="../styles/admin-database.css">
+    <link rel="stylesheet" href="../css/admin-database.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="all">
     <form action="#" method="get" id="search-form">
         <label for="search-by">
             Search by:
             <select name="search-by" id="search-by">
-                <option value="username">Username</option>  
-                <option value="email">Email Address</option>  
+                <option value="username" id="search_op1">Username</option>
+                <option value="email" id="search_op2">Email Address</option>  
             </select>
         </label>
         <label for="search" id="search-label" style="display: none;">
             <input type="text" name="search" id="search" placeholder="Enter your search">
         </label>
-        <label for="sort-by">
+        <label for="sort-by" id="sortlabel">
             Sort by:
             <select name="sort-by" id="sort-by">
-                <option value="default">Default</option>
-                <option value="student">Student</option>  
-                <option value="teacher">Teacher</option>  
+                <option value="default" id="sort_op1">Default</option>
+                <option value="student" id="sort_op2">Student</option>  
+                <option value="teacher" id="sort_op3">Teacher</option>  
             </select>
         </label>
         <button type="submit" id="search-button" name="submit">Search</button>
     </form>
 
     <?php if (isset($_GET['submit'])) { ?>
-        <table border="1">
+        <table id="data_table">
             <tr>
                 <th>ID</th>
                 <th>Role</th>
@@ -96,11 +100,12 @@
                 <td><?php echo $row['user_last_name']; ?></td>
                 <td><?php echo $row['email_address']; ?></td>
                 <td><?php echo $row['institute_name']; ?></td>
-                <td><a href="admin-manageprofile.php?id=<?php echo $row['user_id'];?>">Edit</a></td>
-                <td><a href="admin-deleteprofile.php?id=<?php echo $row['user_id'];?>">Delete</a></td>
+                <td><a href="admin-manageprofile.php?id=<?php echo $row['user_id'];?>"><img src="../image/edit.png" alt="edit" id="edit"></a></td>
+                <td><a href="admin-deleteprofile.php?id=<?php echo $row['user_id'];?>"><img src="../image/delete.png" alt="delete" id="delete"></a></td>
             </tr>
         <?php } ?>
         </table>
+        <br><br>
     <?php } ?>
     
     <script src="../script/admin-database.js"></script>
