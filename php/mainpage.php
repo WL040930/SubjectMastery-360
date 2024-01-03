@@ -42,13 +42,13 @@
             <div>
                 <table id="login">
                     <!--connect to LOGIN PAGE-->
-                    <th><a href="https://music.youtube.com/" class="login_button" title="Click to login">LOGIN</a></th>
+                    <th><a href="feature-login.php" class="login_button" title="Click to login">LOGIN</a></th>
                 </table>
             </div>
             <div>
                 <table id="register">
                     <!--connect to USER REGISTER PAGE-->
-                    <th><a href="https://youtube.com/" class="register_button" title="Click to create a account">SIGN UP</a></th>
+                    <th><a href="feature-registration.php" class="register_button" title="Click to create a account">SIGN UP</a></th>
                 </table>
             </div>
         </div>
