@@ -73,18 +73,18 @@
             <form action="" method="post">
                 <table>
                     <tr>
-                        <td><img src="../image/feedback.png" height="50px"></td>
+                        <td><img src="../image/user.png" height="50px"></td>
                         <td>EMAIL:</td>
                         <td><input type="email" name="email"></td>
                     </tr>
                     <tr>
-                        <td><img src="../image/feedback.png" height="50px"></td>
+                        <td><img src="../image/pass.png" height="50px"></td>
                         <td>PASSWORD:</td>
                         <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
                         <td rolspan="3" align="right" id="login_button">
-                            <input type="submit" value="Login" name="btnLogin">
+                            <input type="submit" value="Login" name="btnLogin" id="login_button">
                         </td>
                     </tr>
                 </table>
