@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - SubjectMaster360</title>
+    <title>Home - SubjectMastery360</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/mainpage.css">
     <script src="../script/mainpage.js"></script>
@@ -86,5 +86,7 @@
             </table>
         </div>
     </div>
+    <br><br>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
