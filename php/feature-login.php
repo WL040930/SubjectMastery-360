@@ -54,9 +54,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - SubjectMastery360</title>
     <link rel="stylesheet" href="../css/login.css">
-    <link rel="icon" href="../image/logo.png">
+    <link rel="icon" href="../image/icon.png">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -79,7 +83,7 @@
                         <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td rolspan="3" align="right">
+                        <td rolspan="3" align="right" id="login_button">
                             <input type="submit" value="Login" name="btnLogin">
                         </td>
                     </tr>
@@ -88,10 +92,10 @@
         </div>
         <div id="footer">
             <div id="sign-up">
-                Don't have a account? <a href="feature-registration.php">Sign up</a>
+                Don't have a account? <b><a href="feature-registration.php">Sign up</a></b>
             </div>
             <div id="forgot-password">
-                <a href="">Forgot Password</a>
+                <b><a href="">Forgot Password</a></b>
             </div>
             <div style="clear: both"></div>
         </div>

@@ -35,11 +35,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Account</title>
+    <link rel="stylesheet" href="../css/admin-deleteprofile.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>User Information - <?php echo $row['user_first_name'].' '.$row['user_last_name'];?></h1>
+<body id="all">
+    <h1 id="title">User Information</h1>
+    <h1 id="user_title">USERNAME: <?php echo $row['user_first_name'].' '.$row['user_last_name'];?></h1>
     <form action="" method="post" onsubmit="return confirmDelete()">
-        <table>
+        <table id="table">
             <tr>
                 <th>ID</th>
                 <td><?php echo $row['user_id'];?></td>
@@ -69,7 +75,7 @@
                 <td><img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"></td>
             </tr>
         </table>
-        <input type="submit" value="Delete" name="delete">
+        <input type="submit" value="Delete" name="delete" id="delete_button"><br>
     </form>
 
 </body>
