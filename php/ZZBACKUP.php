@@ -216,7 +216,7 @@ if (isset($_POST['submitfeedback'])) {
             
             <form action="" method="post" id="markForm_<?php echo $row['exam_user_answer_id']; ?>">
                 <label for="markInput">Mark:</label>
-                <input type="text" name="markInput" id="markInput_<?php echo $row['exam_user_answer_id']; ?>" value="<?php echo $row['exam_user_marks']; ?>">
+                <input type="text" name="markInput" id="markInput" value="<?php echo $row['exam_user_marks']; ?>" <?php echo ($row['exam_user_marks'] !== null) ? 'required' : ''; ?>>
                 <input type="hidden" name="exam_user_answer_id" value="<?php echo $row['exam_user_answer_id']; ?>">
                 <input type="button" value="Update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)">
             </form>
@@ -241,31 +241,31 @@ if (isset($_POST['submitfeedback'])) {
         }
 
         function validateAndUpdateMark(answerId, examMarks) {
-    var mark = document.getElementById('markInput_' + answerId).value;
+            var mark = document.getElementById('markInput').value;
 
-    // Validate the mark
-    if (mark < 0 || mark > examMarks) {
-        alert("Invalid mark. Please enter a mark between 0 and " + examMarks + ".");
-        document.getElementById('markInput_' + answerId).focus(); // Set focus to the input for user convenience
-    } else {
-        updateMark(answerId, examMarks);
-    }
-}
-
-// Existing updateMark function remains unchanged
-function updateMark(answerId, examMarks) {
-    var formData = $('#markForm_' + answerId).serialize();
-
-    $.ajax({
-        type: 'POST',
-        url: 'update-mark.php',
-        data: formData,
-        success: function (response) {
-            location.reload(); // Reloads the page immediately
-        },
-        error: function (error) {
-            alert('Error: ' + error.responseText);
+            // Validate the mark
+            if (mark < 0 || mark > examMarks) {
+                alert("Invalid mark. Please enter a mark between 0 and " + examMarks + ".");
+                markInput.focus(); // Set focus to the input for user convenience
+            } else {
+                updateMark(answerId, examMarks);
+            }
         }
-    });
-}
-    </script>
+
+    // Existing updateMark function remains unchanged
+    function updateMark(answerId, examMarks) {
+        var formData = $('#markForm_' + answerId).serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: 'update-mark.php', 
+            data: formData,
+            success: function (response) {
+                location.reload(); // Reloads the page immediately
+            },
+            error: function (error) {
+                alert('Error: ' + error.responseText);
+            }
+        });
+    }
+</script>
