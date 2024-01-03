@@ -37,6 +37,15 @@
         <input type="submit" value="Confirm Add" name="submit">
         <input type="button" value="Clear" onclick="clearForm()">
     </form>
+    <button type="button" id="exit" onclick="exit()">Exit</button>
+    <script>
+        function exit() {
+            if (confirm('Do you want to leave the page? ONCE YOU LEAVE, YOU WILL NOT BE ABLE TO ADD QUESTION AGAIN.')) {
+                window.location.href = 'stu-teac-index.php';
+            }
+        }
+    </script>
+
     
     <script src="../script/clear-form.js"></script>
     <script src="../script/validation-mark.js"></script>
