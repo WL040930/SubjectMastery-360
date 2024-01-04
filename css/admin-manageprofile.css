@@ -6,6 +6,11 @@
 }
 
 /*head content*/
+#profile{
+    width: 200px; 
+    height: 200px;
+}
+
 #table{
     margin-left: 95px;
     align-items: center;
@@ -41,4 +46,12 @@ td{
     text-align: center;
     align-items: center;
     display: block;
+}
+
+/*error msg*/
+#error_msg{
+    color: red;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
 }

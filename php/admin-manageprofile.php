@@ -38,7 +38,7 @@
         <table border = "1" id=table>
             <tr>
                 <td colspan="2">
-                    <img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"> <br>
+                    <img src="../data/image<?php echo $row['profile_picture']?>" id="profile"> <br>
                     <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
                 </td>
                 </td>
@@ -95,11 +95,11 @@
             if(mysqli_query($connection, $query)) {
                 
             } else {
-                echo "Record update unsuccessful, please try again.";
+                echo "<div id='error_msg'><br>ERROR: Record Update Unsuccessful, Please Try Again.<br><br></div>";
                 exit(); 
             }
         } else {
-            echo "Username, First Name, Last Name and Password cannot be null.";
+            echo "<div id='error_msg'><br>ERROR: Username, First Name, Last Name and Password Cannot be Null.<br><br></div>";
             exit(); 
         }
 
