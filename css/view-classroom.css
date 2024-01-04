@@ -7,23 +7,24 @@ body {
 }
 
 /*overall classroom setting*/
-#all{
+#border{
     width: 100%;
     height: auto;
-
-}
-
-#classroom-container {
-    width: calc(25% - 20px);
-    height: auto;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
 }
 
 /* Style for each classroom column */
 #classroom-column {
+    width: 250px;
+    max-width: 250px;
+    height: 250px;
     margin: 10px;
     margin-top: 20px;
-    margin-left: 25px;
+    margin-left: 60px;
+    margin-right: 25px;
     padding: 15px;
     box-sizing: border-box;
     background-color: white;
