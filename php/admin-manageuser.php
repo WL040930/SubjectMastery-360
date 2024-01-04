@@ -11,28 +11,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page - Admin</title>
+    <title>Admin - Manage User</title>
     <link rel="stylesheet" href="../css/adminmenu.css">
+    <link rel="stylesheet" href="../css/admin-manageuser.css">
 </head>
-
-<style>
-    #result-box {
-        width: 80%; 
-        height: 100%;
-        margin: auto;
-        margin-top: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #f2f2f2;
-    }
-</style>
-
-<body>
+<body id="all">
     <div id="search-box">
         <form action="" method="get">
-            <input type="text" name="email" placeholder="Enter Email to Search"> <br>
-            <input type="submit" value="Search" name="btnSearch">
+            <input type="text" name="email" placeholder="Enter Email to Search" id="search"> <br>
+            <input type="submit" value="Search" name="btnSearch" id="search_button"><br><br>
         </form>
     </div>
 
@@ -57,21 +44,19 @@
             </a>
         </div>                
     </div>
-
 <?php
                     }
                 } else {
-                    echo "No result Found";   
+                    echo '<div id="error_msg">ERROR: No Result  Found :(</div>';   
                 }
             } else {
-                echo "Please Enter Email Address";
+                echo '<div id="error_msg">ERROR: Please Enter Your Email Address !</div>';
             }
         }
     
     mysqli_close($connection);
 
 ?>
-
 </body>
 
 </html>
