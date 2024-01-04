@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #FFF2D8;
+    font-family: 'Exo 2', sans-serif;
 }
 
 #header {
@@ -83,4 +84,35 @@ li a:hover {
 /* Style for the active link */
 li a.active {
     background-color: #4CAF50;
+}
+
+/*total user table*/
+#table{
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 26%;
+    border: 2px solid #7E6E57;
+    border-collapse: collapse;
+}
+
+th, td{
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+th {
+    background-color: #5d6471;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    width: 16%;
+}
+
+td{
+    background-color: #edf1f7;
+    font-size: 14px;
+    width: 10%;
 }
