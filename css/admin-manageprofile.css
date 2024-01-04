@@ -34,13 +34,11 @@ td{
 }
 
 #submit_button, #back_button {
-    background-color: #7E6E57;
-    border: 2px solid black;
-    color: white;
-    margin: 10px auto; /* Set margin to center horizontally */
+    border: 1px solid black;
+    margin: 10px auto;
     width: 100px;
     height: 30px;
     text-align: center;
     align-items: center;
-    display: block; /* Make buttons block elements to center with margin: auto */
+    display: block;
 }
