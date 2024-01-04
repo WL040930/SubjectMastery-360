@@ -1,12 +1,12 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #FFF2D8;
 }
 
 #container {
-    width: 400px;
+    width: 450px;
     margin: 100px auto;
     background-color: #fff;
     border-radius: 8px;
@@ -45,12 +45,13 @@ input[type="submit"] {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    background-color: #333;
+    background-color: #7E6E57;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 17px;
 }
 
 input[type="submit"]:hover {
