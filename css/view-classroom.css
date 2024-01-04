@@ -34,7 +34,7 @@ body {
     flex-grow: 1; /* Allow classrooms to take full width on smaller screens */
     cursor: pointer;
     height: 170px;
-    line-height: 170px; 
+    line-height: 15px; 
 }
 
 #classroom-column:hover {
