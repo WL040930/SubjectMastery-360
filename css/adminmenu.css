@@ -87,30 +87,31 @@ li a.active {
 }
 
 /*total user table*/
+/*total user table*/
 table {
     margin-left: 130px;
-    margin-top: 50px;
+    margin-top: 40px;
     width: 80%;
-    height: 250px;
+    height: 350px;
     align-items: center;
+    border-spacing: 30px;
 }
 
-th, td{
+th, td {
     text-align: center;
     align-items: center;
     border: 3px solid black;
+    padding: 20px; /* Add 20px spacing for both th and td */
 }
 
 th {
     background-color: #5d6471;
     color: white;
-    text-align: center;
-    padding: 10px;
     font-size: 40px;
     width: 16%;
 }
 
-td{
+td {
     background-color: #edf1f7;
     font-size: 38px;
     width: 10%;

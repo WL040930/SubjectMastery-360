@@ -34,7 +34,7 @@
 <body>
     <table>
         <tr>
-            <th>Total User:</th>
+            <th>Total User</th>
             <td>
                 <?php 
                     $userQuery = "SELECT COUNT(*) AS user_count FROM user;";
@@ -47,7 +47,7 @@
             </td>
         </tr>
         <tr>
-            <th>Total Classroom:</th>
+            <th>Total Classroom</th>
             <td>
                 <?php 
                     $classroomQuery = "SELECT COUNT(*) AS classroom_count FROM classroom;";
