@@ -1,20 +1,30 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #FFF2D8;
+    box-sizing: border-box;
+}
+
+/*overall classroom setting*/
+#all{
+    width: 100%;
+    height: auto;
 }
 
 #classroom-container {
-    width: calc(25% - 20px); 
+    width: calc(25% - 20px);
+    height: auto; 
 }
 
 /* Style for each classroom column */
 #classroom-column {
     margin: 10px;
+    margin-top: 20px;
+    margin-left: 25px;
     padding: 15px;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0px 0px 10px 0px #000000;
     text-align: center;
@@ -22,6 +32,9 @@ body {
     color: #333;
     transition: transform 0.3s ease-in-out;
     flex-grow: 1; /* Allow classrooms to take full width on smaller screens */
+    cursor: pointer;
+    height: 170px;
+    line-height: 170px; 
 }
 
 #classroom-column:hover {
