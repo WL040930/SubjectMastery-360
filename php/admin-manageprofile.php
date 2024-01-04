@@ -18,6 +18,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Profile</title>
+    <link rel="stylesheet" href="../css/admin-manageprofile.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     
@@ -30,7 +35,7 @@
             $row = mysqli_fetch_assoc($result);
     ?>
 
-        <table border = "1">
+        <table border = "1" id=table>
             <tr>
                 <td colspan="2">
                     <img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"> <br>
@@ -39,33 +44,34 @@
                 </td>
             </tr>
             <tr>
-                <td>ID</td>
+                <td id="tabla_column">ID</td>
                 <td> <?php echo $row['user_id']; ?></td>
             </tr>
             <tr>
-                <td>Username</td>
+                <td id="tabla_column">Username</td>
                 <td> <input type="text" name="username" value="<?php echo $row['username'];?>"></td>
             </tr>
             <tr>
-                <td>First Name</td>
+                <td id="tabla_column">First Name</td>
                 <td> <input type="text" name="firstname" value="<?php echo $row['user_first_name']; ?>"></td>
             </tr>
             <tr>
-                <td>Last Name</td>
+                <td id="tabla_column">Last Name</td>
                 <td> <input type="text" name="lastname" value="<?php echo $row['user_last_name']; ?>"></td>
             </tr>
             <tr>
-                <td>Password</td>
+                <td id="tabla_column">Password</td>
                 <td> <input type="password" name="password" value="<?php echo $row['password']; ?>" disabled></td>
             </tr>
             <tr>
-                <td>Institute Name</td>
+                <td id="tabla_column">Institute Name</td>
                 <td> <input type="text" name="institute" value="<?php echo $row['institute_name'];?>"></td>
             </tr>
         </table>
-        <input type="submit" name="submit" value="submit">
+        <br>
+        <input type="submit" name="submit" value="Submit" id="submit_button">
     </form>
-    <button onclick="goBack()">Back</button>
+    <button onclick="goBack()" id="back_button">Back</button>
     <script src="../script/feature-back.js"></script>
     <?php } ?>
 
