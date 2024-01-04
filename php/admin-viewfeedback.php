@@ -10,38 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Feedback</title>
+    <title>Admin - View Feedback</title>
+    <link rel="stylesheet" href="../css/admin-viewfeedback.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-
-<style>
-    #feedback-page {
-        width: 100%;
-        height: 100%;
-    }
-
-    .feedback-box {
-        width: 80%; 
-        height: auto; 
-        border-radius: 5px; 
-        border: 1px solid black;
-        margin: 25px auto;
-    }
-
-    #profile-picture {
-        height: auto; 
-        width: 20%; 
-        float: left;
-    }
-
-    #content-box {
-        width: 78%; 
-        height: auto;
-        float: right; 
-    }
-
-</style>
-
-<body>
+<body id="all">
 
     <?php 
 
@@ -65,13 +41,13 @@
             </div>
             <div id="content-box">
                 <div id="user-id">
-                    <?php echo $row['user_id']; ?>
+                    <?php echo "<b>ID: </b>". $row['user_id']; ?>
                 </div>
                 <div id="username">
-                    <?php echo $row['username']; ?>
+                    <?php echo "<b>USERNAME: </b>". $row['username']; ?>
                 </div>
                 <div id="feedback-content">
-                    <?php echo $row['feedback_content']; ?>
+                    <?php echo "<b>FEEDBACK CONTENT: </b>". $row['feedback_content']; ?>
                 </div>
                 <?php 
                     $fetchid = $row['feedback_id'];

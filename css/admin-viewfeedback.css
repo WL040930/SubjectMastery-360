@@ -1,0 +1,45 @@
+#all{
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;   
+}
+
+#feedback-page {
+    width: 100%;
+    height: 100%;
+}
+
+.feedback-box {
+    width: 80%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: 25px auto;
+    display: flex;
+}
+
+#profile-picture {
+    height: auto;
+    align-self: center;
+    margin-left: 20px;
+    border: 1px solid black;
+}
+
+#content-box {
+    width: 78%; 
+    height: auto;
+    float: right; 
+    margin: 10px;
+}
+
+#user-id, #username, #feedback-content{
+    font-size: 18px;
+    word-spacing: 10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+#attachment{
+    margin-left: 20px;
+}
