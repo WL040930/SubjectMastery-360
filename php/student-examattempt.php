@@ -69,8 +69,11 @@
                 $attemptResult = mysqli_query($connection, $attemptQuery);
                 if ($attemptResult) {
                     $new_id = mysqli_insert_id($connection);
-                    $_SESSION['quiz_attempt_started'] = true;
-                    header("Location: student-exam.php?id=$new_id"); 
+                    $feedbackQuery = "INSERT INTO `exam_feedback`(`exam_attempt_id`) VALUES ('$new_id')";
+                    if(mysqli_query($connection, $feedbackQuery)){
+                        $_SESSION['quiz_attempt_started'] = true;
+                        header("Location: student-exam.php?id=$new_id");
+                    } 
                 } else {
                     echo "<script> alert ('Error Occur. Please try again later. ');</script>";
                     echo "<script> window.location.href='stu-teac-index.php'; </script>";

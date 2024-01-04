@@ -49,10 +49,11 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             $wrongmark = $totalMark - $userScore;
             $decline = TRUE;
         }
-        $examTitleQuery = "SELECT e.*, ea.*
+        $examTitleQuery = "SELECT e.*, ea.*, ef.*
                             FROM exam_attempt ea 
                             JOIN exam e 
                             ON ea.exam_id = e.exam_id
+                            JOIN exam_feedback ef ON ea.exam_attempt_id = ef.exam_attempt_id
                             WHERE ea.exam_attempt_id = $exam_attempt_id";
 
         $quiz_title_result = mysqli_query($connection, $examTitleQuery);
@@ -83,6 +84,10 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         <tr>
             <th>Marks</th>
             <td><?php echo $userScore. " / ". $totalMark ?></td>
+        </tr>
+        <tr>
+            <th>Feedback</th>
+            <td><?php echo $quiz_title_row['exam_feedback_content']; ?></td>
         </tr>
     </table>
 
