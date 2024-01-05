@@ -37,10 +37,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <table>
+    <table id="table1">
         <tr>
-            <th>Total User</th>
-            <td>
+            <th id="th1">Total User</th>
+            <td id="td1">
                 <?php 
                     // Query to retrieve the total number of users
                     $userQuery = "SELECT COUNT(*) AS user_count FROM user;";
@@ -55,8 +55,8 @@
             </td>
         </tr>
         <tr>
-            <th>Total Classroom</th>
-            <td>
+            <th id="th1">Total Classroom</th>
+            <td id="td1">
                 <?php 
                     // Query to retrieve the total number of classrooms
                     $classroomQuery = "SELECT COUNT(*) AS classroom_count FROM classroom;";
