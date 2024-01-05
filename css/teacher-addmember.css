@@ -108,3 +108,8 @@ td{
     font-size: 17px;
     margin-right: 10px;
 }
+
+#remove_icon{
+    height: 25px;
+    width: 25px;
+}
