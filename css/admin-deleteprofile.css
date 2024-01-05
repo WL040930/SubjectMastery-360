@@ -15,7 +15,6 @@
 }
 
 #user_title{
-
     margin-left: 55px;
     text-align: left;
     align-items: left;
@@ -27,7 +26,7 @@
 #table{
     margin-left: 55px;
     align-items: center;
-    width: 85%;
+    width: 70%;
 }
 
 th {

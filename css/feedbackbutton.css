@@ -62,7 +62,7 @@ input[type="file"] {
 }
 
 input[type="submit"] {
-    background-color: #3498db;
+    background-color: #acb5c8;
     color: #fff;
     border: none;
     padding: 10px;
@@ -71,7 +71,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #2980b9;
+    background-color: #acb5c8;
 }
 
 /* Adjust styles as needed */
