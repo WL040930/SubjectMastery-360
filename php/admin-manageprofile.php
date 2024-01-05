@@ -60,23 +60,23 @@
             </tr>
             <tr>
                 <td id="tabla_column">Username</td>
-                <td> <input type="text" name="username" value="<?php echo $row['username'];?>"></td>
+                <td> <input id="textbox" type="text" name="username" value="<?php echo $row['username'];?>"></td>
             </tr>
             <tr>
                 <td id="tabla_column">First Name</td>
-                <td> <input type="text" name="firstname" value="<?php echo $row['user_first_name']; ?>"></td>
+                <td> <input id="textbox" type="text" name="firstname" value="<?php echo $row['user_first_name']; ?>"></td>
             </tr>
             <tr>
                 <td id="tabla_column">Last Name</td>
-                <td> <input type="text" name="lastname" value="<?php echo $row['user_last_name']; ?>"></td>
+                <td> <input id="textbox" type="text" name="lastname" value="<?php echo $row['user_last_name']; ?>"></td>
             </tr>
             <tr>
                 <td id="tabla_column">Password</td>
-                <td> <input type="password" name="password" value="<?php echo $row['password']; ?>" disabled></td>
+                <td> <input id="textbox" type="password" name="password" value="<?php echo $row['password']; ?>" disabled></td>
             </tr>
             <tr>
                 <td id="tabla_column">Institute Name</td>
-                <td> <input type="text" name="institute" value="<?php echo $row['institute_name'];?>"></td>
+                <td> <input id="textbox" type="text" name="institute" value="<?php echo $row['institute_name'];?>"></td>
             </tr>
         </table>
         <br>

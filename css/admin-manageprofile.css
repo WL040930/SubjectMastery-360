@@ -16,6 +16,7 @@
     align-items: center;
     width: 85%;
     margin-top: 18px;
+    border-spacing: 3px;
 }
 
 #tabla_column {
@@ -36,6 +37,10 @@ td{
     border: 3px solid black;
     padding: 5px;
     width: 45%;
+}
+
+#textbox{
+    width: 300px;
 }
 
 #submit_button, #back_button {
