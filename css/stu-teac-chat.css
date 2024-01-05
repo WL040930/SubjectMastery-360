@@ -20,13 +20,17 @@ body {
 h1{
     text-align: center;
     color: #000;
-    font-size: 35px;
+    font-size: 43px;
     margin: 0;
     margin-bottom: 20px;
 }
 
-h5{
+h4{
     margin: 0;
+}
+
+#chat_content{
+    font-size: 20px;
 }
 
 /*reply*/
@@ -52,10 +56,27 @@ h5{
     margin-bottom: 3px;
 }
 
+#leave-reply{
+    font-size: 20px;
+}
+
 #title{
     margin-top: 30px;
     margin-left: 45px;
     margin-bottom: 10px;
+}
+
+#content_box, #submit_button{
+    font-size: 17px;
+    margin-top: 10px;
+    margin-left: 8px;
+    padding: 3px;
+    cursor: pointer;    
+    border: 1px solid black;
+}
+
+#submit_button{
+    width: 80px;
 }
 
 /*not sure what is this*/

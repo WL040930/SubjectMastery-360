@@ -60,10 +60,12 @@
 <body>
     <div id="all">
         <h1><?php echo $classroom_id_row['chatroom_title']; ?></h1>
-        <h5>Created By: <?php echo $classroom_id_row['username']; ?></h5>
-        <h5>Time Created: <?php echo $classroom_id_row['chatroom_messages_timestamp']; ?></h5>
-        <br><b>Content: </b> <br>
-        <?php echo $classroom_id_row['chatroom_messages_content']; ?>
+        <h4>Created By: <?php echo $classroom_id_row['username']; ?></h5>
+        <h4>Time Created: <?php echo $classroom_id_row['chatroom_messages_timestamp']; ?></h5>
+        <div id="chat_content">
+            <br><b>Content: </b> <br>
+            <?php echo $classroom_id_row['chatroom_messages_content']; ?>
+        </div>
         <?php
             $query = "SELECT ca.*
                         FROM chatroom_attachment ca
@@ -119,7 +121,7 @@
     <div id="leave-reply">
         <form action="" method="post" id="title">
             Leave Reply: 
-            <input type="text" name="reply" placeholder="Leave Your Reply Here." required id="content_box">
+            <input id="content_box" type="text" name="reply" placeholder="Leave Your Reply Here." style="width: 500px;" required>
             <input type="submit" value="Post" name="submit" id="submit_button">
         </form>
     </div>
