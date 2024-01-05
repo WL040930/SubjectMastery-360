@@ -7,7 +7,7 @@
 
 /*head content*/
 #title{
-    margin-left: 15px;
+    margin-left: 45px;
     font-size: 40px;
     text-decoration: underline;
     text-align: center;
@@ -15,7 +15,7 @@
 }
 
 #user_title{
-    margin-left: 55px;
+    margin-left: 85px;
     text-align: left;
     align-items: left;
     font-size: 30px;
@@ -24,9 +24,11 @@
 
 /*body content*/
 #table{
-    margin-left: 55px;
     align-items: center;
-    width: 70%;
+    margin-left: 130px;
+    margin-top: 40px;
+    width: 75%;
+    border-spacing: 8px;
 }
 
 th {
@@ -48,7 +50,7 @@ td{
     border: 3px solid black;
     padding: 10px;
     margin-left: 10px;
-    width: 45%;
+    width: 50%;
 }
 
 /*delete button*/
@@ -58,7 +60,7 @@ td{
     margin-top: 20px;
     cursor: pointer;    
     border: 2px solid black;
-    border-radius: 15px;
+    border-radius: 8px;
     text-align: center;
     align-items: center;
     margin-left: auto;

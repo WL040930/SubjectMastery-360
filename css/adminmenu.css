@@ -88,31 +88,62 @@ li a.active {
 
 /*total user table*/
 /*total user table*/
-table {
-    margin-left: 130px;
-    margin-top: 40px;
-    width: 80%;
-    height: 350px;
-    align-items: center;
-    border-spacing: 30px;
-}
+/*
+    table {
+        margin-left: 130px;
+        margin-top: 40px;
+        width: 80%;
+        height: 350px;
+        align-items: center;
+        border-spacing: 30px;
+    }
 
-th, td {
-    text-align: center;
+    th, td {
+        text-align: center;
+        align-items: center;
+        border: 3px solid black;
+        padding: 20px; /* Add 20px spacing for both th and td
+    }
+
+    th {
+        background-color: #5d6471;
+        color: white;
+        font-size: 40px;
+        width: 16%;
+    }
+
+    td {
+        background-color: #edf1f7;
+        font-size: 38px;
+        width: 10%;
+    }
+
+
+
+
+    #table{
     align-items: center;
-    border: 3px solid black;
-    padding: 20px; /* Add 20px spacing for both th and td */
+    border-spacing: 10px;
+
 }
 
 th {
+    border: 3px solid black;
     background-color: #5d6471;
+    font-size: 19px;
     color: white;
-    font-size: 40px;
-    width: 16%;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
 }
 
-td {
+td{
     background-color: #edf1f7;
-    font-size: 38px;
-    width: 10%;
+    font-size: 17px;
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 10px;
+    margin-left: 10px;
 }
+*/
