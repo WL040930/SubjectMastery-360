@@ -1,4 +1,4 @@
-1<?php
+<?php
 
     // Include the database connection file
     include "dbconn.php"; 
