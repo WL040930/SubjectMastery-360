@@ -1,3 +1,4 @@
+/*choose quiz page*/
 body {
     font-family: 'Exo 2', sans-serif;
     margin: 0;
@@ -6,13 +7,18 @@ body {
 }
 
 #description {
-    margin-top: 20px;
-    color: #555;
+    margin-left: 20px;
+    margin-top: 25px;
+    color: black;
+    font-size: 23px;
+    text-decoration: underline;
 }
 
 #important {
+    margin-left: 20px;
     margin-top: 20px;
     color: #ff0000;
+    font-size: 20px;
 }
 
 form {
@@ -20,13 +26,11 @@ form {
 }
 
 input[type="submit"] {
-    background-color: #acb5c8;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-left: 20px;
     font-size: 16px;
+    padding: 5px;
+    cursor: pointer;    
+    border: 1px solid black;
 }
 
 input[type="submit"]:hover {
@@ -91,3 +95,5 @@ li{
     margin-right: 50px;
 
 }
+
+/*quiz start attempt page*/
