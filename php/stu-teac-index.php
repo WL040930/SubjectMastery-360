@@ -1,7 +1,7 @@
 <?php
 
     include "dbconn.php";
-    include "stu-teac-session";
+    include "stu-teac-session.php";
     include "feature-feedbackbutton.php";
 
     if (session_status() == PHP_SESSION_NONE) {
