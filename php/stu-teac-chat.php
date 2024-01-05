@@ -49,38 +49,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messages</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/stu-teac-chat.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
-<style>
-    .attachment-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-}
-
-.download-link {
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.download-link:hover {
-    background-color: #45a049;
-}
-
-</style>
-
 <body>
-    <div>
+    <div id="all">
         <h1><?php echo $classroom_id_row['chatroom_title']; ?></h1>
-        <h3>Created By: <?php echo $classroom_id_row['username']; ?></h3>
-        <h6>Time Created: <?php echo $classroom_id_row['chatroom_messages_timestamp']; ?></h6>
-        <b>Content: </b> <br>
-        <?php echo $classroom_id_row['chatroom_messages_content']; ?>
+        <h4>Created By: <?php echo $classroom_id_row['username']; ?></h5>
+        <h4>Time Created: <?php echo $classroom_id_row['chatroom_messages_timestamp']; ?></h5>
+        <div id="chat_content">
+            <br><b>Content: </b> <br>
+            <?php echo $classroom_id_row['chatroom_messages_content']; ?>
+        </div>
         <?php
             $query = "SELECT ca.*
                         FROM chatroom_attachment ca
@@ -104,7 +89,7 @@
             }
         ?>
     </div>
-
+    <b id="comment_title">Comment: </b>
     <?php 
         $replyQuery = "SELECT r.*, cm.*, u.*
                         FROM reply r
@@ -118,10 +103,11 @@
                 while($replyRow = mysqli_fetch_assoc($replyresult)) {
                     
     ?>
+
         <div id="reply-box">
-            <?php echo $replyRow['username']; ?> <br>
-            <?php echo $replyRow['reply_timestamp']; ?> <br>
-            <?php echo $replyRow['reply_text']; ?>
+            <div id="username"><b>Username: </b><?php echo $replyRow['username']; ?> <br></div>
+            <div id="timestap"><b>Timestap: </b><?php echo $replyRow['reply_timestamp']; ?> <br></div>
+            <div id="replytext"><b>Content: </b><?php echo $replyRow['reply_text']; ?></div>
         </div>
     <?php
                 }
@@ -133,10 +119,10 @@
         }
     ?>
     <div id="leave-reply">
-        <form action="" method="post">
+        <form action="" method="post" id="title">
             Leave Reply: 
-            <input type="text" name="reply" placeholder="Leave Your Reply Here." required>
-            <input type="submit" value="Post" name="submit">
+            <input id="content_box" type="text" name="reply" placeholder="Leave Your Reply Here." style="width: 500px;" required>
+            <input type="submit" value="Post" name="submit" id="submit_button">
         </form>
     </div>
 </body>
