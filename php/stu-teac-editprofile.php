@@ -30,8 +30,13 @@ if (mysqli_num_rows($result) == 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Edit Profile</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/stu-teac-editprofile.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -40,38 +45,38 @@ if (mysqli_num_rows($result) == 1) {
         <table border="1">
             <tr>
                 <td colspan="2">
-                    <img src="../data/image<?php echo $row['profile_picture'] ?>" style="max-width: 200px; max-height: 200px;"> <br>
+                    <img src="../data/image<?php echo $row['profile_picture'] ?>" style="width: 150px; height: 150px;"> <br>
                     <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
                 </td>
             </tr>
             <tr>
-                <td>ID</td>
+                <td id="title">ID</td>
                 <td> <?php echo $row['user_id']; ?></td>
             </tr>
             <tr>
-                <td>Username</td>
-                <td> <input type="text" name="username" id="username" value="<?php echo $row['username']; ?>"></td>
+                <td id="title">Username</td>
+                <td> <input id="textbox" type="text" name="username" id="username" value="<?php echo $row['username']; ?>"></td>
             </tr>
             <tr>
-                <td>First Name</td>
-                <td> <input type="text" name="firstname" id="firstname" value="<?php echo $row['user_first_name']; ?>"></td>
+                <td id="title">First Name</td>
+                <td> <input id="textbox" type="text" name="firstname" id="firstname" value="<?php echo $row['user_first_name']; ?>"></td>
             </tr>
             <tr>
-                <td>Last Name</td>
-                <td> <input type="text" name="lastname" id="lastname" value="<?php echo $row['user_last_name']; ?>"></td>
+                <td id="title">Last Name</td>
+                <td> <input id="textbox" type="text" name="lastname" id="lastname" value="<?php echo $row['user_last_name']; ?>"></td>
             </tr>
             <tr>
-                <td>Password</td>
-                <td> <input type="password" name="password" id="password" value="<?php echo $row['password']; ?>"></td>
+                <td id="title">Password</td>
+                <td> <input id="textbox" type="password" name="password" id="password" value="<?php echo $row['password']; ?>"></td>
             </tr>
             <tr>
-                <td>Institute Name</td>
-                <td> <input type="text" name="institute" value="<?php echo $row['institute_name']; ?>"></td>
+                <td id="title">Institute Name</td>
+                <td> <input id="textbox" type="text" name="institute" value="<?php echo $row['institute_name']; ?>"></td>
             </tr>
         </table>
-        <input type="submit" name="submit" value="submit">
+        <input type="submit" name="submit" value="submit" id="submit_button">
     </form>
-    <button onclick="goBack()">Back</button>
+    <button onclick="goBack()" id="back_button">Back</button>
     <script src="../script/feature-back.js"></script>
 <?php } ?>
 </body>
