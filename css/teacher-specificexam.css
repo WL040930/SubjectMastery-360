@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2D8;
+    font-family: 'Exo 2', sans-serif;
+}
+
+#all {
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    margin: 20px;
+}
+
+select, input[type="text"], input[type="submit"] {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+
+input[type="text"], input[type="submit"] {
+    margin-top: 7px;
+}
+
+table {
+    width: 85%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    border-radius: 30px;
+    border: 3px solid black;
+}
+
+th, td {
+    border: 3px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #7E6E57;
+    border: 3px solid black;
+    font-size: 19px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    width: 25%;
+}
+
+td{
+    background-color: #eff2f6;
+    font-size: 17px;
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 5px;
+    width: 45%;
+}
+
+#answer-box {
+    background-color: #edf1f7;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 60%;
+    margin: 0 auto 10px;
+}
+
+canvas {
+    max-width: 400px;
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.chart-container {
+    max-width: 62%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eff2f6;
+}
+
+#feedbackform {
+    margin: 0 auto;
+    width: 85%; 
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#feedback {
+    width: 80%; 
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto; 
+}
+
+input[type="submit"]:hover {
+    background-color: #BCA37F;
+}
+
+#submit {
+    margin: 0 auto;
+    width: 96px;
+}
+
+input[type="text"] {
+    height: auto; 
+    width: 20px; 
+}
+
+#numberquestion {
+    border: 2px solid black;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    float: left; 
+}
+
+#questionquestion {
+    float: right; 
+    width: 85%; 
+    padding-bottom: 2px;
+}
+
+#scorequestion {
+    clear: both; 
+    margin-left: 20px;
+}
+
+.answerquestion {
+    margin-left: 20px;
+}
+
+.chart-container {
+    max-width: 62%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eff2f6;
+}
+
+canvas {
+    /* Remove width and height attributes */
+    display: block;
+    border-radius: 8px;
+}
+
+.update {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto; 
+}
+
+.update:hover {
+    background-color: #BCA37F;
+}
