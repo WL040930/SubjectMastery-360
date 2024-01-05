@@ -47,33 +47,6 @@ body {
     color: black;
 } 
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #7E6E57;
-    overflow: hidden;
-    width: 100%;
-}
-
-li {
-    float: left;
-    width: 25%;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-li a:hover {
-    background-color: #BCA37F;
-}
-
 /* Total user table */
 #table1 {
     margin-left: 130px;
@@ -104,37 +77,40 @@ li a:hover {
     width: 10%;
 }
 
-/* Your existing styles ... */
+#all{
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+} 
 
-/* Your existing styles ... */
-
-ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     background-color: #7E6E57;
-}
-
-ul li:hover > ul {
-    display: block;
-}
-
-/* Adjusted styles for better appearance */
-ul ul li {
-    float: none;
+    overflow: hidden;
     width: 100%;
-    text-align: center;
 }
 
-ul ul li a {
+li {
+    float: left;
+    width: 25%;
+}
+
+li a {
     display: block;
-    padding: 10px;
-    text-decoration: none;
     color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-/* Additional style for a clearer separation */
-ul li ul li {
-    border-top: 1px solid #5d6471;
+li a:hover {
+    background-color: #BCA37F;
+}
+
+/*idk what is this*/
+/* Style for the active link */
+li a.active {
+    background-color: #4CAF50;
 }
