@@ -18,14 +18,20 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz Result</title>
+    <link rel="icon" href="../image/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/student-viewexamquiz.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <form id="quizForm" action="" method="post">
         <div id="name"><?php echo $_SESSION['first_name']." ".$_SESSION['last_name']; ?></div> <br>
         
         <!-- Dropdown list of quizzes -->
-        Quiz: 
+        <div id="title">Quiz: </div>
         <select name="quiz" id="quiz" onchange="submitForm()">
             <option value="">Select a Quiz</option>
             <?php

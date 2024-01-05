@@ -12,7 +12,7 @@ body{
     font-size: 30px;
 }
 
-#exam{
+#exam, #quiz{
     margin-top: 10px;
     font-size: 18px;
     border: 2px solid black;
@@ -27,6 +27,6 @@ body{
     width: 70px;
 }
 
-#exam, #title{
+#exam, #quiz, #title{
     display: inline-block;
 }

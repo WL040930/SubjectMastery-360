@@ -21,7 +21,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     <title>View Quiz Result</title>
     <link rel="icon" href="../image/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="../css/student-viewexam.css">
+    <link rel="stylesheet" href="../css/student-viewexamquiz.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
