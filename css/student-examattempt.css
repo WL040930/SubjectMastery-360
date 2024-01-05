@@ -1,0 +1,83 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2D8;
+}
+
+h1 {
+    color: #333;
+    letter-spacing: 2px;
+}
+
+#description {
+    margin-left: 20px;
+    margin-top: 25px;
+    color: black;
+    font-size: 23px;
+    text-decoration: underline;
+}
+
+#important {
+    margin-left: 20px;
+    margin-top: 20px;
+    color: #ff0000;
+    font-size: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    margin-left: 20px;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;    
+    border: 1px solid black;
+}
+
+input[type="submit"]:hover {
+    background-color: #5d6471;
+    color: white;
+}
+
+/* Choose Exam page */
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+    color: #333;
+}
+
+ul {
+    width: 250px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: auto;
+    margin-bottom: 15px;
+    display: flex;
+    background-color: #EAD7BB;
+    justify-content: center;
+}
+
+#title{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    align-items: center;
+}
+
+ul:hover{
+    background-color: #7E6E57;
+}
+
+li{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 50px;
+
+}

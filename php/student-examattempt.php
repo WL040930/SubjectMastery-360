@@ -41,6 +41,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Attempt</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/student-examattempt.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
@@ -50,8 +56,8 @@
         </div>
         <div id="important">
             <b>
-                IMPORTANT: KINDLY AVOID NAVIGATING AWAY FROM THIS PAGE DURING THE EXAMINATION, <br>
-                AS THIS MAY RESULT IN YOUR RESPONSES NOT BEING REGISTERED IN THE SYSTEM. 
+                IMPORTANT: KINDLY AVOID NAVIGATING AWAY FROM THIS PAGE DURING THE EXAMINATION. <br>
+                THIS MAY RESULT IN YOUR RESPONSES NOT BEING REGISTERED IN THE SYSTEM. 
             </b>
         </div>
         <form action="" method="post">
@@ -128,16 +134,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Exam</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/student-examattempt.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Please select the Exam: </h1>
+    <h1>Please Select The Exam </h1>
     <ul>
         <?php
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="student-examattempt.php?id=' . $classroom_row['exam_id'] . '">' . $classroom_row['exam_title'] . '</a></li>';
+            echo '<li><a id="title" href="student-examattempt.php?id=' . $classroom_row['exam_id'] . '">' . $classroom_row['exam_title'] . '</a></li>';
         }
         ?>
+    <br>
     </ul>
+        
 </body>
 </html>
 
