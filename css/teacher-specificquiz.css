@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2D8;
+    font-family: 'Exo 2', sans-serif;
+}
+
+#all{
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;   
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+select, input[type="text"], input[type="submit"] {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+input[type="text"], input[type="submit"] {
+    margin-top: 7px;
+}
+
+input[type="text"] {
+    width: 600px; 
+    height: 30px; 
+}
+
+table {
+    width: 85%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 95px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    border: 3px solid black; 
+}
+
+th, td {
+    border: 3px solid black;
+    padding: 10px;
+}
+
+/* Rest of your styles... */
+
+
+th, td {
+    border: 3px solid black;
+    padding: 10px;
+}
+
+/* Rest of your styles... */
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #7E6E57;
+    border: 3px solid black;
+    font-size: 19px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    width: 25%;
+}
+
+td{
+    background-color: #eff2f6;
+    font-size: 17px;
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 5px;
+    width: 45%;
+}
+
+#answer-box {
+    background-color: #edf1f7;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    border-radius: 10px; 
+    border-spacing: 3px;
+    width: 60%; 
+    margin: 0 auto 10px; 
+}
+
+canvas {
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+/* Adjusted the size of the canvas for better performance */
+#quizChart {
+    width: 100%;
+    height: auto;
+}
+
+#quesnum {
+    border: 3px solid black;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    float: left; 
+}
+
+#quesques {
+    float: right; 
+    width: 85%; 
+}
+
+#quesans {
+    clear: both; 
+    background-color: #e2e3e6; 
+    padding: 5px;
+    padding-left: 10px; 
+    border-radius: 35px; 
+    width: auto; 
+}
+
+#correctanswer {
+    color: red; 
+    margin: 10px; 
+}
+
+.chart-container {
+    max-width: 500px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    /* Center the chart using flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    /* Remove width and height attributes */
+    display: block;
+    border-radius: 8px;
+}
+
+#quiz {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #e2e3e6;
+    border-radius: 5px;
+    width: 300px;
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#quiz:hover,
+#quiz:focus {
+    border-color: #7E6E57;
+}

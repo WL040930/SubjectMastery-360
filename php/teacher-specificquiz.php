@@ -20,8 +20,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz Result</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/teacher-specificquiz.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="all"> 
     <form id="quizForm" action="" method="post">
         <!-- Dropdown list of quizzes -->
         Quiz: 
@@ -112,7 +116,7 @@
         <th>Overall Feedback</th>
         <td>
             <input type="text" name="feedback" value="<?php echo $feedback_row['quiz_feedback_content']; ?>">
-            <input type="hidden" name="quiz_attempt_id" value="<?php echo $quiz_attempt_id; ?>">
+            <input type="hidden" name="quiz_attempt_id" value="<?php echo $quiz_attempt_id; ?>"> <br>
             <input type="submit" value="Submit" name="submitfeedback">
         </td>
     </form>
@@ -141,11 +145,10 @@
         ?>
 
     <div id="answer-box">
-        <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
-        <p>Question: <?php echo $row['quiz_question_text']; ?></p>
-        <p>User Answer: <?php echo $row['option_text']; ?></p>
-        <p>Question Feedback: <?php echo $row['quiz_feedback_content']; ?></p>
-        <?php
+        <div id="quesnum"><?php echo $calnum; $calnum = $calnum + 1; ?> </div>
+        <div id="quesques"><b><p>Question: </b><?php echo $row['quiz_question_text']; ?></p></div>
+        <div id="quesans"><p><b>User Answer: </b><?php echo $row['option_text']; ?></p></div>
+        <div id="correctanswer"><?php
             if ($row['iscorrect'] == TRUE) {
                 echo "CORRECT"; 
             } else {
@@ -156,6 +159,7 @@
                 echo "Correct Answer: ".$correctAnswerRow['option_text'];
             }
         ?>
+        </div>
     </div>
     <?php
             }
@@ -166,7 +170,7 @@
     ?>
 
     <!-- Adjusted the size of the canvas for better performance -->
-    <canvas id="quizChart" width="400" height="200"></canvas>
+    <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
 
     <script>
         function submitForm() {

@@ -1,40 +1,37 @@
 body {
-    background-color: #FFF2D8;
-    font-family: 'Exo 2', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #FFF2D8;
+    font-family: 'Exo 2', sans-serif;
 }
 
-/*head logo*/
 #header {
     background-color: #EAD7BB;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     width: auto;
-    height: 125px;
+    height: 135px;
 }
 
-#weblogo{
+#weblogo {
     width: 125px;
     height: 125px;
     border-radius: 50%;
     float: left;
-    justify-content: left;
 }
 
-#webname{
+#webname {
     float: left;
     margin-left: 15px;
     font-size: 22px;
     font-style: italic;
     font-family: 'Exo 2', sans-serif;
-    justify-content: right;
     color: black;
     text-align: left;
 }
 
-#title{
+#head_con {
     font-family: 'Exo 2', sans-serif;
     float: right;
     margin: 0;
@@ -44,18 +41,22 @@ body {
     font-size: 20px;
 }
 
-/*menu bar*/
+/* All settings except logo & website name */
+#all {
+    font-family: 'Exo 2', sans-serif;
+    color: black;
+} 
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     background-color: #7E6E57;
-    display: flex; /* Use flexbox for horizontal layout */
+    overflow: hidden;
+    width: 100%;
 }
 
 li {
-    flex-grow: 1; /* Each menu item takes equal width */
-    position: relative;
     float: left;
     width: 25%;
 }
@@ -63,36 +64,77 @@ li {
 li a {
     display: block;
     color: white;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
-    padding: 10px;
     transition: background-color 0.3s ease;
 }
 
-li:hover {
-    background-color: #555;
+li a:hover {
+    background-color: #BCA37F;
 }
+
+/* Total user table */
+#table1 {
+    margin-left: 130px;
+    margin-top: 40px;
+    width: 80%;
+    height: 350px;
+    align-items: center;
+    border-spacing: 30px;
+}
+
+#th1, #td1 {
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 20px; /* Add 20px spacing for both th and td */
+}
+
+#th1 {
+    background-color: #5d6471;
+    color: white;
+    font-size: 40px;
+    width: 16%;
+}
+
+#td1 {
+    background-color: #edf1f7;
+    font-size: 38px;
+    width: 10%;
+}
+
+/* Your existing styles ... */
+
+/* Your existing styles ... */
 
 ul ul {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #555;
+    background-color: #7E6E57;
 }
 
-li:hover > ul {
+ul li:hover > ul {
     display: block;
 }
 
+/* Adjusted styles for better appearance */
 ul ul li {
+    float: none;
+    width: 100%;
+    text-align: center;
+}
+
+ul ul li a {
     display: block;
-}
-
-ul ul a {
     padding: 10px;
+    text-decoration: none;
+    color: white;
 }
 
-ul ul ul {
-    left: 100%;
-    top: 0;
+/* Additional style for a clearer separation */
+ul li ul li {
+    border-top: 1px solid #5d6471;
 }
