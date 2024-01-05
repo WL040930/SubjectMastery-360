@@ -3,6 +3,7 @@ include "dbconn.php";
 include "teacher-session.php";
 
 $id = $_SESSION['id'];
+$decline = TRUE;
 
 $fetchQuery = "SELECT cm.*, c.*, ce.*, e.*
                 FROM classroom_member cm 
@@ -79,7 +80,7 @@ function calculateUserMarks($exam_attempt_id, $connection) {
 if (isset($_POST['submitfeedback'])) {
     $feedback = $_POST['feedback'];
     $exam_attempt_id = $_POST['exam_attempt_id'];
-
+    
     $update_feedback_query = "UPDATE `exam_feedback` SET `exam_feedback_content`='$feedback' WHERE exam_attempt_id = '$exam_attempt_id'";
     $update_feedback_result = mysqli_query($connection, $update_feedback_query);
 
@@ -146,7 +147,7 @@ if (isset($_POST['submitfeedback'])) {
         $exam_attempt_id = $_POST['user'];
         $totalMark = calculateFullMarks($exam_attempt_id, $connection);
         $userScore = calculateUserMarks($exam_attempt_id, $connection); 
-
+        
         if($userScore == "Not finish marking"){
             $decline = FALSE; 
         } else {
@@ -183,6 +184,10 @@ if (isset($_POST['submitfeedback'])) {
             <tr>
                 <th>Exam End Time</th>
                 <td><?php echo $quiz_title_row['exam_end_time']; ?></td>
+            </tr>
+            <tr>
+                <th>Marks</th>
+                <td><?php echo $userScore. " / ". $totalMark; ?></td>
             </tr>
         </table>
 
@@ -222,14 +227,46 @@ if (isset($_POST['submitfeedback'])) {
             </form>
         </div>
 
+        
         <?php
             }
         }
         ?>
+        <canvas id="quizChart" width="400" height="200"></canvas>
+        
 </body>
 </html>
+<?php
+if ($decline) {
+    // Execute the JavaScript code only if $decline is true
+    ?>
+    <script>
+        var ctx = document.getElementById('quizChart').getContext('2d');
+        var dataChart = {
+            labels: ['Correct - Mark', 'Incorrect - Mark'],
+            datasets: [{
+                data: [<?php echo $userScore; ?>, <?php echo $wrongmark; ?>],
+                backgroundColor: [
+                    'rgba(75, 192, 75, 0.7)', // Green for correct
+                    'rgba(255, 99, 132, 0.7)' // Red for incorrect
+                ],
+                borderColor: [
+                    'rgba(255, 255, 255, 1)',
+                    'rgba(255, 255, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
 
-
+        // Create the pie chart with data
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: dataChart,
+        });
+    </script>
+<?php
+    }
+?>
 
 <script>
         function submitForm() {
