@@ -35,7 +35,8 @@
             if(!empty($email)) {
 
                 // Query to search for users based on the entered email
-                $query = "SELECT * FROM user WHERE email_address LIKE '%$email' OR email_address LIKE '%$email%' OR email_address LIKE '$email%'";
+                $query = "SELECT * FROM user WHERE email_address LIKE '%$email' OR email_address LIKE '%$email%' 
+                          OR email_address LIKE '$email%'";
                 $result = mysqli_query($connection, $query);
 
                 // Check if there are any results
@@ -73,5 +74,4 @@
 
     ?>
 </body>
-
 </html>
