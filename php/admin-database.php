@@ -1,12 +1,16 @@
 <?php
+    // Include necessary files
     include "dbconn.php"; 
     include "admin-menu.php";
     include "admin-session.php";
 
+    // Initialize variables for sorting and searching
     $sortrole = ""; 
     $searchby = "";
 
+    // Check if the form is submitted
     if (isset($_GET['submit'])) {
+        // Set sorting option based on user selection
         $sortrole = $_GET['sort-by'];
         if ($sortrole == "default") {
             $sortrole = "";
@@ -16,9 +20,11 @@
             $sortrole = "WHERE role = 'teacher'";
         }
 
+        // Set search criteria based on user input
         $searchby = $_GET['search-by'];
         $searchTerm = mysqli_real_escape_string($connection, $_GET['search']);
 
+        // Build the search condition based on the selected sort role
         if (empty($sortrole)) {
             $searchbyClause = "";
             if (!empty($searchby)) {
@@ -39,6 +45,7 @@
             }
         }
 
+        // Construct the final query for fetching data
         $query = "SELECT * FROM user LEFT JOIN role ON user.role_id = role.role_id $sortrole $searchbyClause";
         $result = mysqli_query($connection, $query);
     }
@@ -51,12 +58,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Database</title>
     <link rel="stylesheet" href="../css/admin-database.css">
-    <!--font-->
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body id="all">
+    <!-- Search form for sorting and filtering data -->
     <form action="#" method="get" id="search-form">
         <label for="search-by">
             Search by:
@@ -79,6 +87,7 @@
         <button type="submit" id="search-button" name="submit">Search</button>
     </form>
 
+    <!-- Display the table with user data -->
     <?php if (isset($_GET['submit'])) { ?>
         <table id="data_table">
             <tr>

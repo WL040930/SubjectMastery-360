@@ -1,6 +1,7 @@
 <?php
 
     include "dbconn.php";
+    include "stu-teac-session";
     include "feature-feedbackbutton.php";
 
     if (session_status() == PHP_SESSION_NONE) {
@@ -38,22 +39,6 @@
             <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
                 <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
                 <h2 id="class_name"><?php echo $row['classroom_name'];?></h2>
-            </div>
-            <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
-                <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
-                <h2><?php echo $row['classroom_name'];?></h2>
-            </div>
-            <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
-                <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
-                <h2><?php echo $row['classroom_name'];?></h2>
-            </div>
-            <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
-                <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
-                <h2><?php echo $row['classroom_name'];?></h2>
-            </div>
-            <div id="classroom-column" style="background-color: <?php echo $row['classroom_color'].';';?>">
-                <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
-                <h2><?php echo $row['classroom_name'];?></h2>
             </div>
         </div>    
         </a>
