@@ -14,6 +14,7 @@ function register_validation() {
     var length = /.{8,}/;
     var username_length = /.{5,11}/;
     var name_length = /.{1,15}/;
+    var email_pattern = /^\S+@\S+\.\S+$/;
 
     if (!username.match(username_length)) {
         validate_message.textContent = "Username must be between 5 and 11 characters long";
@@ -29,6 +30,12 @@ function register_validation() {
 
     if (!last_name.match(name_length)) {
         validate_message.textContent = "Last name must be between 1 and 15 characters long";
+        validate_message.style.color = "red";
+        return false;
+    }
+
+    if (!email.match(email_pattern)) {
+        validate_message.textContent = "Invalid email format";
         validate_message.style.color = "red";
         return false;
     }
@@ -58,5 +65,3 @@ function register_validation() {
     validate_message.textContent = "";
     return true;
 }
-
-// add validate email

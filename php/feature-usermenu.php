@@ -53,10 +53,14 @@
             </li>
             <li> Report
                 <ul>
-                    <li>
-                        <a href="student-viewquiz.php">View Quiz Report</a>
-                        <a href="#">View Exam Report</a>
-                    </li>
+                    <li><a href="student-viewquiz.php">View Quiz Report</a></li>
+                    <li><a href="#">View Exam Report</a></li>
+                </ul>
+            </li>
+            <li> Others
+                <ul>
+                    <li><a href="#">Manage Profile</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -81,6 +85,12 @@
                 <ul>
                     <li><a href="#">View Quiz Report</a></li>
                     <li><a href="#">View Exam Report</a></li>
+                </ul>
+            </li>
+            <li> Others
+                <ul>
+                    <li><a href="#">Manage Profile</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
             </li>
         </ul>

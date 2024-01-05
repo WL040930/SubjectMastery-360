@@ -89,7 +89,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         </tr>
         <tr>
             <th>Marks</th>
-            <td><?php echo $userScore. " / ". $totalMark ?></td>
+            <td><?php echo $userScore. " / ". $totalMark; ?></td>
         </tr>
         <tr>
             <th>Feedback</th>
