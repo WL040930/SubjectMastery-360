@@ -3,7 +3,7 @@ include "dbconn.php";
 include "teacher-session.php";
 
 $id = $_SESSION['id'];
-$decline = TRUE;
+$decline = false;
 
 $fetchQuery = "SELECT cm.*, c.*, ce.*, e.*
                 FROM classroom_member cm 
@@ -103,6 +103,7 @@ if (isset($_POST['submitfeedback'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Exam Result</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <form id="examForm" action="" method="post">
@@ -226,19 +227,19 @@ if (isset($_POST['submitfeedback'])) {
                 <input type="button" value="Update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)">
             </form>
         </div>
-
+        
         
         <?php
             }
         }
         ?>
         <canvas id="quizChart" width="400" height="200"></canvas>
+
         
 </body>
 </html>
 <?php
 if ($decline) {
-    // Execute the JavaScript code only if $decline is true
     ?>
     <script>
         var ctx = document.getElementById('quizChart').getContext('2d');
