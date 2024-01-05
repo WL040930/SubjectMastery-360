@@ -11,7 +11,7 @@ body {
     width: 80%;
     height: auto;
     margin: 50px auto;
-    background-color: #c1b39c;
+    background-color: #EAD7BB;
     border-radius: 8px;
     padding: 20px;
 }
@@ -89,7 +89,7 @@ h4{
 
 .download-link {
     text-decoration: none;
-    background-color: #acb5c8;
+    background-color: #FFFFFF;
     color: rgb(0, 0, 0);
     padding: 8px 16px;
     border-radius: 5px;
@@ -97,5 +97,5 @@ h4{
 }
 
 .download-link:hover {
-    background-color: #acb5c8;
+    background-color: #FFFFFF;
 }
