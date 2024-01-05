@@ -133,9 +133,9 @@
         <tr>
             <td colspan="4">
                 <form method="post" action="">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" required>
-                    <button type="submit" name="manage_member">Add Member</button>
+                    <label id="email_title" for="email">Email:</label>
+                    <input id="email_con" type="email" name="email" required>
+                    <button id="add_button" type="submit" name="manage_member">Add Member</button>
                 </form>
             </td>
         </tr>
@@ -170,13 +170,21 @@
 </head>
 <body>
     <h1>Choose a Classroom to Manage</h1>
-    <ul>
-        <?php
+    <?php
+        $firstIteration = true; // Flag to identify the first iteration
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="teacher-addmember.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            // Check if it's not the first iteration to add spacing
+            if (!$firstIteration) {
+                echo '</ul>'; // Close the previous <ul>
+                echo '<ul id="newclass">'; // Open a new <ul>
+            } else {
+                echo '<ul id="oldclass">'; // Open the first <ul>
+                $firstIteration = false; // Set the flag to false after the first iteration
+            }
+            echo '<li><a id="class_content" href="teacher-addmember.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
         }
-        ?>
-    </ul>
+        echo '</ul>'; // Close the last <ul> after the loop
+    ?>
 </body>
 </html>
 
