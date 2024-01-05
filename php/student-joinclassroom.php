@@ -73,47 +73,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Classroom</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        .code-input {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .code-input input {
-            width: 40px;
-            height: 40px;
-            font-size: 18px;
-            text-align: center;
-            margin: 0 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #submit-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/student-joinclassroom.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 <body>
 
 <div class="container">
