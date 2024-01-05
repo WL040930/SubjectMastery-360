@@ -61,7 +61,7 @@
                 exit();
             }
         } else {
-            echo "Error: " . mysqli_error($connection);
+            echo "<script> alert ('Invalid Classroom Code. Please Try Again.'); </script>";
         }
     }
     
@@ -98,7 +98,7 @@
 
         <div id="validation-message"></div>
 
-        <button type="submit" id="submit-btn" name="submit">Submit</button>
+        <br><button type="submit" id="submit-btn" name="submit">Submit</button>
     </form>
 </div>
 
