@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <th>Profile Picture</th>
-                <td><img src="../data/image<?php echo $row['profile_picture']?>" style="max-width: 200px; max-height: 200px;"></td>
+                <td><img src="../data/image<?php echo $row['profile_picture']?>" style="width: 200px; height: 200px;"></td>
             </tr>
         </table>
         <input type="submit" value="Delete" name="delete" id="delete_button"><br>
