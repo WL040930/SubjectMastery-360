@@ -1,8 +1,10 @@
 <?php
 
+    // Include necessary files
     include "dbconn.php"; 
     include "admin-menu.php";
     include "admin-session.php";
+    
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
 <body id="all">
 
     <?php 
-
+    // SQL query to fetch user details and feedback
     $query = "SELECT
                 *
             FROM
@@ -28,7 +30,7 @@
             INNER JOIN
                 feedback ON user.user_id = feedback.user_id";
             
-
+    // Loop through the result set
     $result = mysqli_query($connection, $query); 
     while ($row = mysqli_fetch_assoc($result)) {
 
