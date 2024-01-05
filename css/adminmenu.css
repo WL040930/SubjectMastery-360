@@ -10,12 +10,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-}
-
-#header{
     width: auto;
-    height: 125px;
-    background-color: #EAD7BB;
+    height: 135px;
 }
 
 #weblogo{

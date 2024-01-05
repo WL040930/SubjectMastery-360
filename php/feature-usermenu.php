@@ -10,18 +10,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Menu</title>
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/usermenu.css">
+    <!--website name font-->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
+    <!--others font-->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <div id="header">
-        <div id="image">
-            <img src="../image/logo.png" alt="" height="100px">
+        <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
+        <div id="webname">
+            <h1>SubjectMastery360</h1>
         </div>
         <div id="title">
-            <h1>Welcome, <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name'];?></h1>
+            <h1>Welcome <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name'];?>!</h1>
         </div>
         <div style="clear: both"></div>
     </div>
