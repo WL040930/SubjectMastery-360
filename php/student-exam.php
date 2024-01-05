@@ -55,11 +55,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/student-exam.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Exam - <?php echo $exam_name_row['exam_title']; ?></h1>
     <h3 style="color: red;"><b>IMPORTANT: DO NOT LEAVE THIS PAGE BEFORE YOU HAVE SUBMITTED YOUR ANSWERS.</b></h3>
-    <br>
     <div id="question-box">
         <form action="" method="post">
             <?php
@@ -77,15 +82,15 @@
                 $array = array();
                 while($displayQuestionRow = mysqli_fetch_assoc($displayQuestionResult)) { 
                     $array[] = $displayQuestionRow['exam_user_answer_id'];
-            ?>
+            ?><br>
             No. <?php echo $number; $number = $number + 1; ?> <br>
             <?php 
                 if($displayQuestionRow['exam_attachment'] != null) {
-                    echo "<img src='../data/image".$displayQuestionRow['exam_attachment']."'>";
+                    echo "<br> <img id='exam_pic' src='../data/image".$displayQuestionRow['exam_attachment']."'>";
                 } 
-            ?>
-            <input type="text" value="<?php echo $displayQuestionRow['exam_question']; ?>" disabled><br>
-            <input type="text" value="<?php echo $displayQuestionRow['exam_user_answer']; ?>" name="answers[]"><br>
+            ?><br>
+            <input id="exam_question" type="text" value="<?php echo $displayQuestionRow['exam_question']; ?>" disabled><br>
+            <input id="exam_ans" type="text" value="<?php echo $displayQuestionRow['exam_user_answer']; ?>" name="answers[]"><br>
             <?php
                 }
             ?>
