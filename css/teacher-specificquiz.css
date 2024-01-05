@@ -13,13 +13,14 @@ body {
 }
 
 form {
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 select, input[type="text"], input[type="submit"] {
     padding: 8px;
     font-size: 16px;
-    margin-right: 10px;
+    margin-right: 20px;
+    margin-left: 15px;
 }
 
 input[type="text"], input[type="submit"] {
@@ -117,6 +118,8 @@ canvas {
 #quesques {
     float: right; 
     width: 85%; 
+    margin-bottom: 2px;
+    padding-bottom: 2px;
 }
 
 #quesans {
@@ -134,17 +137,16 @@ canvas {
 }
 
 .chart-container {
-    max-width: 500px;
+    max-width: 62%;
     margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-    /* Center the chart using flexbox */
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #eff2f6;
 }
 
 canvas {
