@@ -1,7 +1,12 @@
 <?php
 
+    // Include the database connection file
     include "dbconn.php"; 
+
+    // Include the admin menu file
     include "admin-menu.php"; 
+
+    // Include the admin session file
     include "admin-session.php"; 
 
 ?>
@@ -24,13 +29,21 @@
     </div>
 
     <?php 
+        // Check if the Search button is clicked
         if(isset($_GET['btnSearch'])) {
             $email = $_GET['email'];
             if(!empty($email)) {
+
+                // Query to search for users based on the entered email
                 $query = "SELECT * FROM user WHERE email_address LIKE '%$email' OR email_address LIKE '%$email%' OR email_address LIKE '$email%'";
                 $result = mysqli_query($connection, $query);
+
+                // Check if there are any results
                 if(mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)) { ?>
+
+                     // Display search results
+                    while($row = mysqli_fetch_assoc($result)) { 
+    ?>
 
     <div id="search-result">
         <div id="result-box">
@@ -44,19 +57,21 @@
             </a>
         </div>                
     </div>
-<?php
+    <?php
                     }
                 } else {
+                    // Display an error message if no results are found
                     echo '<div id="error_msg">ERROR: No Result  Found :(</div>';   
                 }
             } else {
+                // Display an error message if no email is entered
                 echo '<div id="error_msg">ERROR: Please Enter Your Email Address !</div>';
             }
         }
     
     mysqli_close($connection);
 
-?>
+    ?>
 </body>
 
 </html>
