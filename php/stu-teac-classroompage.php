@@ -34,40 +34,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $classroom_member_row['classroom_name']; ?></title>
+    <title>Classroom - <?php echo $classroom_member_row['classroom_name']; ?></title>
+    <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/classroom-page.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
-<style>
-    #chatbox {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-}
-
-#chatbox a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-}
-
-#chatbox a:hover {
-    background-color: #e5e5e5;
-}
-
-#chatbox div {
-    margin-bottom: 8px;
-}
-
-#chatbox div:last-child {
-    margin-bottom: 0; /* Remove margin-bottom for the last div to avoid extra spacing */
-}
-
-</style>
-
-<body>
+<body id="all">
 
     <?php
         $chatquery = "SELECT cms.*, cm.*, u.* 
@@ -80,13 +56,13 @@
     ?>
     <div id="chatbox">
         <a href="stu-teac-chat.php?id=<?php echo $chatrow['chatroom_messages_id']; ?>">
-            <div>
-                <?php echo $chatrow['username']; ?>
-            </div>
-            <div>
+            <div id=chat_title>
                 <?php echo $chatrow['chatroom_title'];  ?>
             </div>
-            <div>
+            <div id="username">
+                <?php echo $chatrow['username']; ?>
+            </div>
+            <div id="timestap">
                 <?php echo $chatrow['chatroom_messages_timestamp'];  ?>
             </div>
         </a>

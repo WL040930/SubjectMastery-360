@@ -1,12 +1,72 @@
+#all{
+    font-family: 'Exo 2', sans-serif;
+    background-color: #FFF2D8;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+/*chatbox*/
+#chatbox {
+    width: 80%;
+    height: auto;
+    margin: 50px auto;
+    background-color: #EAD7BB;
+    border: 1px solid #BCA37F;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#chatbox a {
+    width: 80%;
+    height: auto;
+    text-decoration: none;
+    display: block;
+}
+
+#chatbox:hover {
+    width: 80%;
+    height: auto;
+    background-color: #fff;
+    border: 2px solid black;
+    color: #ffffff;
+}
+
+#chatbox div {
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+#chatbox div:last-child {
+    margin-bottom: 0; /* Remove margin-bottom for the last div to avoid extra spacing */
+}
+
+#chat_title{
+    margin: 10px;
+    font-size: 40px;
+}
+
+#username, #timestap{
+    margin: 10px;
+    font-size: 20px;
+    display: inline-block;
+}
+
+
+
+/*button & newchat*/
 button {
     padding: 10px;
-    background-color: #3498db;
-    color: #fff;
+    background-color: #857c6e;
+    color: white;
     border: none;
     cursor: pointer;
     position: fixed; 
     left: 20px; 
     bottom: 20px;
+    border-radius: 8px;
 }
 
 #newChatContainer {
