@@ -102,10 +102,11 @@ if (isset($_POST['submitfeedback'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Exam Result</title>
+    <link rel="stylesheet" href="../css/teacher-specificexam.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body id="all">
     <form id="examForm" action="" method="post">
         Exam: 
         <select name="exam" id="exam" onchange="submitForm()">
@@ -191,18 +192,19 @@ if (isset($_POST['submitfeedback'])) {
                 <td><?php echo $userScore. " / ". $totalMark; ?></td>
             </tr>
         </table>
-
+        <div id="feedbackform">
         <form action="" method="post">
             <?php
                 $feedback_query = "SELECT * FROM exam_feedback WHERE exam_attempt_id = '$exam_attempt_id'";
                 $feedback_result = mysqli_query($connection, $feedback_query);
                 $feedback_row = mysqli_fetch_assoc($feedback_result);
             ?>
-            <label for="feedback">Overall Feedback</label>
+            <label for="feedback"><b>Overall Feedback: </b></label>
             <input type="text" name="feedback" id="feedback" value="<?php echo $feedback_row['exam_feedback_content']; ?>">
-            <input type="hidden" name="exam_attempt_id" value="<?php echo $exam_attempt_id; ?>">
-            <input type="submit" value="Submit" name="submitfeedback">
+            <input type="hidden" name="exam_attempt_id" value="<?php echo $exam_attempt_id; ?>"> <br>
+            <div id="submit"><input type="submit" value="Submit" name="submitfeedback"></div>
         </form>
+        </div>
 
         <?php
             $fetchExamQuery = "SELECT eua.*, eq.* FROM exam_user_answer eua 
@@ -215,16 +217,17 @@ if (isset($_POST['submitfeedback'])) {
         ?>
 
         <div id="answer-box">
-            <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
-            <p>Question: <?php echo $row['exam_question']; ?> </p>
-            <p>Mark Score: <?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
-            <p>User Answer: <?php echo $row['exam_user_answer']; ?></p>
+            <div id="numberquestion"><?php echo $calnum; $calnum = $calnum + 1;  ?> </div>
+            <div id="questionquestion"><p><b>Question: </b><?php echo $row['exam_question']; ?> </p> </div>
+            <div id="scorequestion"><p><b>Mark Score: </b><?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p></div>
+            <div class="answerquestion"><p><b>User Answer: </b><?php echo $row['exam_user_answer']; ?></p> </div>
             
             <form action="" method="post" id="markForm_<?php echo $row['exam_user_answer_id']; ?>">
                 <label for="markInput">Mark:</label>
-                <input type="text" name="markInput" id="markInput_<?php echo $row['exam_user_answer_id']; ?>" value="<?php echo $row['exam_user_marks']; ?>">
+                <input type="text" name="markInput" id="markInput_<?php echo $row['exam_user_answer_id']; ?>" value="<?php echo $row['exam_user_marks']; ?>"> / 
+                <?php echo $row['exam_marks']; ?>
                 <input type="hidden" name="exam_user_answer_id" value="<?php echo $row['exam_user_answer_id']; ?>">
-                <input type="button" value="Update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)">
+                <input type="button" value="Update" class="update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)">
             </form>
         </div>
         
@@ -233,7 +236,9 @@ if (isset($_POST['submitfeedback'])) {
             }
         }
         ?>
+        <div class="chart-container">
         <canvas id="quizChart" width="400" height="200"></canvas>
+        </div>
 
         
 </body>
