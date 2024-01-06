@@ -105,18 +105,20 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             while($row = mysqli_fetch_assoc($fetchResultQueryResult)) {
                 ?>
                 <div id="answer-box">
-                    <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
-                    <p>Question: <?php echo $row['quiz_question_text']; ?></p>
-                    <p>User Answer: <?php echo $row['option_text']; ?></p>
+                    <div id="numbering">
+                        <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
+                </div>
+                    <p id="question"><b>Question: </b><?php echo $row['quiz_question_text']; ?></p>
+                    <p id="answer"><b>User Answer: </b><?php echo $row['option_text']; ?></p>
                     <?php
                     if ($row['iscorrect'] == true || ($row['iscorrect'] === null && $row['answer'] === null)) {
-                        echo "CORRECT"; 
+                        echo "<div id='correct'>CORRECT</div>"; 
                     } else {
-                        echo "INCORRECT <br>";
+                        echo "<div id='incorrect'>INCORRECT</div><br>";
                         $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
                         $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
                         $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                        echo "Correct Answer: ".$correctAnswerRow['option_text'];
+                        echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
                     }
                     ?>
                 </div>
@@ -129,19 +131,22 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     ?>
 
     <div id="answer-box">
-        <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
-        <p>Question: <?php echo $row['quiz_question_text']; ?></p>
-        <p>User Answer: <?php echo $row['option_text']; ?></p>
+        <div id="numbering">
+            <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
+        </div>
+        <p id="question"><b>Question: </b><?php echo $row['quiz_question_text']; ?></p>
+        <p id="answer"><b>User Answer: </b><?php echo $row['option_text']; ?></p>
         <?php
             if ($row['iscorrect'] == TRUE) {
-                echo "CORRECT"; 
+                echo "<div id='correct'>CORRECT</div>"; 
             }
             else {
-                echo "INCORRECT <br>";
+                echo "<div id='incorrect'>INCORRECT</div><br>";
                 $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
                 $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
                 $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                echo "Correct Answer: ".$correctAnswerRow['option_text'];
+                echo "<div id='final_title'><b>Correct Answer:</b></div>";
+                echo "<div id='final_ans'>" . $correctAnswerRow['option_text'] . "</div>";
             }
         ?>
     </div>
@@ -153,8 +158,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     ?>
 
     <!-- Adjusted the size of the canvas for better performance -->
-    <canvas id="quizChart" width="400" height="200"></canvas>
-
+    <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
     <script>
         function submitForm() {
             document.getElementById("quizForm").submit();
