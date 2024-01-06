@@ -16,7 +16,7 @@ form {
     margin: 20px;
 }
 
-select, input[type="text"], input[type="submit"] {
+select, input[type="text"]{
     padding: 8px;
     font-size: 16px;
     margin-right: 20px;
@@ -30,6 +30,22 @@ input[type="text"], input[type="submit"] {
 input[type="text"] {
     width: 600px; 
     height: 30px; 
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #BCA37F;
 }
 
 table {
@@ -131,9 +147,27 @@ canvas {
     width: auto; 
 }
 
-#correctanswer {
-    color: red; 
-    margin: 10px; 
+#correct{
+    font-size: 18px;
+    color: #5e9656;
+}
+
+#incorrect{
+    font-size: 18px;
+    color: red;
+}
+
+#answer, #correct, #incorrect{
+    display: inline-block;
+}
+
+#final_ans{
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+#final_title, #final_ans{
+    display: inline-block;
 }
 
 .chart-container {

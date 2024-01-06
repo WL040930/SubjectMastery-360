@@ -1,0 +1,121 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2D8;
+}
+
+/*create exam menu bar*/
+h1 {
+    color: #333;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+#sec_exam{
+    background-color: #EAD7BB;
+    width: 380px;
+    height: 55px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-bottom: 15px;
+    margin-left: 400px;
+}
+
+#sec_exam:hover{
+    background-color: #7E6E57;
+    border-spacing: 20px;
+}
+
+#fir_exam{
+    background-color: #EAD7BB;
+    width: 380px;
+    height: 55px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 400px;
+}
+
+#fir_exam:hover{
+    background-color: #7E6E57;
+}
+
+#title{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    align-items: center;
+}
+
+li{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 50px;
+
+}
+
+/*create exam details*/
+#container {
+    width: 75%;
+    height: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #000000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    letter-spacing: 3px;
+    word-spacing: 2px;
+    font-size: 38px;
+}
+
+#name_con, #desc_con{
+    margin-right: 10px;
+    word-spacing: 5px;
+}
+
+.inp-box {
+    width: 500px;
+    margin-top: 22px;
+    margin-bottom: 25px;
+    word-spacing: 5px;
+    font-size: 21px;
+    text-align: center;
+}
+
+#exam_name, #exam_description{
+    font-size: 20px;
+}
+
+/* Create button */
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-left: 280px;
+}
+ 
+input[type="submit"]:hover {
+    background-color: #BCA37F;
+}
