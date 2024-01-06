@@ -157,13 +157,14 @@ if (isset($_POST['submit'])) {
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Choose the Exam you would like to add a question</h1>
-
-    <?php
-        while ($fetch_row = mysqli_fetch_assoc($fetch_result)) {
-            echo "<a href='teacher-examquestion.php?id=".$fetch_row['exam_id']."'>".$fetch_row['exam_title']."</a><br>";
-        }
-    ?>
+    <h1 id="eq_h1">Choose The Exam You Would Like To Add A Question</h1>
+    <div id="eq_choices">
+        <?php
+            while ($fetch_row = mysqli_fetch_assoc($fetch_result)) {
+                echo "<a href='teacher-examquestion.php?id=".$fetch_row['exam_id']."'>".$fetch_row['exam_title']."</a><br>";
+            }
+        ?>
+    </div>
 </body>
 </html>
 
