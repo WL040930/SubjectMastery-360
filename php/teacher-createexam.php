@@ -25,6 +25,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Exam</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <form action="" method="post">
@@ -87,13 +93,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Classroom</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Please select the classroom you would like to manage: </h1>
     <ul>
         <?php
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="teacher-createexam.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            echo '<li><a id="title" href="teacher-createexam.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
         }
         ?>
     </ul>

@@ -152,13 +152,13 @@
         <div id="quesans"><p><b>User Answer: </b><?php echo $row['option_text']; ?></p></div>
         <div id="correctanswer"><?php
             if ($row['iscorrect'] == TRUE) {
-                echo "CORRECT"; 
+                echo "<div id='correct'>CORRECT</div>"; 
             } else {
-                echo "INCORRECT <br>";
+                echo "<div id='incorrect'>INCORRECT</div><br>";
                 $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
                 $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
                 $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                echo "Correct Answer: ".$correctAnswerRow['option_text'];
+                echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
             }
         ?>
         </div>

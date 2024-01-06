@@ -1,0 +1,44 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF2D8;
+}
+
+h1 {
+    color: #333;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+ul {
+    width: 250px;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin: auto;
+    margin-bottom: 15px;
+    display: flex;
+    background-color: #EAD7BB;
+    justify-content: center;
+}
+
+#title{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    align-items: center;
+}
+
+ul:hover{
+    background-color: #7E6E57;
+}
+
+li{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 50px;
+
+}
