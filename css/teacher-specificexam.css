@@ -165,6 +165,7 @@ input[type="text"] {
     justify-content: center;
     align-items: center;
     background-color: #eff2f6;
+    padding-bottom: 0px;
 }
 
 canvas {
@@ -187,4 +188,8 @@ canvas {
 
 .update:hover {
     background-color: #BCA37F;
+}
+
+#updateButton {
+    margin-left: 30px;
 }
