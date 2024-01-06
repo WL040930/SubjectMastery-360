@@ -227,7 +227,7 @@ if (isset($_POST['submitfeedback'])) {
                 <input type="text" name="markInput" id="markInput_<?php echo $row['exam_user_answer_id']; ?>" value="<?php echo $row['exam_user_marks']; ?>"> / 
                 <?php echo $row['exam_marks']; ?>
                 <input type="hidden" name="exam_user_answer_id" value="<?php echo $row['exam_user_answer_id']; ?>">
-                <input type="button" value="Update" class="update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)">
+                <div id="updateButton"><input type="button" value="Update" class="update" onclick="validateAndUpdateMark(<?php echo $row['exam_user_answer_id']; ?>, <?php echo $row['exam_marks']; ?>)"></div>
             </form>
         </div>
         
@@ -237,7 +237,7 @@ if (isset($_POST['submitfeedback'])) {
         }
         ?>
         <div class="chart-container">
-        <canvas id="quizChart" width="400" height="200"></canvas>
+            <canvas id="quizChart" width="400" height="200"></canvas>
         </div>
 
         
