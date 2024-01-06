@@ -1,22 +1,16 @@
 <?php
 
-    // Include necessary files
     include "dbconn.php"; 
-    include "admin-menu.php";
-    include "admin-session.php";
-    
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - View Feedback</title>
     <link rel="stylesheet" href="../css/admin-viewfeedback.css">
     <!--font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body id="all">
@@ -62,20 +56,9 @@
                     }
                 ?>
             </div>
-            <div style="clear: both"></div>
         </div>
     </div>
+
+    <?php } ?>
 </body>
 </html>
-
-<?php
-        }
-
-?>
-
-<?php
-
-    // Close database connection
-    mysqli_close($connection);
-
-?>

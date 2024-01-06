@@ -19,6 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz Result</title>
+    <link rel="stylesheet" href="../css/teacher-overallquiz.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -61,7 +62,7 @@
             </tr>
             <tr>
                 <th>Number of Attempt</th>
-                <th><?php echo $numofAttempt; ?></th>
+                <td><?php echo $numofAttempt; ?></td>
             </tr>
             <tr>
                 <th>Full Marks of the Assessment</th>
@@ -76,7 +77,9 @@
                 <td><?php echo $percentage; ?></td>
             </tr>
         </table>
+        <div class="chart-container">
         <canvas id="quizChart" width="400" height="200"></canvas>
+        </div>
     <?php
 
         }
