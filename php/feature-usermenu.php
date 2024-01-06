@@ -19,9 +19,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
+<style>
 
+</style>
 
-<body>
+<body id="all">
 
     <div id="header">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
