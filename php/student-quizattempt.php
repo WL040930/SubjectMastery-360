@@ -43,15 +43,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Attempt</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/student-quizattempt.css">
+    <link rel="stylesheet" href="../css/student-quizexamattempt.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="container">
-        <h1><?php echo $row['quiz_title']; ?></h1>
+    <div class="container">
+        <div class="header">
+            <h1><?php echo $row['quiz_title']; ?></h1>
+        </div>
         <div id="description">
             <?php echo $row['quiz_description'];?>
         </div>
@@ -62,7 +64,7 @@
             </b>
         </div>
         <form action="" method="post">
-            <input type="submit" value="Start Attempt" name="submit">
+            <input type="submit" value="Start Attempt" name="submit" class="btnstart">
         </form>
     </div>
 </body>
@@ -137,29 +139,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Quiz</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/student-quizattempt.css">
+    <link rel="stylesheet" href="../css/student-quizexamattempt.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Please Select The Quiz: </h1>
+    <h1 align="center" style="margin: 20px;">Please Select The Quiz: </h1>
     <ul>
     <?php
-        $firstIteration = true; // Flag to identify the first iteration
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            // Check if it's not the first iteration to add spacing
-            if (!$firstIteration) {
-                echo '</ul>'; // Close the previous <ul>
-                echo '<ul id="newquiz">'; // Open a new <ul>
-            } else {
-                echo '<ul id="oldquiz">'; // Open the first <ul>
-                $firstIteration = false; // Set the flag to false after the first iteration
-            }
-            echo '<li><a id="title" href="student-quizattempt.php?id=' . $classroom_row['quiz_id'] . '">' . $classroom_row['quiz_title'] . '</a></li>';
+            echo '<a class="linktoclassroom" href="student-quizattempt.php?id=' . $classroom_row['quiz_id'] . '"><li class="choose-classroom">' . $classroom_row['quiz_title'] . '</li></a>';
         }
-        echo '</ul>'; // Close the last <ul> after the loop
         ?>
     </ul>
 </body>

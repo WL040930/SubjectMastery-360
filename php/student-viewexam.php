@@ -38,7 +38,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             <option value="">Select a Exam</option>
             <?php
                 while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
-                    echo "<option value='". $fetchRow['exam_attempt_id']."'>" .$fetchRow['exam_title'] ."</option>";
+                    echo "<option value='". $fetchRow['exam_attempt_id']."'>" .$fetchRow['exam_attempt_id']." - ".$fetchRow['exam_title'] ."</option>";
                 } 
             ?>
         </select>

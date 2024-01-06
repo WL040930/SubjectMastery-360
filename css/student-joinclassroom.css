@@ -1,15 +1,27 @@
-body {
-    font-family: 'Exo 2', sans-serif;
-    background-color: #FFF2D8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
 .container {
     text-align: center;
+    border: 3px solid black;
+    box-shadow: 0px 0px 10px 0px #000000;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.header {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin: 20px;
+}
+
+.codedes {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .code-input {

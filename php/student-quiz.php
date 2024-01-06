@@ -63,12 +63,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
+<!-- Add these changes to your existing HTML -->
+
 <body>
-    <h1>Exam - <?php echo $quiz_name_row['quiz_title']; ?></h1>
-    <h3 style="color: red;"><b>IMPORTANT: DO NOT LEAVE THIS PAGE BEFORE YOU HAVE SUBMITTED YOUR ANSWERS.</b></h3>
-    <div id="question-box">
+    <div class="headerquiz">
+        <h1>Quiz - <?php echo $quiz_name_row['quiz_title']; ?></h1>
+        <h3 style="color: red;"><b>IMPORTANT: DO NOT LEAVE THIS PAGE BEFORE YOU HAVE SUBMITTED YOUR ANSWERS.</b></h3>
+    </div>
+
+    <div class="container-all">
         <form action="" method="post">
-        <div id="question_option">
             <?php
                 $displayQuestionQuery = "SELECT
                                             ua.*,
@@ -84,57 +88,68 @@
                 $number = 1;
                 while ($displayQuestionRow = mysqli_fetch_assoc($displayQuestionResult)) {
                     $question_fetch_id = $displayQuestionRow['quiz_question_id'];
-            ?><br>
-                No. <?php echo $number; $number = $number + 1; ?> <br>
-                <?php
-                    if($displayQuestionRow['quiz_attachment'] != null) {
-                        echo "<img src='../data/image".$displayQuestionRow['quiz_attachment']."'>";
-                    }
-                ?>
-        </div>
-            <div id="question-text">
-                <?php echo $displayQuestionRow['quiz_question_text'];?>
-            </div>
-            <div id="option">
-                <?php
-                    $fetchOption = "SELECT
-                                        qq.*,
-                                        qo.*
-                                    FROM
-                                        quiz_question qq
-                                    JOIN
-                                        quiz_option qo ON qq.quiz_question_id = qo.quiz_question_id
-                                    WHERE
-                                        qq.quiz_question_id = '$question_fetch_id'
-                                    ";
+            ?>
 
-                    $fetchOptionResult = mysqli_query($connection, $fetchOption);
+            <h3>No. <?php echo $number; $number = $number + 1; ?></h3>
 
-                    // Fetch options into an array
-                    $options = array();
-                    while ($fetchOptionRow = mysqli_fetch_assoc($fetchOptionResult)) {
-                        $options[] = array(
-                            'option_id' => $fetchOptionRow['quiz_option_id'],
-                            'option_text' => $fetchOptionRow['option_text'],
-                        );
-                    }
+            <?php
+                if($displayQuestionRow['quiz_attachment'] != null) {
+                    echo "<img class='attachment-image' src='../data/image".$displayQuestionRow['quiz_attachment']."'>";
+                }
+            ?>
 
-                    // Shuffle the options array
-                    shuffle($options);
+            <p><?php echo $displayQuestionRow['quiz_question_text']; ?></p>
 
-                    // Display shuffled radio buttons
-                    foreach ($options as $option) {
-                        ?>
-                        <input type="radio" name="question<?php echo $question_fetch_id;?>" value="<?php echo $option['option_id'];?>"> <?php echo $option['option_text'];?> <br>
-                        <?php
-                        }
-                    }  
-                ?>
-            </div>
+            <?php
+                $fetchOption = "SELECT
+                                    qq.*,
+                                    qo.*
+                                FROM
+                                    quiz_question qq
+                                JOIN
+                                    quiz_option qo ON qq.quiz_question_id = qo.quiz_question_id
+                                WHERE
+                                    qq.quiz_question_id = '$question_fetch_id'
+                                ";
+
+                $fetchOptionResult = mysqli_query($connection, $fetchOption);
+
+                // Fetch options into an array
+                $options = array();
+                while ($fetchOptionRow = mysqli_fetch_assoc($fetchOptionResult)) {
+                    $options[] = array(
+                        'option_id' => $fetchOptionRow['quiz_option_id'],
+                        'option_text' => $fetchOptionRow['option_text'],
+                    );
+                }
+
+                // Shuffle the options array
+                shuffle($options);
+
+                // Display shuffled radio buttons
+                foreach ($options as $option) {
+                    ?>
+                    <label>
+                        <input type="radio" name="question<?php echo $question_fetch_id;?>" value="<?php echo $option['option_id'];?>">
+                        <?php echo $option['option_text'];?>
+                    </label>
+                    <?php
+                }
+            ?>
+            <?php } ?>
+
             <input type="submit" value="Submit Answers" name="submit">
         </form>
+
+        <?php
+            // Check if quiz has been submitted and show success message
+            if (isset($_POST['submit'])) {
+                echo "<div class='message'>Answer Submitted Successfully</div>";
+            }
+        ?>
     </div>
 </body>
+
 </html>
 
 <?php
