@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../css/teacher-manageclassroom.css">
 </head>
 <body>
-    <h1>Manage Classroom - <?php echo $row['classroom_name']; ?></h1>
+    <h1 align="center" style="margin: 25px;">Manage Classroom - <?php echo $row['classroom_name']; ?></h1>
     <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateCode()">
         <table>
             <tr>
@@ -163,9 +163,13 @@
             </tr>
         </table>
         <div id="validation-message"></div>
-        <input type="submit" value="Update" name="submit">
+        <div class="updatebtn">
+        <input type="submit" value="Update" name="submit" class="submitbtn">
+        </div>
     </form>
-    <a href="teacher-addmember.php?id=<?php echo $row['classroom_id'];?>">Click Here to Add Member into Classroom</a>
+    <div class="linkdiv">
+        <a class="link" href="teacher-addmember.php?id=<?php echo $row['classroom_id'];?>">Click Here to Add Member into Classroom</a>
+    </div>
 </body>
 </html>
 
@@ -216,7 +220,7 @@ if (isset($_POST['submit'])) {
     mysqli_query($connection, $query);
 
     echo "<script> alert('Classroom Information Successfully Updated');</script>";
-    echo "<script> window.location.href = 'stu-teac-viewclassroom.php'; </script>";
+    echo "<script> window.location.href = 'stu-teac-index.php'; </script>";
 }
 ?>
 

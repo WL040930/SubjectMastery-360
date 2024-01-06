@@ -23,3 +23,92 @@
 .linktoclassroom:hover {
     color: black;
 }
+
+th, td{
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+th {
+    background-color: #7E6E57;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 19px;
+}
+
+td{
+    background-color: #edf1f7;
+    font-size: 17px;
+}
+
+table{
+    margin: 0 auto;
+    width: 60%;
+}
+
+input[type="text"], select {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #edf1f7;
+    border: none; /* Disable the border */
+}
+
+input[type="text"]:focus, select:focus {
+    background-color: #D0E2F5;
+}
+
+.updatebtn {
+    text-align: center;
+    margin: 25px;
+}
+
+.submitbtn {
+    height: 35px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.submitbtn:hover{
+    background-color: #BCA37F;
+}
+
+.link {
+    text-decoration: none;
+    color: #7E6E57;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.link:hover {
+    color: #7E6E57;
+}
+
+.link:visited {
+    color: #BCA37F;
+}
+
+.linkdiv {
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+    padding: 20px;
+    width: 30%; 
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.linkdiv:hover {
+    background-color: #7E6E57;
+}
