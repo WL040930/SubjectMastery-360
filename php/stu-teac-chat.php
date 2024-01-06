@@ -1,5 +1,6 @@
 1<?php
 
+    ob_start();
     include "dbconn.php";
     include "feature-usermenu.php";
     include "stu-teac-session.php";
@@ -90,13 +91,14 @@
             }
         ?>
     </div>
-    <b id="comment_title">Comment: </b>
+    <div class="comment_title_div"><b id="comment_title">Comment: </b></div>
     <?php 
         $replyQuery = "SELECT r.*, cm.*, u.*
                         FROM reply r
                         JOIN classroom_member cm ON r.classroom_member_id = cm.classroom_member_id
                         JOIN user u ON cm.user_id = u.user_id
-                        WHERE r.chatroom_messages_id = '$messages_id'";
+                        WHERE r.chatroom_messages_id = '$messages_id'
+                        ORDER BY r.reply_timestamp DESC";
         $replyresult = mysqli_query($connection, $replyQuery);
         if($replyQuery){
             if(mysqli_num_rows($replyresult) > 0){
@@ -113,14 +115,14 @@
     <?php
                 }
             } else {
-                echo "There is no reply messages in this chatroom";
+                echo "<div id='noreply'>There is no reply messages in this chatroom</div>";
             }
         } else {
             echo "Query Failed: ". mysqli_error($connection); 
         }
     ?>
     <div id="leave-reply">
-        <form action="" method="post" id="title">
+        <form action="" method="post" id="title-form">
             Leave Reply: 
             <input id="content_box" type="text" name="reply" placeholder="Leave Your Reply Here." style="width: 500px;" required>
             <input type="submit" value="Post" name="submit" id="submit_button">

@@ -35,14 +35,18 @@ h4{
 
 /*reply*/
 #comment_title{
-    margin-left: 45px;
     font-size: 20px;
+
+}
+
+.comment_title_div {
+    margin: 0 auto;
+    width: 80%;
 }
 
 #reply-box{
-    margin-top: 10px;
-    margin-left: 45px;
-    margin-bottom: 15px;
+    margin: 0 auto;
+    margin-top: 20px;
     word-spacing: 5px;
     width: 80%;
     height: auto;;
@@ -61,10 +65,9 @@ h4{
     margin: 0;
 }
 
-#title{
-    margin-top: 30px;
-    margin-left: 45px;
-    margin-bottom: 10px;
+#title-form{
+    width: 80%;
+    margin: 0 auto;
 }
 
 #content_box, #submit_button{
@@ -114,4 +117,9 @@ h4{
 
 .download-link:hover {
     background-color: #FFFFFF;
+}
+
+#noreply {
+    width: 80%; 
+    margin: 0 auto;
 }
