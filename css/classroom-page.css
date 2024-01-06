@@ -8,6 +8,12 @@ body{
     padding: 0;
 }
 
+.classroomname {
+    text-align: center;
+    font-size: 40px;
+    margin: 20px;
+}
+
 /*chatbox*/
 #chatbox {
     width: 80%;

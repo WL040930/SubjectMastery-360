@@ -47,6 +47,11 @@
 
 <body id="all">
 
+    <div class="classroomname">
+        <h1><?php echo $classroom_member_row['classroom_name']; ?></h1>
+        <?php echo $classroom_member_row['classroom_description']; ?>
+    </div>
+
     <?php
         $chatquery = "SELECT cms.*, cm.*, u.* 
                       FROM chatroom_messages cms 

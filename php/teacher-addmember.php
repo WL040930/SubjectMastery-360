@@ -1,4 +1,5 @@
 <?php
+
     include "dbconn.php";
     include "feature-usermenu.php";
     include "teacher-session.php";
@@ -147,53 +148,7 @@
 <?php
 
     } else {
-        $user_id = $_SESSION['id'];
-        $classrooms_query = "SELECT cm.classroom_id, c.classroom_name FROM classroom_member cm 
-                            JOIN classroom c ON cm.classroom_id = c.classroom_id 
-                            WHERE cm.user_id = '$user_id'";
-        $classrooms_result = mysqli_query($connection, $classrooms_query);
-
-        if ($classrooms_result && mysqli_num_rows($classrooms_result) > 0) {
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Classroom</title>
-    <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/teacher-addmember.css">
-    <!--font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <h1>Choose a Classroom to Manage</h1>
-    <?php
-        $firstIteration = true; // Flag to identify the first iteration
-        while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            // Check if it's not the first iteration to add spacing
-            if (!$firstIteration) {
-                echo '</ul>'; // Close the previous <ul>
-                echo '<ul id="newclass">'; // Open a new <ul>
-            } else {
-                echo '<ul id="oldclass">'; // Open the first <ul>
-                $firstIteration = false; // Set the flag to false after the first iteration
-            }
-            echo '<li><a id="class_content" href="teacher-addmember.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
-        }
-        echo '</ul>'; // Close the last <ul> after the loop
-    ?>
-</body>
-</html>
-
-<?php
-
-        } else {
-            echo "You are not involved in any classrooms.";
-        }
+        header("Location: stu-teac-index.php");
+        exit();
     }
-
 ?>
