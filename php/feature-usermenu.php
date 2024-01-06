@@ -80,8 +80,18 @@
             </li>
             <li>Quiz / Exam
                 <ul>
-                    <li><a href="teacher-createquiz.php">Create Quiz</a></li>
-                    <li><a href="teacher-createexam.php">Create Exam</a></li>
+                    <li>Quiz
+                        <ul>
+                            <li><a href="teacher-createquiz.php">Create Quiz</a></li>
+                            <li><a href="teacher-quizquestion.php">Add Quiz Question</a></li>
+                        </ul>
+                    </li>
+                    <li>Exam
+                        <ul>
+                            <li><a href="teacher-createexam.php">Create Exam</a></li>
+                            <li><a href="teacher-examquestion.php">Add Exam Question</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li>Results

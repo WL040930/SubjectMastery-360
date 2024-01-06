@@ -157,7 +157,7 @@ if (isset($_POST['submit'])) {
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 id="eq_h1">Choose The Exam You Would Like To Add A Question</h1>
+    <h1 id="eq_h1" align="center">Choose The Exam You Would Like To Add Questions</h1>
     <div id="eq_choices">
     <ul>
         <?php
