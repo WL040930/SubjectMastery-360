@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <link rel="stylesheet" href="../css/teacher-createexamquiz.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
