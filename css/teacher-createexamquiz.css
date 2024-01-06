@@ -73,6 +73,7 @@ li{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 h1 {
@@ -87,20 +88,30 @@ h1 {
 #name_con, #desc_con{
     margin-right: 10px;
     word-spacing: 5px;
+    float: left;
+}
+
+form {
+    width: 100%;
+    height: 100%;
 }
 
 .inp-box {
     width: 500px;
-    margin-top: 22px;
-    margin-bottom: 25px;
     word-spacing: 5px;
     font-size: 21px;
     text-align: center;
+    float: right
 }
 
-#exam_name, #exam_description{
-    font-size: 20px;
+.name-con {
+    width: 100px;
 }
+
+#exam_name {
+    height: 100px;
+}
+
 
 /* Create button */
 input[type="submit"] {
@@ -112,10 +123,36 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
-    margin-left: 280px;
+    margin: 0 auto;
 }
  
 input[type="submit"]:hover {
     background-color: #BCA37F;
+}
+
+.choose-classroom {
+    margin: 0 auto;
+    width: 30%;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    list-style: none;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+}
+
+.choose-classroom:hover {
+    background-color: #7E6E57;
+}
+
+.linktoclassroom, .linktoclassroom:visited {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+
+}
+
+.linktoclassroom:hover {
+    color: black;
 }

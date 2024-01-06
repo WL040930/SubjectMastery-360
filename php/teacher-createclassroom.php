@@ -2,7 +2,6 @@
 
     include "dbconn.php";
     include "feature-usermenu.php";
-    session_start(); 
 
 ?>
 
@@ -18,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body id="classroom_body">
     <h1>Create Classroom</h1>
     <div id="container">
         <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateCode()">

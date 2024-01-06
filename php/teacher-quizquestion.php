@@ -26,10 +26,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
+    <link rel="stylesheet" href="../css/teacher-quizquestion.css">
 </head>
 <body>
     
-    <h1>Add Question - <?php echo $row['quiz_title'];?></h1>
+    <h1 align="center">Add Question - <?php echo $row['quiz_title'];?></h1>
+    <div class="container-all">
     <form action="" method="post" onsubmit="return validate_mark()" enctype="multipart/form-data">
 
         <input type="text" name="question" id="question" placeholder="Enter the Question" required> <br>
@@ -42,8 +44,19 @@
         <div id="validation-message"></div>
         <input type="submit" value="Add Question" name="submit">
         <input type="button" value="Clear" onclick="clearForm()">
-
     </form>
+    <button type="button" id="exit" onclick="exit()" class="exit-btn">Exit</button>
+    </div>
+        
+
+
+    <script>
+        function exit() {
+            if (confirm('Do you want to leave the page? ONCE YOU LEAVE, YOU WILL NOT BE ABLE TO ADD QUESTION AGAIN.')) {
+                window.location.href = 'stu-teac-index.php';
+            }
+        }
+    </script>
 
     <script src="../script/clear-form-quiz.js"></script>
     <script src="../script/validation-mark.js"></script>
@@ -147,15 +160,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Quiz</title>
+    <link rel="stylesheet" href="../css/teacher-quizquestion.css">
 </head>
 <body>
-    <h1>Choose the Quiz you would like to add a question</h1>
-
+    <h1 align="center">Choose the Quiz you would like to add a question</h1>
+    <ul>
     <?php
         while ($fetch_row = mysqli_fetch_assoc($fetch_result)) {
-            echo "<a href='teacher-quizquestion.php?id=".$fetch_row['quiz_id']."'>".$fetch_row['quiz_title']."</a><br>";
+            echo "<a class='linktoclassroom' href='teacher-quizquestion.php?id=".$fetch_row['quiz_id']."'><li class='choose-classroom'>".$fetch_row['quiz_title']."</li></a>";
         }
     ?>
+    </ul>
 </body>
 </html>
 

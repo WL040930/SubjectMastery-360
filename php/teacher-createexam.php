@@ -27,7 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Exam</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <link rel="stylesheet" href="../css/teacher-createexamquiz.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,12 +37,16 @@
     <h1>Create Exam</h1>
     <div id="container">
         <form action="" method="post">
-            <div id="exam_name"><b id="name_con">Exam Name: </b>
+            <div id="exam_name">
+                <div class="name-con"><b>Exam Name: </b></div>
                 <input class="inp-box" type="text" name="exam_name" placeholder="exam name" required> <br>
             </div>
-            <div id="exam_description"><b id="desc_con">Exam Description: </b>
-            <input class="inp-box" id="description" type="text" name="exam_description" placeholder="exam description"> <br>
+            <div style="clear: both"></div>
+            <div id="exam_description">
+                <b id="desc_con">Exam Description: </b>
+                <input class="inp-box" id="description" type="text" name="exam_description" placeholder="exam description"> <br>
             </div>
+            <div style="clear: both"></div>
             <input type="submit" value="Create" name="submit">
         </form>
     </div>
@@ -72,17 +76,6 @@
 
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
 <?php
     // outside the classroom page
     } else {
@@ -102,29 +95,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Classroom</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <link rel="stylesheet" href="../css/teacher-createexamquiz.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Please select the classroom you would like to manage: </h1>
+    <div style="padding: 10px;"><h1>Please select the classroom you would like to create exam: </h1></div>
     <ul>
         <?php
-        $firstIteration = true; // Flag to identify the first iteration
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            // Check if it's not the first iteration to add spacing
-            if (!$firstIteration) {
-                echo '</ul>'; // Close the previous <ul>
-                echo '<ul id="fir_exam">'; // Open a new <ul>
-            } else {
-                echo '<ul id="sec_exam">'; // Open the first <ul>
-                $firstIteration = false; // Set the flag to false after the first iteration
-            }
-            echo '<li><a id="title" href="teacher-createexam.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            echo '<a class="linktoclassroom" href="teacher-createexam.php?id=' . $classroom_row['classroom_id'] . '"><li class="choose-classroom">' . $classroom_row['classroom_name'] . '</li></a>';
         }
-        echo '</ul>'; // Close the last <ul> after the loop
+
         ?>
     </ul>
 </body>

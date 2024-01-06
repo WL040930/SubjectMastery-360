@@ -26,19 +26,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
+    <link rel="stylesheet" href="../css/teacher-examquestion.css">
 </head>
 <body>
     
-    <h1>Add Question - <?php echo $row['exam_title'];?></h1>
+    <div class="container-add">
+    <h1 style="font-size: 36px; text-decoration: underline; padding: 10px">Add Question - <?php echo $row['exam_title'];?></h1>
     <form action="" method="post" enctype="multipart/form-data" onsubmit ="return validate_mark()">
+        <div class="question">
+        <label for="question">Question: </label> <br>
         <input type="text" name="question" id="question" placeholder="Enter Question" required> <br>
+        </div>
+        <div class="mark">
+        <label for="mark">Mark: </label> <br>
         <input type="text" name="mark" placeholder="mark" id="mark" required> <br>
+        </div>
+        <div class="image">
         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"> <br>
+        </div>
         <div id="validation-message"></div> <br>
-        <input type="submit" value="Confirm Add" name="submit">
-        <input type="button" value="Clear" onclick="clearForm()">
+        <div class="join">
+        <input type="submit" value="Confirm Add" name="submit" class="submit-btn">
+        <input type="button" value="Clear" onclick="clearForm()" class="clear-btn">
+        </div>
     </form>
-    <button type="button" id="exit" onclick="exit()">Exit</button>
+    <div class="exit-btn">
+    <button type="button" id="exit" onclick="exit()" class="exit-btn2">Exit</button>
+    </div>
+    <div style="clear: both"></div>
+    </div>
     <script>
         function exit() {
             if (confirm('Do you want to leave the page? ONCE YOU LEAVE, YOU WILL NOT BE ABLE TO ADD QUESTION AGAIN.')) {

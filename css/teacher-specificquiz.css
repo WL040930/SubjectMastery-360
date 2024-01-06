@@ -128,7 +128,8 @@ canvas {
     border-radius: 50%;
     text-align: center;
     line-height: 30px;
-    float: left; 
+    float: left;
+    margin: 10px; 
 }
 
 #quesques {
@@ -136,6 +137,8 @@ canvas {
     width: 85%; 
     margin-bottom: 2px;
     padding-bottom: 2px;
+    margin: 10px;
+    margin-top: 20px;
 }
 
 #quesans {
@@ -145,16 +148,20 @@ canvas {
     padding-left: 10px; 
     border-radius: 35px; 
     width: auto; 
+    margin: 10px;
 }
 
 #correct{
     font-size: 18px;
     color: #5e9656;
+    padding: 5px;
 }
 
 #incorrect{
     font-size: 18px;
     color: red;
+    padding: 5px;
+    padding-left: 10px;
 }
 
 #answer, #correct, #incorrect{
@@ -164,6 +171,7 @@ canvas {
 #final_ans{
     font-size: 18px;
     margin-right: 5px;
+    padding: 10px;
 }
 
 #final_title, #final_ans{
