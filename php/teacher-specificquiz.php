@@ -1,4 +1,5 @@
 <?php
+
     include "dbconn.php";
     include "feature-usermenu.php";
     include "teacher-session.php";
@@ -12,6 +13,7 @@
                     JOIN quiz q ON cq.quiz_id = q.quiz_id
                     WHERE user_id = '$id'";
     $fetchResult = mysqli_query($connection, $fetchQuery);
+    
 ?>
 
 <!DOCTYPE html>
