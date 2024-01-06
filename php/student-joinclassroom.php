@@ -83,8 +83,12 @@
 <body>
 
 <div class="container">
-    <h1>Join Classroom</h1>
-    <p>Enter the 7-digit code to join the classroom:</p>
+    <div class="header">
+        <h1>Join Classroom</h1>
+    </div>
+    <div class="codedes">
+        <p>Enter the 7-digit code to join the classroom:</p>
+    </div>
 
     <form action="" method="post" onsubmit="return validateForm()">
         <div class="code-input" id="codeInput">

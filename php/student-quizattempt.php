@@ -43,7 +43,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Attempt</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/student-quizattempt.css">
+    <link rel="stylesheet" href="../css/student-quizexamattempt.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,7 +139,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Quiz</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/student-quizattempt.css">
+    <link rel="stylesheet" href="../css/student-quizexamattempt.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
