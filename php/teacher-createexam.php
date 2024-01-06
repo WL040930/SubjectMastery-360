@@ -131,7 +131,8 @@
 </html>
 
 <?php
-
+        } else {
+            echo "You are not involved in any of the classroom. ";
         }
     }
 

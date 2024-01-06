@@ -12,10 +12,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
+<style>
+    * {
+        padding:0; 
+        margin: 0; 
+    }
 
+    #menu {
+        text-align: center;
+        background-color: #7E6E57;
+    }
+
+    #menu ul {
+        display: inline-flex; 
+        list-style: none;
+        color: white;
+    }
+
+    #menu ul li {
+        position: relative; /* Added this line for proper positioning of submenus */
+        width: 200px;
+        margin: 15px;
+        padding: 15px;
+    }
+
+    #menu ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        font-family: 'Exo 2', sans-serif;
+    }
+
+    .active, #menu ul li:hover {
+        background-color: #C4BBAF;
+        border-radius: 10px;
+    }
+
+    #menu ul li ul {
+        display: none;
+        position: absolute;
+        background-color: #7E6E57;
+        border-radius: 10px;
+        left: 0; /* Added this line to align submenus to the left */
+        top: 100%; /* Added this line to position submenus below parent items */
+    }
+
+    #menu ul li:hover ul {
+        display: block;
+    }
+
+    #menu ul li ul li {
+        width: 150px;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    #menu ul li ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+        font-family: 'Exo 2', sans-serif;
+    }
+
+    #menu ul li:hover ul li ul {
+        display: none;
+        position: absolute;
+        background-color: #7E6E57;
+        border-radius: 10px;
+        left: 100%; /* Added this line to align submenus to the left */
+        top: 0; /* Added this line to position submenus below parent items */
+    }
+
+    #menu ul li:hover ul li:hover ul {
+        display: block;
+    }
+
+</style>
 
 <body id="all">
-
+ 
     <div id="header">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
@@ -26,7 +101,7 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    
+   
     <div id="menu">
         <ul>
             <li>Classroom
