@@ -19,6 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
+
+
 <body>
 
     <div id="header">
@@ -83,7 +85,10 @@
             </li>
             <li> Report
                 <ul>
-                    <li><a href="#">View Quiz Report</a></li>
+                    <li>View Quiz Report
+                        <li><a href="">Overall</a></li>
+                        <li><a href="">Specific Student</a></li>
+                    </li>
                     <li><a href="#">View Exam Report</a></li>
                 </ul>
             </li>
