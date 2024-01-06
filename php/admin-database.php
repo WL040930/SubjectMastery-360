@@ -1,4 +1,4 @@
-<?php
+8<?php
     // Include necessary files
     include "dbconn.php"; 
     include "admin-menu.php";

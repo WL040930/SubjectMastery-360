@@ -79,7 +79,7 @@ li a:hover {
 /*idk what is this*/
 /* Style for the active link */
 li a.active {
-    background-color: #4CAF50;
+    background-color: #7E6E57;
 }
 
 /*total user table*/
@@ -102,7 +102,7 @@ li a.active {
     }
 
     #th1 {
-        background-color: #5d6471;
+        background-color: #7E6E57;
         color: white;
         font-size: 40px;
         width: 16%;

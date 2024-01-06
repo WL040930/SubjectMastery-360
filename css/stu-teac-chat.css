@@ -77,6 +77,21 @@ h4{
 
 #submit_button{
     width: 80px;
+    height: 35px;
+    padding: 10px 20px;
+    font-size: 17px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto;
+    margin-left: 10px;
+}
+
+#submit_button:hover{
+    background-color: #BCA37F;
 }
 
 /*not sure what is this*/

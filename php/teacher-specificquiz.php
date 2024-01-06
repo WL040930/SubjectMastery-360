@@ -1,4 +1,4 @@
-x <?php
+<?php
     include "dbconn.php";
     include "teacher-session.php";
 

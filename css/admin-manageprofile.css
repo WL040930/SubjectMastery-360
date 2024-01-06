@@ -44,13 +44,23 @@ td{
 }
 
 #submit_button, #back_button {
-    border: 1px solid black;
     margin: 10px auto;
     width: 100px;
-    height: 30px;
     text-align: center;
     align-items: center;
     display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit_button:hover, #back_button:hover{
+    background-color: #BCA37F;
 }
 
 /*error msg*/

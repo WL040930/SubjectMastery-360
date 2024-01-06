@@ -28,11 +28,19 @@ body{
 }
 
 #search_button{
-    font-size: 17px;
-    margin-top: 10px;
-    padding: 3px;
-    cursor: pointer;    
-    border: 1px solid black;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto;
+}
+
+#search_button:hover{
+    background-color: #BCA37F;
 }
 
 /*result*/

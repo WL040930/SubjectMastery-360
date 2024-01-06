@@ -96,7 +96,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             <td><?php echo $quiz_title_row['exam_feedback_content']; ?></td>
         </tr>
     </table>
-
+    
     <?php
     
         $fetchExamQuery = "SELECT eua.*, eq.* FROM exam_user_answer eua 
@@ -107,12 +107,13 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         while ($row = mysqli_fetch_assoc($fetchExamResult)) {
     
     ?>
-
         <div id="answer-box">
-            <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
-            <p>Question: <?php echo $row['exam_question']; ?> </p>
-            <p>Mark Score: <?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
-            <p>User Answer: <?php echo $row['exam_user_answer']; ?></p>
+            <div id="numbering">
+                <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
+            </div>
+            <p id="question"><b>Question: </b><?php echo $row['exam_question']; ?> </p>
+            <p id="marks"><b>Mark Score: </b><?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
+            <p id="answer"><b>User Answer: </b><?php echo $row['exam_user_answer']; ?></p>
         </div>    
 
     <?php

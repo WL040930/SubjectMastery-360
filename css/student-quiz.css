@@ -25,14 +25,17 @@ body {
 
 /*submit button*/
 input[type="submit"] {
-    margin-top: 15px;
-    font-size: 16px;
-    padding: 5px;
-    cursor: pointer;    
-    border: 1px solid black;
-}
-
-input[type="submit"]:hover {
-    background-color: #5d6471;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto;
+}
+ 
+input[type="submit"]:hover {
+    background-color: #BCA37F;
 }

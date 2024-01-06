@@ -18,11 +18,18 @@
 <style>
     #edit_button{
         padding: 10px;
-        margin: 10px;
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-bottom: 10px;
-        font-size: 15px;
+        font-size: 18px;
+        background-color: #7E6E57;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 20px auto;
+    }
+
+    #edit_button:hover{
+        background-color: #BCA37F;
     }
 </style>
 <body>
