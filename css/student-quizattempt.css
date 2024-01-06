@@ -1,28 +1,59 @@
-/*choose quiz page*/
-body {
-    font-family: 'Exo 2', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #FFF2D8;
-}
-
-#description {
-    margin-left: 20px;
-    margin-top: 25px;
-    color: black;
-    font-size: 23px;
-    text-decoration: underline;
-}
-
-#important {
-    margin-left: 20px;
+.choose-classroom {
+    margin: 0 auto;
+    width: 30%;
+    padding: 20px;
     margin-top: 20px;
-    color: #ff0000;
+    text-align: center;
+    list-style: none;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+}
+
+.choose-classroom:hover {
+    background-color: #7E6E57;
+}
+
+.linktoclassroom, .linktoclassroom:visited {
+    text-decoration: none;
+    color: black;
     font-size: 20px;
 }
 
-form {
+.linktoclassroom:hover {
+    color: black;
+}
+
+.container {
+    margin: 0 auto;
+    width: 70%; 
+    text-align: center;
     margin-top: 20px;
+    margin-bottom: 100px;
+    border: 3px solid black;
+    box-shadow: 0px 0px 10px 0px #000000;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+    padding: 20px;
+}
+
+.header {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#description {
+    font-size: 20px;
+    margin-bottom: 20px;
+
+}
+
+#important {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: red;
 }
 
 input[type="submit"] {
@@ -34,68 +65,9 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-left: 20px;
+    margin: 20px auto;
 }
  
 input[type="submit"]:hover {
     background-color: #BCA37F;
-}
-
-/* Choose Exam page */
-
-h1 {
-    letter-spacing: 3px;
-    word-spacing: 2px;
-    margin-top: 50px;
-    margin-bottom: 25px;
-    text-align: center;
-    color: #333;
-}
-
-ul{
-    margin-left: 255px;
-}
-
-#oldquiz{
-    background-color: #EAD7BB;
-    width: 250px;
-    height: 55px;
-    text-align: center;
-    border-radius: 5px;
-    border: 2px solid black;
-}
-
-#oldquiz:hover{
-    background-color: #7E6E57;
-    border-spacing: 20px;
-}
-
-#newquiz{
-    background-color: #EAD7BB;
-    width: 250px;
-    height: 55px;
-    text-align: center;
-    border-radius: 5px;
-    border: 2px solid black;
-    margin-top: 10px;
-}
-
-#newquiz:hover{
-    background-color: #7E6E57;
-}
-
-#title{
-    color: black;
-    text-decoration: none;
-    font-size: 20px;
-    margin-bottom: 15px;
-    text-align: center;
-    align-items: center;
-}
-
-li{
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-right: 50px;
-
 }
