@@ -1,4 +1,4 @@
-8<?php
+<?php
     // Include necessary files
     include "dbconn.php"; 
     include "admin-menu.php";
@@ -120,3 +120,10 @@
     <script src="../script/admin-database.js"></script>
 </body>
 </html>
+
+<?php
+
+    // Close database connection
+    mysqli_close($connection);
+
+?>
