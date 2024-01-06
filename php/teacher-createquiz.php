@@ -25,13 +25,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form action="" method="post">
-        <input type="text" name="quiz_name" placeholder="Quiz Name" required> <br>
-        <input type="text" name="quiz_description" placeholder="Quiz Description"> <br>
-        <input type="submit" value="Create" name="submit">
-    </form>
+    <h1>Create Quiz</h1>
+    <div id="container">
+        <form action="" method="post">
+            <input type="text" name="quiz_name" placeholder="Quiz Name" required> <br>
+            <input type="text" name="quiz_description" placeholder="Quiz Description"> <br>
+            <input type="submit" value="Create" name="submit">
+        </form>
+    </div>
 </body>
 </html>
 
@@ -76,21 +85,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Classroom</title>
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/teacher-createexam.css">
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Please select the classroom you would like to manage: </h1>
     <ul>
         <?php
+        $firstIteration = true; // Flag to identify the first iteration
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="teacher-createquiz.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            // Check if it's not the first iteration to add spacing
+            if (!$firstIteration) {
+                echo '</ul>'; // Close the previous <ul>
+                echo '<ul id="fir_exam">'; // Open a new <ul>
+            } else {
+                echo '<ul id="sec_exam">'; // Open the first <ul>
+                $firstIteration = false; // Set the flag to false after the first iteration
+            }
+            echo '<li><a id="title" href="teacher-createquiz.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
         }
+        echo '</ul>'; // Close the last <ul> after the loop
         ?>
     </ul>
 </body>
 </html>
 
 <?php
-
         } else {
             echo "You are not involved in any of the classroom. ";
         }
