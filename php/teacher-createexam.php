@@ -47,7 +47,9 @@
                 <input class="inp-box" id="description" type="text" name="exam_description" placeholder="exam description"> <br>
             </div>
             <div style="clear: both"></div>
-            <input type="submit" value="Create" name="submit">
+            <div id="classroomsubmit_button">
+                <input type="submit" value="Create" name="submit">
+            </div>
         </form>
     </div>
 </body>

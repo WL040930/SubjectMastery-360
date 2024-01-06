@@ -63,7 +63,7 @@ li{
 /*create exam details*/
 #container {
     width: 75%;
-    height: 300px;
+    height: 200px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 8px;
@@ -73,7 +73,6 @@ li{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 100px;
 }
 
 h1 {
@@ -85,35 +84,45 @@ h1 {
     font-size: 38px;
 }
 
-#name_con, #desc_con{
-    margin-right: 10px;
-    word-spacing: 5px;
-    float: left;
-}
-
 form {
     width: 100%;
     height: 100%;
 }
 
+#exam_name{
+    width: 50%;
+    height: 70px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.name-con, #desc_con{
+    font-size: 20px;
+    text-align: center;
+    float: left;
+    margin-right: 20px;
+    text-align: center;
+}
+
+#exam_description{
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+}
+
 .inp-box {
-    width: 500px;
+    text-align: center;
     word-spacing: 5px;
     font-size: 21px;
-    text-align: center;
-    float: right
+    width: 55%;
 }
-
-.name-con {
-    width: 100px;
-}
-
-#exam_name {
-    height: 100px;
-}
-
 
 /* Create button */
+#classroomsubmit_button{
+    margin: 20px auto;
+    text-align: center;
+}
+
 input[type="submit"] {
     padding: 10px 20px;
     font-size: 18px;
@@ -123,7 +132,6 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 0 auto;
 }
  
 input[type="submit"]:hover {
