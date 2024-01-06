@@ -104,9 +104,10 @@
 </head>
 <body>
 
-    <h1>Add/Remove Member - <?php echo $fetchrow['classroom_name']; ?></h1>
-
-    <h3>Total Member: <?php echo $rowcount; ?></h3>
+    <div class="headeradd">
+        <h1>Add/Remove Member - <?php echo $fetchrow['classroom_name']; ?></h1>
+        <h3>Total Member: <?php echo $rowcount; ?></h3>
+    </div>
 
     <table>
         <tr>
@@ -125,7 +126,7 @@
                 <td><?php echo $row['username']; ?></td>
                 <td><?php echo $row['email_address']; ?></td>
                 <td>
-                    <a href="teacher-addmember.php?id=<?php echo $id; ?>&remove_member=<?php echo $row['user_id']; ?>">Remove</a>
+                    <a href="teacher-addmember.php?id=<?php echo $id; ?>&remove_member=<?php echo $row['user_id']; ?>"><img src="../image/delete.png" alt="Remove" id="delete"></a>
                 </td>
             </tr>
         <?php
@@ -135,8 +136,8 @@
         <tr>
             <td colspan="4">
                 <form method="post" action="">
-                    <label id="email_title" for="email">Email:</label>
-                    <input id="email_con" type="email" name="email" required>
+                    <label id="email_title" for="email"><b>Email:</b></label> <br>
+                    <input id="email_con" type="email" name="email" placeholder="Enter the Email Here. " required> <br>
                     <button id="add_button" type="submit" name="manage_member">Add Member</button>
                 </form>
             </td>
