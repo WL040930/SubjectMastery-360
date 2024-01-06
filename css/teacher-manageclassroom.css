@@ -1,0 +1,25 @@
+.choose-classroom {
+    margin: 0 auto;
+    width: 30%;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    list-style: none;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: #EAD7BB;
+}
+
+.choose-classroom:hover {
+    background-color: #7E6E57;
+}
+
+.linktoclassroom, .linktoclassroom:visited {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.linktoclassroom:hover {
+    color: black;
+}

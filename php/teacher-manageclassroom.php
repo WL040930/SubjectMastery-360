@@ -22,6 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Classroom</title>
+    <link rel="stylesheet" href="../css/teacher-manageclassroom.css">
 </head>
 <body>
     <h1>Manage Classroom - <?php echo $row['classroom_name']; ?></h1>
@@ -239,13 +240,14 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Classroom</title>
+    <link rel="stylesheet" href="../css/teacher-manageclassroom.css">
 </head>
 <body>
-    <h1>Choose a Classroom to Manage</h1>
+    <h1 align="center">Choose the Classroom to You Want to Manage:</h1>
     <ul>
         <?php
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<li><a href="teacher-manageclassroom.php?id=' . $classroom_row['classroom_id'] . '">' . $classroom_row['classroom_name'] . '</a></li>';
+            echo '<a class="linktoclassroom" href="teacher-manageclassroom.php?id=' . $classroom_row['classroom_id'] . '"><li class="choose-classroom">' . $classroom_row['classroom_name'] . '</li></a>';
         }
         ?>
     </ul>

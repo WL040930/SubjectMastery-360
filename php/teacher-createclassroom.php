@@ -152,7 +152,9 @@
             </div><br>
             
             <div id="validation-message"></div>
+            <div class="submitbtn">
             <input type="submit" value="Create" name="submit">
+            </div>
         </form>
     </div>
     <script src="../script/teacher-codevalidation.js"></script>

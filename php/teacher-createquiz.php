@@ -27,20 +27,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <link rel="icon" href="../image/icon.png">
-    <link rel="stylesheet" href="../css/teacher-createexamquiz.css">
+    <link rel="stylesheet" href="../css/teacher-createquiz.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Create Quiz</h1>
-    <div id="container">
-        <form action="" method="post">
-            <input type="text" name="quiz_name" placeholder="Quiz Name" required> <br>
-            <input type="text" name="quiz_description" placeholder="Quiz Description"> <br>
-            <input type="submit" value="Create" name="submit">
-        </form>
+    <div class="container-all">
+        <h1>Create Quiz</h1>
+        <div id="container">
+            <form action="" method="post">
+                <h2>Quiz Name: </h2>
+                <input type="text" name="quiz_name" placeholder="Quiz Name" required> <br>
+                <h2>Quiz Description: </h2>
+                <input type="text" name="quiz_description" placeholder="Quiz Description"> <br>
+                <input type="submit" value="Create" name="submit">
+            </form>
+        </div>
     </div>
 </body>
 </html>
@@ -94,7 +98,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div style="padding: 10px;"><h1>Please Select the Classroom You would Like to Create Quiz: </h1></div>
+    <div style="padding: 10px;"><h1 align="center">Please Select the Classroom You would Like to Create Quiz: </h1></div>
     <ul>
         <?php
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {

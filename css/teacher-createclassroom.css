@@ -15,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 h1 {
@@ -43,10 +44,54 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
-    margin-left: 150px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+textarea {
+    font-size: 24px;
 }
  
 input[type="submit"]:hover {
     background-color: #BCA37F;
+}
+
+/* Choose file */
+input[type="file"] {
+    /* Same styles as above */
+    padding: 10px 20px;
+    font-size: 24px;
+}
+
+select {
+    font-size: 24px; /* Increase the font size of the select element */
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #FCE5CD;
+    color: #7E6E57;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 5px 0px #000000;
+    transition: background-color 0.3s ease;
+}
+
+option {
+    font-size: 24px; /* Increase the font size of the option elements */
+    background-color: #FCE5CD;
+    color: #7E6E57;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+
+option:hover {
+    background-color: #BCA37F;
+    color: white;
+}
+    
+.submitbtn {
+    text-align: center;
 }
