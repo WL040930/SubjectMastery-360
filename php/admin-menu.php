@@ -37,10 +37,10 @@
     
     <div id="all">
         <!-- Navigation menu for admin functionalities -->
-        <div id="menubar">
+        <div id="menu">
             <ul> 
                 <!-- Menu items with hyperlinks to various admin pages -->
-                <li><a href="admin-manageuser.php" disable>Manage User</a></li>
+                <li><a href="admin-manageuser.php">Manage User</a></li>
                 <li><a href="admin-database.php">Database</a></li>
                 <li><a href="admin-viewfeedback.php">Feedback</a></li>
                 <li><a href="feature-logout.php">Logout</a></li>

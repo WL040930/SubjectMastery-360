@@ -1,6 +1,7 @@
 <?php
 
     include "dbconn.php";
+    include "feature-usermenu.php";
     include "teacher-session.php"; 
 
     if(isset($_GET['id'])){ 

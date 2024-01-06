@@ -1,27 +1,28 @@
 <?php
-include "dbconn.php";
+    include "dbconn.php";
+    include "feature-usermenu.php";
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
-if (!isset($_SESSION['id'])) {
-    header("Location: stu-teac-index.php");
-    exit();
-} else {
-    $user_id = $_SESSION['id'];
-}
+    if (!isset($_SESSION['id'])) {
+        header("Location: stu-teac-index.php");
+        exit();
+    } else {
+        $user_id = $_SESSION['id'];
+    }
 
-$url_id = $_GET['id'];
-if ($user_id != $url_id) {
-    header("Location: stu-teac-index.php");
-    exit();
-}
+    $url_id = $_GET['id'];
+    if ($user_id != $url_id) {
+        header("Location: stu-teac-index.php");
+        exit();
+    }
 
-$sql = "SELECT * FROM user WHERE user_id = '$user_id'";
-$result = mysqli_query($connection, $sql);
-if (mysqli_num_rows($result) == 1) {
-    $row = mysqli_fetch_assoc($result);
+    $sql = "SELECT * FROM user WHERE user_id = '$user_id'";
+    $result = mysqli_query($connection, $sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>

@@ -49,41 +49,38 @@ body {
     color: black;
 } 
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #7E6E57;
-    overflow: hidden;
-    width: 100%;
-}
-
-li {
-    float: left;
-    width: 25%;
-}
-
-li a {
-    display: block;
-    color: white;
+#menu {
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-li a:hover {
-    background-color: #BCA37F;
-}
-
-/*idk what is this*/
-/* Style for the active link */
-li a.active {
     background-color: #7E6E57;
 }
 
-/*total user table*/
-/*total user table*/
+#menu ul {
+    display: inline-flex; 
+    list-style: none;
+    color: white;
+    margin: 0;
+}
+
+#menu ul li {
+    position: relative; /* Added this line for proper positioning of submenus */
+    width: 200px;
+    margin: 15px;
+    padding: 15px;
+    font-size: 20px;
+}
+
+#menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Exo 2', sans-serif;
+}
+
+#menu ul li:hover {
+    background-color: #C4BBAF;
+    border-radius: 10px;
+}
+
 
     #table1 {
         margin-left: 130px;

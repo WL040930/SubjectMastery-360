@@ -1,5 +1,7 @@
 <?php
+
     include "dbconn.php";
+    include "feature-usermenu.php";
     include "stu-teac-session.php";
 
     if (!isset($_GET['id'])) {

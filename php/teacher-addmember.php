@@ -1,5 +1,6 @@
 <?php
     include "dbconn.php";
+    include "feature-usermenu.php";
     include "teacher-session.php";
 
     $user_id_session = $_SESSION['id'];

@@ -1,5 +1,6 @@
 <?php
     include "dbconn.php";
+    include "feature-usermenu.php";
     include "teacher-session.php";
     
     // Check if classroom_id is provided in the URL
