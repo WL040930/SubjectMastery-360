@@ -159,11 +159,13 @@ if (isset($_POST['submit'])) {
 <body>
     <h1 id="eq_h1">Choose The Exam You Would Like To Add A Question</h1>
     <div id="eq_choices">
+    <ul>
         <?php
             while ($fetch_row = mysqli_fetch_assoc($fetch_result)) {
-                echo "<a href='teacher-examquestion.php?id=".$fetch_row['exam_id']."'>".$fetch_row['exam_title']."</a><br>";
+                echo "<a href='teacher-examquestion.php?id=".$fetch_row['exam_id']."'><li class='choose-classroom'>".$fetch_row['exam_title']."</li></a>";
             }
         ?>
+    </ul>
     </div>
 </body>
 </html>
