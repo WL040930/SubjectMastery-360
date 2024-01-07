@@ -78,38 +78,44 @@
 </html>
 
 <?php
+if(isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $institute_name = $_POST['institute_name'];
 
-    if(isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $institute_name = $_POST['institute_name'];
-        $query = "INSERT INTO `user`(`username`, `user_first_name`, `user_last_name`, `email_address`, `password`, `institute_name`) VALUES ('$username','$first_name','$last_name','$email','$password','$institute_name')";
-        if(mysqli_query($connection, $query)){
-            $new_id = mysqli_insert_id($connection);
-            $fetch = " SELECT user.*
-                        FROM user
-                        WHERE user.user_id = '$new_id'"; 
-            $result = mysqli_query($connection, $fetch); 
-            $row = mysqli_fetch_assoc($result);  
-            $_SESSION['id'] = $row['user_id'];
-            echo "<script>alert('Registration Successful!')</script>";
-            echo "<script>
-                var wantToAddPicture = confirm('Do you want to add a profile picture after registration?');
-
-                if (wantToAddPicture) {
-                    window.location.href='feature-profilepicture.php';
-                } else {
-                    window.location.href='feature-login.php';
-                }
-                </script>";
-            exit();
-        } else {
-            echo "<script>alert('Registration Failed!')</script>";
-        }
+    // Check if email already exists in the database
+    $check_query = "SELECT * FROM `user` WHERE `email_address` = '$email'";
+    $check_result = mysqli_query($connection, $check_query);
+    if(mysqli_num_rows($check_result) > 0) {
+        // Email already exists, return false or show an error message
+        echo "<script>alert('Email already exists! Please choose a different email.')</script>";
+        return false;
     }
-    
+
+    // Proceed with registration if email is unique
+    $query = "INSERT INTO `user`(`username`, `user_first_name`, `user_last_name`, `email_address`, `password`, `institute_name`) VALUES ('$username','$first_name','$last_name','$email','$password','$institute_name')";
+    if(mysqli_query($connection, $query)){
+        $new_id = mysqli_insert_id($connection);
+        $fetch = " SELECT user.*
+                    FROM user
+                    WHERE user.user_id = '$new_id'"; 
+        $result = mysqli_query($connection, $fetch); 
+        $row = mysqli_fetch_assoc($result);  
+        $_SESSION['id'] = $row['user_id'];
+        echo "<script>alert('Registration Successful!')</script>";
+        echo "<script>
+            var wantToAddPicture = confirm('Do you want to add a profile picture after registration?');
+
+            if (wantToAddPicture) {
+                window.location.href='feature-profilepicture.php';
+            } else {
+                window.location.href='feature-login.php';
+            }
+        </script>";
+    }
+}
 
 ?> 
