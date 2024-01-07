@@ -136,6 +136,12 @@ footer {
     color: black;
 }
 
+#footer_con{
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+}
+
 /*copyright*/
 #copyright{
     font-size: 15px;
