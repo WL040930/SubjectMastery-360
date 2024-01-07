@@ -1,5 +1,5 @@
 <?php
-
+    ob_start(); 
     include "dbconn.php";
 
     if (session_status() == PHP_SESSION_NONE) {
@@ -12,7 +12,6 @@
     } else {
         $user_id = $_SESSION['id'];
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +28,11 @@
             background-color: #edf1f7;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FFF2D8;
         }
 
         #container {
@@ -49,7 +53,7 @@
         .box {
             display: inline-block;
             width: 200px;
-            height: 200px;
+            height: 230px;
             border: 2px solid #BCA37F;
             margin: 10px;
             padding: 10px;
@@ -86,6 +90,7 @@
             display: none;
             color: #BCA37F;
             font-size: 14px;
+            text-align: left;
         }
 
         .box.enlarged .specification {
@@ -111,6 +116,12 @@
         input[type="submit"]:hover {
             background-color: #BCA37F;
         }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
     </style>
 </head>
 
@@ -125,7 +136,15 @@
                 <img src="../image/student.png" alt="Student">
                 <h3>Student</h3>
                 <div class="specification">
-                    <p>Student specification goes here...</p>
+                    <p>
+                        <ul>
+                            <li>Join Classroom</li>
+                            <li>Download Study Materials</li>
+                            <li>Attempt Quiz and Exam</li>
+                            <li>Read Own Results</li>
+                            <li>Read Feedback from Teacher</li>
+                        </ul>
+                    </p>
                 </div>
                 <input type="radio" name="role" value="student" checked>
             </div>
@@ -134,7 +153,15 @@
                 <img src="../image/teacher.png" alt="Teacher">
                 <h3>Teacher</h3>
                 <div class="specification">
-                    <p>Teacher specification goes here...</p>
+                    <p>
+                        <ul>
+                            <li>Create Classroom</li>
+                            <li>Share Class Materials</li>
+                            <li>Create Quiz and Exam</li>
+                            <li>Read students' Results</li>
+                            <li>Provide Feedback</li>
+                        </ul>
+                    </p>
                 </div>
                 <input type="radio" name="role" value="teacher">
             </div>
@@ -165,7 +192,6 @@
 </html>
 
 <?php
-
     if(isset($_POST['btnNext'])) {
         $selectedRole = $_POST['role']; 
         
@@ -191,5 +217,5 @@
             echo "<script> window.location.href='feature-logout.php'; </script>";
         }
     }
-
+    ob_end_flush(); 
 ?>
