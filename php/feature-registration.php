@@ -88,28 +88,24 @@
         $institute_name = $_POST['institute_name'];
         $query = "INSERT INTO `user`(`username`, `user_first_name`, `user_last_name`, `email_address`, `password`, `institute_name`) VALUES ('$username','$first_name','$last_name','$email','$password','$institute_name')";
         if(mysqli_query($connection, $query)){
-            $fetch = " SELECT user.*, role.*
+            $new_id = mysqli_insert_id($connection);
+            $fetch = " SELECT user.*
                         FROM user
-                        INNER JOIN
-                        role ON user.role_id = role.role_id
-                        WHERE email_address = '$email' AND password='$password'"; 
+                        WHERE user.user_id = '$new_id'"; 
             $result = mysqli_query($connection, $fetch); 
             $row = mysqli_fetch_assoc($result);  
             $_SESSION['id'] = $row['user_id'];
-            $_SESSION['username'] = $row['username']; 
-            $_SESSION['email'] = $row['email_address'];
-            $_SESSION['role'] = $row['role']; 
             echo "<script>alert('Registration Successful!')</script>";
             echo "<script>
-                    var wantToAddPicture = confirm('Do you want to add a profile picture after registration?');
+                var wantToAddPicture = confirm('Do you want to add a profile picture after registration?');
 
-                    if (wantToAddPicture) {
-                        window.location.href='feature-profilepicture.php';
-                    } else {
-                        window.location.href='feature-login.php';
-                    }
-                    </script>";
-            exit(); 
+                if (wantToAddPicture) {
+                    window.location.href='feature-profilepicture.php';
+                } else {
+                    window.location.href='feature-login.php';
+                }
+                </script>";
+            exit();
         } else {
             echo "<script>alert('Registration Failed!')</script>";
         }
