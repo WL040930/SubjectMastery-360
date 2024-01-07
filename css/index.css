@@ -1,4 +1,4 @@
-body {
+/*body {
     font-family: 'Exo 2', sans-serif;
     margin: 0;
     padding: 0;
@@ -6,7 +6,23 @@ body {
     box-sizing: border-box;
 }
 
-/*overall classroom setting*/
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#classroom-container {
+    width: 100%;
+    height: auto;
+}
+
+.border {
+    width: 250px; 
+    max-width: 250px;
+    height: 250px;
+}
+
 #border{
     width: 100%;
     height: auto;
@@ -16,7 +32,7 @@ body {
     justify-content: left;
 }
 
-/* Style for each classroom column */
+
 #classroom-column {
     width: 250px;
     max-width: 250px;
@@ -34,24 +50,25 @@ body {
     text-decoration: none;
     color: #333;
     transition: transform 0.3s ease-in-out;
-    flex-grow: 1; /* Allow classrooms to take full width on smaller screens */
+    flex-grow: 1; 
     cursor: pointer;
     height: 170px;
     line-height: 15px; 
 }
 
 #classroom-column:hover {
-    transform: scale(1.05); /* Enlarge on hover */
+    transform: scale(1.05); 
 }
 
-/* Style for the classroom image */
+
 #classroom-column img {
     width: 100px;
     height: auto;
     margin-bottom: 10px;
 }
 
-/* Style for the classroom name */
+
 #classroom-column h2 {
     margin: 0;
 }
+*/
