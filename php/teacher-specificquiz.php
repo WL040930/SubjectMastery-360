@@ -33,7 +33,7 @@
 <body id="all"> 
     <form id="quizForm" action="" method="post">
         <!-- Dropdown list of quizzes -->
-        Quiz: 
+        <b>Quiz:</b> 
         <select name="quiz" id="quiz" onchange="submitForm()">
             <option value="">Select a Quiz</option>
             <?php
@@ -112,20 +112,20 @@
             <td><?php echo $userScore. " / ". $totalMark ?></td>
         </tr>
         <tr>
-    <form action="" method="post">
-        <?php
-        $feedback_query = "SELECT * FROM quiz_feedback WHERE quiz_attempt_id = '$quiz_attempt_id'";
-        $feedback_result = mysqli_query($connection, $feedback_query);
-        $feedback_row = mysqli_fetch_assoc($feedback_result);
-        ?>
-        <th>Overall Feedback</th>
-        <td>
-            <input type="text" name="feedback" value="<?php echo $feedback_row['quiz_feedback_content']; ?>">
-            <input type="hidden" name="quiz_attempt_id" value="<?php echo $quiz_attempt_id; ?>"> <br>
-            <input type="submit" value="Submit" name="submitfeedback">
-        </td>
-    </form>
-</tr>
+            <form action="" method="post">
+                <?php
+                $feedback_query = "SELECT * FROM quiz_feedback WHERE quiz_attempt_id = '$quiz_attempt_id'";
+                $feedback_result = mysqli_query($connection, $feedback_query);
+                $feedback_row = mysqli_fetch_assoc($feedback_result);
+                ?>
+                <th>Overall Feedback</th>
+                <td>
+                    <input type="text" name="feedback" value="<?php echo $feedback_row['quiz_feedback_content']; ?>">
+                    <input type="hidden" name="quiz_attempt_id" value="<?php echo $quiz_attempt_id; ?>"> <br>
+                    <input type="submit" value="Submit" name="submitfeedback">
+                </td>
+            </form>
+        </tr>
     </table>
 
     <?php

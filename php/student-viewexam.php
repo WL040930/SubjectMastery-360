@@ -29,11 +29,11 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <h1 align="center" style="margin: 20px;">View Exam Result - <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name']; ?></h1>
+    <div class="formexam">
     <form id="examForm" action="" method="post">
-        <div id="name"><b>Student Name: </b><?php echo $_SESSION['first_name']." ".$_SESSION['last_name']; ?></div> <br>
-        
-        <!-- Dropdown list of quizzes -->
-        <div id="title">Exam: </div>
+        Exam:
         <select name="exam" id="exam" onchange="submitForm()">
             <option value="">Select a Exam</option>
             <?php
@@ -43,6 +43,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             ?>
         </select>
     </form>
+    </div>
     <?php
     
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['exam'])) {
@@ -109,12 +110,12 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     
     ?>
         <div id="answer-box">
-            <div id="numbering">
+            <div id="quesnum">
                 <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
             </div>
-            <p id="question"><b>Question: </b><?php echo $row['exam_question']; ?> </p>
-            <p id="marks"><b>Mark Score: </b><?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
-            <p id="answer"><b>User Answer: </b><?php echo $row['exam_user_answer']; ?></p>
+            <p id="quesques"><b>Question: </b><?php echo $row['exam_question']; ?> </p>
+            <p id="quesans"><b>User Answer: </b><?php echo $row['exam_user_answer']; ?></p>
+            <p id="quesmarks"><b>Mark Score: </b><?php echo $row['exam_user_marks']. " / ". $row['exam_marks']; ?></p>
         </div>    
 
     <?php
@@ -122,7 +123,7 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     }
     
     ?>
-    <canvas id="quizChart" width="400" height="200"></canvas>
+    <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
     
     <script>
         function submitForm() {

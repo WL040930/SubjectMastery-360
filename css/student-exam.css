@@ -3,7 +3,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #FFF2D8;
-    margin-left: 25px;
 }
 
 /*question*/
@@ -47,4 +46,34 @@ input[type="submit"] {
  
 input[type="submit"]:hover {
     background-color: #BCA37F;
+}
+
+.headerexam {
+    width: 100%;
+    height: auto;
+    background-color: #7E6E57;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+
+}
+
+.submitbtn {
+    font-size: 20px;
+    text-align: center;
+}
+
+#question-box {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    background-color:  #eff2f6;
+    padding: 20px;
 }

@@ -1,16 +1,16 @@
 <?php
-include "dbconn.php";
-include "feature-usermenu.php";
-include "student-session.php";
+    include "dbconn.php";
+    include "feature-usermenu.php";
+    include "student-session.php";
 
-$user_id = $_SESSION['id'];
+    $user_id = $_SESSION['id'];
 
-$fetchQuery = "SELECT qa.*, q.*
-                FROM quiz_attempt qa 
-                JOIN quiz q 
-                ON qa.quiz_id = q.quiz_id
-                WHERE user_id = '$user_id'"; 
-$fetchResult = mysqli_query($connection, $fetchQuery);
+    $fetchQuery = "SELECT qa.*, q.*
+                    FROM quiz_attempt qa 
+                    JOIN quiz q 
+                    ON qa.quiz_id = q.quiz_id
+                    WHERE user_id = '$user_id'"; 
+    $fetchResult = mysqli_query($connection, $fetchQuery);
 ?>
 
 <!DOCTYPE html>
@@ -28,39 +28,48 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form id="quizForm" action="" method="post">
-        <div id="name"><?php echo $_SESSION['first_name']." ".$_SESSION['last_name']; ?></div> <br>
-        
-        <!-- Dropdown list of quizzes -->
-        <div id="title">Quiz: </div>
+    <h1 align="center" style="margin: 20px;">View Quiz Result - <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name']; ?></h1>
+
+    <div class="formquiz">
+    <form action="" method="post" id="quizForm">
+        Quiz: 
         <select name="quiz" id="quiz" onchange="submitForm()">
-            <option value="">Select a Quiz</option>
+            <option value="">Select Quiz: </option>
             <?php
-                while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
-                    echo "<option value='". $fetchRow['quiz_attempt_id']."'>" .$fetchRow['quiz_title'] ."</option>";
-                } 
+            while ($userRow = mysqli_fetch_assoc($fetchResult)) {
+                echo "<option value='". $userRow['quiz_attempt_id']."'>" .$userRow['quiz_attempt_id']." - ".$userRow['quiz_title']."</option>";
+            }
             ?>
         </select>
     </form>
+    </div>
+
     <?php
     
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
-        // user_id and quiz_attempt_id is retrieved dy 
-        $quiz_attempt_id = $_POST['quiz'];
-        $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
-        $userScore = calculate_user_score($quiz_attempt_id, $user_id);
-        $quiz_title_query = "SELECT q.*, qa.*, qf.* FROM quiz_attempt qa
-                                JOIN quiz q ON qa.quiz_id = q.quiz_id
-                                JOIN quiz_feedback qf ON qa.quiz_attempt_id = qf.quiz_attempt_id
-                                WHERE qa.quiz_attempt_id = '$quiz_attempt_id'";
-        $quiz_title_result = mysqli_query($connection, $quiz_title_query);
-        $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
+            // user_id and quiz_attempt_id are retrieved
+            $quiz_attempt_id = $_POST['quiz'];
+            $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
+            $userScore = calculate_user_score($quiz_attempt_id, $user_id);
+            $quiz_title_query = "SELECT q.*, qa.*, u.*, qf.* 
+                                    FROM quiz_attempt qa
+                                    JOIN quiz q ON qa.quiz_id = q.quiz_id
+                                    JOIN user u ON qa.user_id = u.user_id
+                                    JOIN quiz_feedback qf ON qa.quiz_attempt_id = qf.quiz_attempt_id
+                                    WHERE qa.quiz_attempt_id = $quiz_attempt_id";
+            $quiz_title_result = mysqli_query($connection, $quiz_title_query);
+            $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
+
     ?>
     
     <table border="1">
         <tr>
             <th>Quiz Attempt ID</th>
             <td><?php echo $quiz_attempt_id; ?></td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td><?php echo $quiz_title_row['username']; ?></td>
         </tr>
         <tr>
             <th>Quiz Title</th>
@@ -79,24 +88,22 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
             <td><?php echo $quiz_title_row['quiz_end_time']; ?></td>
         </tr>
         <tr>
-        <tr>
             <th>Marks</th>
-            <td><?php echo ($userScore !== null ? $userScore : 0) . " / " . $totalMark ?></td>
+            <td><?php echo $userScore. " / ". $totalMark ?></td>
         </tr>
         <tr>
             <th>Feedback</th>
             <td><?php echo $quiz_title_row['quiz_feedback_content']; ?></td>
         </tr>
+        </table>
 
-    </table>
-
-    <?php
-        $fetchResultQuery = "SELECT qq.*, qo.*, qua.* 
+        <?php
+        $fetchResultQuery = "SELECT qq.*, qo.*, qua.*, qf.quiz_feedback_content 
                             FROM quiz_user_answer qua 
                             JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
                             LEFT JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+                            LEFT JOIN quiz_feedback qf ON qf.quiz_attempt_id = qua.quiz_attempt_id
                             WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
-
         $fetchResultQueryResult = mysqli_query($connection, $fetchResultQuery);
         $calnum = 1; 
         $correctData = 0;
@@ -104,61 +111,38 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
 
         if(mysqli_num_rows($fetchResultQueryResult) > 0) {
             while($row = mysqli_fetch_assoc($fetchResultQueryResult)) {
-                ?>
-                <div id="answer-box">
-                    <div id="numbering">
-                        <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
-                </div>
-                    <p id="question"><b>Question: </b><?php echo $row['quiz_question_text']; ?></p>
-                    <p id="answer"><b>User Answer: </b><?php echo $row['option_text']; ?></p>
-                    <?php
-                    if ($row['iscorrect'] == true || ($row['iscorrect'] === null && $row['answer'] === null)) {
-                        echo "<div id='correct'>CORRECT</div>"; 
-                    } else {
-                        echo "<div id='incorrect'>INCORRECT</div><br>";
-                        $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
-                        $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
-                        $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                        echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
-                    }
-                    ?>
-                </div>
-                <?php
                 if ($row['iscorrect'] == true) {
                     $correctData++;
                 } else {
                     $incorrectData++;
                 }
-    ?>
+        ?>
 
     <div id="answer-box">
-        <div id="numbering">
-            <?php echo $calnum; $calnum = $calnum + 1; ?> <br>
-        </div>
-        <p id="question"><b>Question: </b><?php echo $row['quiz_question_text']; ?></p>
-        <p id="answer"><b>User Answer: </b><?php echo $row['option_text']; ?></p>
-        <?php
+        <div id="quesnum"><?php echo $calnum; $calnum = $calnum + 1; ?> </div>
+        <div id="quesques"><b><p>Question: </b><?php echo $row['quiz_question_text']; ?></p></div>
+        <div id="quesans"><p><b>User Answer: </b><?php echo $row['option_text']; ?></p></div>
+        <div id="correctanswer"><?php
             if ($row['iscorrect'] == TRUE) {
                 echo "<div id='correct'>CORRECT</div>"; 
-            }
-            else {
+            } else {
                 echo "<div id='incorrect'>INCORRECT</div><br>";
                 $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
                 $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
                 $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                echo "<div id='final_title'><b>Correct Answer:</b></div>";
-                echo "<div id='final_ans'>" . $correctAnswerRow['option_text'] . "</div>";
+                echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
             }
         ?>
+        </div>
     </div>
     <?php
             }
         }
-    }
+        }
 
     ?>
 
-    <!-- Adjusted the size of the canvas for better performance -->
+    
     <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
     <script>
         function submitForm() {
