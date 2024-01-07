@@ -43,9 +43,11 @@
             <tr>
                 <th>Classroom Picture: </th>
                 <td>
-                    <img src="../data/image<?php echo $row['classroom_picture']; ?>" alt="Classroom Picture" width="200px">
-                    <br>
-                    <input type="file" name="image" id="classroom_picture">
+                <img src="../data/image<?php echo $row['classroom_picture']; ?>" style="width: 150px; height: 150px;"
+                    id="previewImage"> <br>
+                <label for="image" class="custom-file-input">
+                    <input type="file" name="image" id="classroom_picture" accept=".jpg, .jpeg, .png" onchange="handleFileInput()">
+                </label>
                 </td>
             </tr>
             <tr>
@@ -173,6 +175,22 @@
 </body>
 </html>
 
+    <script>
+        function handleFileInput() {
+            var fileInput = document.getElementById('classroom_picture');
+            var previewImage = document.getElementById('previewImage');
+            var selectedFile = fileInput.files[0];
+
+            if (selectedFile) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+    </script>
+
 <script src="../script/teacher-codevalidation.js"></script>
 
 <?php
@@ -201,7 +219,7 @@ if (isset($_POST['submit'])) {
         } else {
             // Move uploaded image to the destination folder
             $newImageName = uniqid() . '.' . $imageExtension;
-            move_uploaded_file($tmpName, '../data/image/' . $newImageName);
+            move_uploaded_file($tmpName, '../data/image' . $newImageName);
         }
     }
 

@@ -128,6 +128,16 @@
             <input type="submit" value="Post" name="submit" id="submit_button">
         </form>
     </div>
+    <div id="back">
+        <button onclick="backToClass()" class="backtopage">Back</button>
+    </div>
+    
+    <script>
+        function backToClass() {
+            window.location.href = "stu-teac-classroompage.php?id=<?php echo $classroom_id; ?>";
+        }
+    </script>
+
 </body>
 </html>
 

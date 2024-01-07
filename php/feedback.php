@@ -10,10 +10,29 @@
     <meta charset="UTF-8">
     <title>Admin - View Feedback</title>
     <link rel="stylesheet" href="../css/admin-viewfeedback.css">
+    <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/mainpage.css">
     <!--font-->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body id="all">
+    <div id="logo_menu">
+        <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
+        <div id="webname">
+            <h1>SubjectMastery360</h1>
+        </div>
+        <div id="menubar">
+            <table class="menubar_content">
+                <!--connect to HOME-->
+                <th><a href="mainpage.php" class="menu1">HOME</a></th>
+                <!--connect to ABOUT US-->
+                <th><a href="" class="menu2">ABOUT US</a></th>
+                <!--connect to CUSTOMER FEEDBACK-->
+                <th><a href="feedback.php" class="menu3">CUSTOMER FEEDBACK</a></th>   
+            </table>
+        </div>
+    </div>
+    <br>
 
     <?php 
     // SQL query to fetch user details and feedback

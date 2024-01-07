@@ -1,3 +1,12 @@
+<?php
+
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +36,7 @@
                 <!--connect to ABOUT US-->
                 <th><a href="" class="menu2">ABOUT US</a></th>
                 <!--connect to CUSTOMER FEEDBACK-->
-                <th><a href="" class="menu3">CUSTOMER FEEDBACK</a></th>   
+                <th><a href="feedback.php" class="menu3">CUSTOMER FEEDBACK</a></th>   
             </table>
         </div>
     </div>
@@ -39,6 +48,9 @@
         </div>
         <br>
         <div id="login_signup">
+            <?php
+                if(!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
+            ?>
             <div>
                 <table id="login">
                     <!--connect to LOGIN PAGE-->
@@ -51,6 +63,15 @@
                     <th><a href="feature-registration.php" class="register_button" title="Click to create a account">SIGN UP</a></th>
                 </table>
             </div>
+            <?php
+                } else {
+            ?>
+            <table id="login">
+                    <th><a href="stu-teac-index.php" class="login_button" title="Back to View Classroom">Back To Classroom</a></th>
+            </table>
+            <?php
+                }
+                ?>
         </div>
         <br><br><br>
         <div id="objective">

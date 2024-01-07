@@ -1,5 +1,6 @@
 <?php
 
+    ob_start();
     include "dbconn.php";
     include "feature-usermenu.php";
     include "stu-teac-session.php";
@@ -57,7 +58,8 @@
                       FROM chatroom_messages cms 
                       JOIN classroom_member cm ON cms.classroom_member_id = cm.classroom_member_id
                       JOIN user u ON cm.user_id = u.user_id
-                      WHERE cm.classroom_id = '$id'";
+                      WHERE cm.classroom_id = '$id'
+                      ORDER BY cms.chatroom_messages_timestamp DESC";
         $chatresult = mysqli_query($connection, $chatquery); 
         while ($chatrow = mysqli_fetch_assoc($chatresult)) {
     ?>
@@ -77,7 +79,7 @@
     <?php
         }
     ?>
-    <button onclick="toggleNewChatModal()">New Chat</button>
+    <button onclick="toggleNewChatModal()" class="newchat">New Chat</button>
 
     <div id="newChatContainer">
         <h2>New Chat</h2>
@@ -95,6 +97,16 @@
         </form>
 
     </div>
+
+    <div id="backbtn">
+        <button class="backbtn" onclick="backtomain()">Back</button>
+    </div>
+
+    <script>
+        function backtomain() {
+            window.location.href = "stu-teac-index.php";
+        }
+    </script>
 
 <script src="../script/classroom-newchat.js"></script>
 
@@ -144,6 +156,8 @@
         header('Location: stu-teac-classroompage.php?id=' . $_GET['id']);
         exit(); 
     }
+
+    ob_end_flush();
 ?>
 
 

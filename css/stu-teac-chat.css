@@ -123,3 +123,29 @@ h4{
     width: 80%; 
     margin: 0 auto;
 }
+
+#back {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.backtopage {
+    margin: 10px auto;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backtopage:hover{
+    background-color: #BCA37F;
+}

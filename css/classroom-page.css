@@ -63,7 +63,7 @@ body{
 
 
 /*button & newchat*/
-button {
+.newchat {
     padding: 10px;
     background-color: #857c6e;
     color: white;
@@ -73,6 +73,12 @@ button {
     left: 20px; 
     bottom: 20px;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newchat:hover {
+    background-color: #716553 ;
+
 }
 
 #newChatContainer {
@@ -110,4 +116,28 @@ label {
 input {
     padding: 8px;
     margin-bottom: 15px;
+}
+
+#backbtn {
+    text-align: center;
+}
+
+.backbtn {
+    margin: 10px auto;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backbtn:hover{
+    background-color: #BCA37F;
 }

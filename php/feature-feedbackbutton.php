@@ -30,10 +30,10 @@
             <h2>New Chat</h2>
             <form id="newChatForm" method="post" action="#" enctype="multipart/form-data">
                 <label for="feedback-content">Feedback Content:</label>
-                <input type="text" id="feedback-content" name="feedback-content" required>
+                <textarea id="feedback-content" name="feedback-content" cols="20" rows="5" required></textarea>
 
                 <label for="image">Select File:</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
 
                 <input type="submit" value="Submit" name="submit">
             </form>
@@ -77,13 +77,12 @@
                                     VALUES ('$feedback_id','$newImageName')";
                     mysqli_query($connection, $updateQuery);
 
-                    echo "<script> alert('Question Added Success.');</script>";
-                    $current_page = basename($_SERVER['PHP_SELF']);
-                    header("Location: $current_page?id=" . $_GET['id']);
+                    echo "<script> alert('Feedback Submitted.');</script>";
+                    header("Location: stu-teac-index.php");
                     exit();
                 }
             } else {
-                echo "<script> alert('Question Added Success.');</script>";
+                echo "<script> alert('Feedback Submitted.');</script>";
             }
         }
         else {
@@ -91,5 +90,5 @@
         }
 
     }
-//DOUBLE CHECK ON THE LINKING PART !!!
+
 ?>
