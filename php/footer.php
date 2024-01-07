@@ -12,6 +12,7 @@
             <div class="fol_title">
                 <h2 class="fol_title_content">FOLLOW US</h2>
             </div>
+            
             <div id="fol_content">
                 <div id="fol_icon">
                     <img src="../image/follow1.webp" alt="follow our instagram" id="fol_img1">
