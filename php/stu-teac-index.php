@@ -50,7 +50,7 @@
                             <img src="../data/image<?php echo $row['classroom_picture'];?>" width="100px">
                         </div>
                         <div class="classroom_name">
-                            <b><?php echo $row['classroom_name']; ?></b>
+                            <p><b><?php echo $row['classroom_name']; ?></b><p>
                         </div>
                     </div>
                 </a>
