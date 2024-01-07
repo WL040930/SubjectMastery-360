@@ -44,7 +44,7 @@
 
                      // Display search results
                     while($row = mysqli_fetch_assoc($result)) { 
-    ?>
+    ?> 
 
     <div id="search-result">
         <div id="result-box">

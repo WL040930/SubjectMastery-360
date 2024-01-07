@@ -45,7 +45,7 @@
                 <td>
                 <img src="../data/image<?php echo $row['classroom_picture']; ?>" style="width: 150px; height: 150px;"
                     id="previewImage"> <br>
-                <label for="image" class="custom-file-input">
+                <label for="classroom_picture" class="custom-file-input">
                     <input type="file" name="image" id="classroom_picture" accept=".jpg, .jpeg, .png" onchange="handleFileInput()">
                 </label>
                 </td>
@@ -175,21 +175,22 @@
 </body>
 </html>
 
-    <script>
-        function handleFileInput() {
-            var fileInput = document.getElementById('classroom_picture');
-            var previewImage = document.getElementById('previewImage');
-            var selectedFile = fileInput.files[0];
+<script>
+    function handleFileInput() {
+        var fileInput = document.getElementById('classroom_picture');
+        var previewImage = document.getElementById('previewImage');
+        var selectedFile = fileInput.files[0];
 
-            if (selectedFile) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                };
-                reader.readAsDataURL(selectedFile);
-            }
+        if (selectedFile) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(selectedFile);
         }
-    </script>
+    }
+</script>
+
 
 <script src="../script/teacher-codevalidation.js"></script>
 

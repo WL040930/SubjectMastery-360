@@ -107,9 +107,6 @@
             echo "<script>window.location.href='admin-database.php';</script>";
         }
     }
-?>
-
-<?php
 
     // Close database connection
     mysqli_close($connection);

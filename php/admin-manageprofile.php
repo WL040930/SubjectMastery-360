@@ -86,7 +86,14 @@
     </form>
     <button onclick="goBack()" id="back_button">Back</button>
     <script src="../script/feature-back.js"></script>
-    <?php } ?>
+
+    <?php 
+        } else {
+            echo "<script> alert('No User Found'); </script>"; 
+            echo "<script>window.location.href='admin-manageuser.php';</script>";
+            exit();
+        }
+    ?>
 
 </body>
 </html>
@@ -178,10 +185,7 @@
             }
         }
     }
-?>
-
-<?php
-
+    
     // Close database connection
     mysqli_close($connection);
 
