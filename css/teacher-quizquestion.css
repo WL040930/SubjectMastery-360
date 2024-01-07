@@ -51,16 +51,14 @@
 }
 
 .container-all input[type="text"],
-.container-all input[type="file"],
-.container-all input[type="submit"],
-.container-all input[type="button"] {
+.container-all input[type="file"]{
     /* Add your input styles here */
     /* For example: */
     margin-bottom: 10px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px;
+    width: 350px;
 }
 
 .container-all #validation-message {
@@ -74,19 +72,34 @@
 .container-all input[type="button"] {
     /* Add your button styles here */
     /* For example: */
-    background-color: #4CAF50;
+    background-color: #7E6E57;
     color: white;
     cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .container-all input[type="submit"]:hover,
 .container-all input[type="button"]:hover {
     /* Add your button hover styles here */
     /* For example: */
-    background-color: #45a049;
+    background-color: #BCA37F;
 }
 
 .exit-btn {
     width: 100px;
     padding: 5px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.exit-btn:hover{
+    background-color: #BCA37F;
 }
