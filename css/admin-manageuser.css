@@ -70,3 +70,11 @@ body{
     margin-left: 20px;
     font-weight: bold;
 }
+
+a{
+    text-decoration: none;
+}
+
+a:visited{
+    text-decoration: none;
+}

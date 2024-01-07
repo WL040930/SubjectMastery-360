@@ -49,9 +49,11 @@
         <table border = "1" id=table>
             <tr>
                 <td colspan="2">
-                    <img src="../data/image<?php echo $row['profile_picture']?>" id="profile"> <br>
-                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png">
-                </td>
+                    <img src="../data/image<?php echo $row['profile_picture']; ?>" style="width: 150px; height: 150px;"
+                        id="previewImage"> <br>
+                    <label for="image" class="custom-file-input">
+                        <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="handleFileInput()">
+                    </label>
                 </td>
             </tr>
             <tr>
@@ -88,6 +90,22 @@
 
 </body>
 </html>
+
+    <script>
+        function handleFileInput() {
+            var fileInput = document.getElementById('image');
+            var previewImage = document.getElementById('previewImage');
+            var selectedFile = fileInput.files[0];
+
+            if (selectedFile) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(selectedFile);
+            }
+        }
+    </script>
 
 <?php
 
