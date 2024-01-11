@@ -2,7 +2,6 @@
 if (isset($_GET['filename'])) {
     $filename = $_GET['filename'];
 
-    // Your logic to construct the file path goes here
     $filePath = '../data/file' . $filename;
 
     if (file_exists($filePath)) {
