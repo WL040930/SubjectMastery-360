@@ -22,7 +22,7 @@
 
     // Function to delete user
     function deleteUser($connection, $id) {
-        // Check if the user is attempting to delete an admin (user with ID '4')
+        // Check if the user is attempting to delete an admin account
         $checkquery = "SELECT * FROM `user` LEFT JOIN role ON user.role_id = role.role_id WHERE user_id = '$id'";
         $queryResult = mysqli_query($connection, $checkquery);
         $queryRow = mysqli_fetch_assoc($queryResult);
