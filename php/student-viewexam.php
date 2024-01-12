@@ -1,17 +1,22 @@
 <?php
-include "dbconn.php";
-include "feature-usermenu.php";
-include "student-session.php";
 
-$user_id = $_SESSION['id'];
-$decline = TRUE; 
+    // include necessary files 
+    include "dbconn.php";
+    include "feature-usermenu.php";
+    include "student-session.php";
 
-$fetchQuery = " SELECT ea.*, e.*
-                FROM exam_attempt ea 
-                JOIN exam e 
-                ON ea.exam_id = e.exam_id
-                WHERE user_id = '$user_id'"; 
-$fetchResult = mysqli_query($connection, $fetchQuery);
+    // fetch the user_id from session
+    $user_id = $_SESSION['id'];
+    $decline = TRUE; 
+
+    // fetch all the exam attempt for the user
+    $fetchQuery = " SELECT ea.*, e.*
+                    FROM exam_attempt ea 
+                    JOIN exam e 
+                    ON ea.exam_id = e.exam_id
+                    WHERE user_id = '$user_id'"; 
+    $fetchResult = mysqli_query($connection, $fetchQuery);
+
 ?>
 
 <!DOCTYPE html>
@@ -30,44 +35,68 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
 </head>
 <body>
 
-    <h1 align="center" style="margin: 20px;">View Exam Result - <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name']; ?></h1>
-    <div class="formexam">
-    <form id="examForm" action="" method="post">
-        Exam:
-        <select name="exam" id="exam" onchange="submitForm()">
-            <option value="">Select a Exam</option>
-            <?php
-                while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
-                    echo "<option value='". $fetchRow['exam_attempt_id']."'>" .$fetchRow['exam_attempt_id']." - ".$fetchRow['exam_title'] ."</option>";
-                } 
-            ?>
-        </select>
-    </form>
-    </div>
-    <?php
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['exam'])) {
-        // user_id and exam_attempt_id is retrieved dy 
-        $exam_attempt_id = $_POST['exam'];
-        $totalMark = calculateFullMarks($exam_attempt_id, $connection);
-        $userScore = calculateUserMarks($exam_attempt_id, $connection); 
-        if($userScore == "Not finish marking"){
-            $decline = FALSE; 
-        } else {
-            $wrongmark = $totalMark - $userScore;
-            $decline = TRUE;
-        }
-        $examTitleQuery = "SELECT e.*, ea.*, ef.*
-                            FROM exam_attempt ea 
-                            JOIN exam e 
-                            ON ea.exam_id = e.exam_id
-                            JOIN exam_feedback ef ON ea.exam_attempt_id = ef.exam_attempt_id
-                            WHERE ea.exam_attempt_id = $exam_attempt_id";
+    <h1 align="center" style="margin: 20px;">
+        View Exam Result - <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name']; ?>
+    </h1>
 
-        $quiz_title_result = mysqli_query($connection, $examTitleQuery);
-        $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
-    
+    <?php
+
+        // if there is no exam attempt for the user, display the message
+        if (mysqli_num_rows($fetchResult) == 0) {
+            echo "<h2 align='center'>No Exam Attempt</h2> <br>";
+        } else {
+            // if user has exam attempt, display the message
+
     ?>
+
+    <!-- display the exam attempt in a dropdown list -->
+    <div class="formexam">
+        <form id="examForm" action="" method="post">
+            Exam:
+            <select name="exam" id="exam" onchange="submitForm()">
+                <option value="">Select a Exam</option>
+                <?php
+                    while ($fetchRow = mysqli_fetch_assoc($fetchResult)) {
+                        echo "<option value='". $fetchRow['exam_attempt_id']."'>" .$fetchRow['exam_attempt_id']." - ".$fetchRow['exam_title'] ."</option>";
+                    } 
+                ?>
+            </select>
+        </form>
+    </div>
+
+    <?php
+
+        // if the form is submitted, display the exam attempt
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['exam'])) {
+            
+            // fetch the exam attempt id from the form
+            $exam_attempt_id = $_POST['exam'];
+
+            // fetch the total marks and user marks for the exam attempt
+            $totalMark = calculateFullMarks($exam_attempt_id, $connection);
+            $userScore = calculateUserMarks($exam_attempt_id, $connection); 
+
+            // if the user marks is NULL, set the decline to FALSE, then the graph would not be displayed
+            if($userScore == "Not finish marking"){
+                $decline = FALSE; 
+            } else {
+                $wrongmark = $totalMark - $userScore;
+                $decline = TRUE;
+            }
+
+            // fetch the exam attempt information
+            $examTitleQuery = "SELECT e.*, ea.*, ef.*
+                                FROM exam_attempt ea 
+                                JOIN exam e 
+                                ON ea.exam_id = e.exam_id
+                                JOIN exam_feedback ef ON ea.exam_attempt_id = ef.exam_attempt_id
+                                WHERE ea.exam_attempt_id = $exam_attempt_id";
+
+            $quiz_title_result = mysqli_query($connection, $examTitleQuery);
+            $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
+        
+    ?>
+
         <table border="1">
         <tr>
             <th>Exam Attempt ID</th>
@@ -100,7 +129,8 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
     </table>
     
     <?php
-    
+
+        // fetch the exam attempt question and answer
         $fetchExamQuery = "SELECT eua.*, eq.* FROM exam_user_answer eua 
                             JOIN exam_question eq ON eua.exam_question_id = eq.exam_question_id
                             WHERE eua.exam_attempt_id = '$exam_attempt_id'";
@@ -109,6 +139,8 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         while ($row = mysqli_fetch_assoc($fetchExamResult)) {
     
     ?>
+
+        <!-- display the exam attempt question and answer -->
         <div id="answer-box">
             <div id="quesnum">
                 <?php echo $calnum; $calnum = $calnum + 1;  ?> <br>
@@ -119,55 +151,64 @@ $fetchResult = mysqli_query($connection, $fetchQuery);
         </div>    
 
     <?php
+
         }
     }
     
     ?>
+
+    <!-- display the graph -->
     <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
     
+    <!-- submit the form automatically -->
     <script>
         function submitForm() {
             document.getElementById("examForm").submit();
         }
     </script>
-<?php
 
-if ($decline) {
-    // Execute the JavaScript code only if $decline is false
-    ?>
-    <script>
-        var ctx = document.getElementById('quizChart').getContext('2d');
-        var dataChart = {
-            labels: ['Correct - Mark', 'Incorrect - Mark'],
-            datasets: [{
-                data: [<?php echo $userScore; ?>, <?php echo $wrongmark; ?>],
-                backgroundColor: [
-                    'rgba(75, 192, 75, 0.7)', // Green for correct
-                    'rgba(255, 99, 132, 0.7)' // Red for incorrect
-                ],
-                borderColor: [
-                    'rgba(255, 255, 255, 1)',
-                    'rgba(255, 255, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        // Create the pie chart with data
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: dataChart,
-        });
-    </script>
     <?php
+
+    if ($decline) {
+        // Execute the JavaScript code only if $decline is false
+    ?>
+        <script>
+            var ctx = document.getElementById('quizChart').getContext('2d');
+            var dataChart = {
+                labels: ['Correct - Mark', 'Incorrect - Mark'],
+                datasets: [{
+                    data: [<?php echo $userScore; ?>, <?php echo $wrongmark; ?>],
+                    backgroundColor: [
+                        'rgba(75, 192, 75, 0.7)', // Green for correct
+                        'rgba(255, 99, 132, 0.7)' // Red for incorrect
+                    ],
+                    borderColor: [
+                        'rgba(255, 255, 255, 1)',
+                        'rgba(255, 255, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Create the pie chart with data
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: dataChart,
+            });
+        </script>
+
+    <?php
+
+        }
     }
-?>
+    ?>
 </body>
 </html>
 
 
 <?php
 
+    // a function to calculate the total marks for a specific exam attempt
     function calculateFullMarks($exam_attempt_id, $connection) {
         // SQL query to calculate the total marks for a specific exam attempt
         $totalMarkQuery = "
@@ -190,13 +231,13 @@ if ($decline) {
         return $total_marks;
     }
 
+    // a function to calculate the total user marks for a specific exam attempt
     function calculateUserMarks($exam_attempt_id, $connection) {
         // SQL query to check for NULL values among exam_user_marks
-        $checkNullQuery = "
-            SELECT COUNT(*) AS null_count
-            FROM exam_user_answer
-            WHERE exam_attempt_id = ?
-            AND exam_user_marks IS NULL";
+        $checkNullQuery = " SELECT COUNT(*) AS null_count
+                            FROM exam_user_answer
+                            WHERE exam_attempt_id = ?
+                            AND exam_user_marks IS NULL";
 
         // Prepare and execute the query
         $stmt = $connection->prepare($checkNullQuery);

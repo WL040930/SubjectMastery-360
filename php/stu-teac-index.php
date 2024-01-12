@@ -22,7 +22,7 @@
     $query = "SELECT * FROM classroom_member cm JOIN classroom c ON cm.classroom_id = c.classroom_id WHERE cm.user_id = '$id'";
     $result = mysqli_query($connection, $query);
     if(mysqli_num_rows($result) == 0) {
-        echo "You are not a member of any classroom";
+        echo "<div style='text-align: center; margin-top: 100px; font-size: 30px;'>You are not a member of any classroom.</div>";
         exit();
     } else {
     
