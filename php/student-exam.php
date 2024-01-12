@@ -115,8 +115,8 @@
             
             <!--display the question and the answer box-->
             <input id="exam_question" type="text" value="<?php echo $displayQuestionRow['exam_question']; ?>" disabled><br>
-            <input id="exam_ans" type="text" value="<?php echo $displayQuestionRow['exam_user_answer']; ?>" name="answers[]"><br>
-            
+            <textarea id="exam_ans" name="answers[]" style="resize: none; width: 80%; height: 100px; "><?php echo $displayQuestionRow['exam_user_answer']; ?></textarea><br>
+    
             <?php
                 }
             

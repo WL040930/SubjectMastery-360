@@ -1,10 +1,14 @@
 <?php
+
+    // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
     include "teacher-session.php";
 
+    // get the quiz id from the url
     $id = $_SESSION['id'];
 
+    // Fetch the quizzes that the teacher has created
     $fetchQuery = "SELECT cm.*, c.*, cq.*, q.*
                     FROM classroom_member cm 
                     JOIN classroom c ON cm.classroom_id = c.classroom_id
@@ -37,7 +41,8 @@
         </select>
     </form>
     <?php
-    
+
+        // If the user has selected a quiz, display the quiz result
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
             $quiz_id = $_POST['quiz'];
             $titleQuery = "SELECT * FROM quiz WHERE quiz_id = '$quiz_id'";
@@ -45,6 +50,7 @@
             $titleRow = mysqli_fetch_assoc($titleResult);
             $quiz_title = $titleRow['quiz_title'];
             $numofAttempt = quiz_attempt_count($quiz_id);
+            // If there is at least one attempt, calculate the average mark
             if ($numofAttempt > 0) {
                 $totalMark = calculate_total_marks($quiz_id, $connection); 
                 $averageMark = $totalMark / $numofAttempt;
@@ -58,7 +64,7 @@
                 $incorrect = 0;
             }
     ?>
-
+        <!-- Display the quiz result -->
         <table border="1">
             <tr>
                 <th>Quiz ID</th>
@@ -85,8 +91,9 @@
                 <td><?php echo $percentage; ?></td>
             </tr>
         </table>
+        <!-- Display the chart -->
         <div class="chart-container">
-        <canvas id="quizChart" width="400" height="200"></canvas>
+            <canvas id="quizChart" width="400" height="200"></canvas>
         </div>
     <?php
 
@@ -95,11 +102,13 @@
     ?>
     
     <script>
+        // Function to submit the form
         function submitForm() {
             document.getElementById("quizForm").submit();
         }
     </script> 
-        <script>
+    <script>
+        // Create the chart
         var ctx = document.getElementById('quizChart').getContext('2d');
         var dataChart = {
             labels: ['Correct Percentage', 'Incorrect Percentage'],
@@ -128,6 +137,7 @@
 
 <?php
 
+    // Function to calculate the number of attempts for a specific quiz
     function quiz_attempt_count($quiz_id) {
         global $connection;
 
@@ -159,14 +169,18 @@
 
     // Function to calculate the total marks of a specific quiz
     function calculate_total_marks($quiz_id, $db) {
-        $query = "
-        SELECT SUM(qq.quiz_mark) as total_marks
-        FROM quiz_user_answer qua
-        JOIN quiz_attempt qa ON qua.quiz_attempt_id = qa.quiz_attempt_id
-        JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-        JOIN quiz_option qot ON qua.answer = qot.quiz_option_id
-        WHERE qa.quiz_id = ? AND qot.iscorrect = 1
-        ";
+        // Fetch the total marks
+        $query = "  SELECT SUM(qq.quiz_mark) as total_marks
+                    FROM quiz_user_answer qua
+                    JOIN quiz_attempt qa ON qua.quiz_attempt_id = qa.quiz_attempt_id
+                    JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+                    JOIN quiz_option qot ON qua.answer = qot.quiz_option_id
+                    WHERE qa.quiz_id = ? AND qot.iscorrect = 1
+                    ";
+
+        // Prepare the statement
+        // The question mark (?) is a placeholder for the quiz id
+        // 'i' represents an integer type
         $stmt = $db->prepare($query);
         $stmt->bind_param("i", $quiz_id);
         $stmt->execute();
@@ -175,12 +189,13 @@
         return $row['total_marks'];
     }
 
+    // Function to calculate the total possible marks of a specific quiz
     function calculate_total_possible_marks($quiz_id, $db) {
-        $query = "
-        SELECT SUM(qq.quiz_mark) as total_marks
-        FROM quiz_question qq
-        WHERE qq.quiz_id = ?
-        ";
+        $query = "  SELECT SUM(qq.quiz_mark) as total_marks
+                    FROM quiz_question qq
+                    WHERE qq.quiz_id = ?
+                    ";
+                    
         $stmt = $db->prepare($query);
         $stmt->bind_param("i", $quiz_id);
         $stmt->execute();

@@ -1,10 +1,14 @@
 <?php
+
+    // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
     include "student-session.php";
 
+    // retrieve user id from session
     $user_id = $_SESSION['id'];
 
+    // SQL query to retrieve all the quiz attempt for the user
     $fetchQuery = "SELECT qa.*, q.*
                     FROM quiz_attempt qa 
                     JOIN quiz q 
@@ -30,18 +34,28 @@
 <body>
     <h1 align="center" style="margin: 20px;">View Quiz Result - <?php echo $_SESSION['first_name']. " ". $_SESSION['last_name']; ?></h1>
 
+    <?php
+
+        // if there is no quiz attempt for the user, display the message
+        if (mysqli_num_rows($fetchResult) == 0) {
+            echo "<h2 align='center'>No Quiz Attempt</h2> <br>";
+        } else {
+            // if user has quiz attempt, display the message
+    ?>
+
+    <!-- A drop down list allows user to select the specific -->
     <div class="formquiz">
-    <form action="" method="post" id="quizForm">
-        Quiz: 
-        <select name="quiz" id="quiz" onchange="submitForm()">
-            <option value="">Select Quiz: </option>
-            <?php
-            while ($userRow = mysqli_fetch_assoc($fetchResult)) {
-                echo "<option value='". $userRow['quiz_attempt_id']."'>" .$userRow['quiz_attempt_id']." - ".$userRow['quiz_title']."</option>";
-            }
-            ?>
-        </select>
-    </form>
+        <form action="" method="post" id="quizForm">
+            Quiz: 
+            <select name="quiz" id="quiz" onchange="submitForm()">
+                <option value="">Select Quiz: </option>
+                <?php
+                while ($userRow = mysqli_fetch_assoc($fetchResult)) {
+                    echo "<option value='". $userRow['quiz_attempt_id']."'>" .$userRow['quiz_attempt_id']." - ".$userRow['quiz_title']."</option>";
+                }
+                ?>
+            </select>
+        </form>
     </div>
 
     <?php
@@ -49,8 +63,12 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['quiz'])) {
             // user_id and quiz_attempt_id are retrieved
             $quiz_attempt_id = $_POST['quiz'];
+
+            // calculate the total mark and user score
             $totalMark = quiz_total_mark($quiz_attempt_id, $user_id); 
             $userScore = calculate_user_score($quiz_attempt_id, $user_id);
+
+            // SQL query to retrieve the quiz attempt information
             $quiz_title_query = "SELECT q.*, qa.*, u.*, qf.* 
                                     FROM quiz_attempt qa
                                     JOIN quiz q ON qa.quiz_id = q.quiz_id
@@ -95,15 +113,17 @@
             <th>Feedback</th>
             <td><?php echo $quiz_title_row['quiz_feedback_content']; ?></td>
         </tr>
-        </table>
+    </table>
 
-        <?php
+    <?php
+
+        // fetch the question adn answer for the quiz attempt
         $fetchResultQuery = "SELECT qq.*, qo.*, qua.*, qf.quiz_feedback_content 
-                            FROM quiz_user_answer qua 
-                            JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
-                            LEFT JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
-                            LEFT JOIN quiz_feedback qf ON qf.quiz_attempt_id = qua.quiz_attempt_id
-                            WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
+                             FROM quiz_user_answer qua 
+                             JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
+                             LEFT JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+                             LEFT JOIN quiz_feedback qf ON qf.quiz_attempt_id = qua.quiz_attempt_id
+                             WHERE qua.quiz_attempt_id = $quiz_attempt_id"; 
         $fetchResultQueryResult = mysqli_query($connection, $fetchResultQuery);
         $calnum = 1; 
         $correctData = 0;
@@ -116,22 +136,27 @@
                 } else {
                     $incorrectData++;
                 }
-        ?>
+    ?>
 
+    <!-- display the question and answer -->
     <div id="answer-box">
         <div id="quesnum"><?php echo $calnum; $calnum = $calnum + 1; ?> </div>
         <div id="quesques"><b><p>Question: </b><?php echo $row['quiz_question_text']; ?></p></div>
         <div id="quesans"><p><b>User Answer: </b><?php echo $row['option_text']; ?></p></div>
-        <div id="correctanswer"><?php
+        <div id="correctanswer">
+        <?php
             if ($row['iscorrect'] == TRUE) {
                 echo "<div id='correct'>CORRECT</div>"; 
             } else {
+
+                // display correct answer if the user answer is incorrect
                 echo "<div id='incorrect'>INCORRECT</div><br>";
                 $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
                 $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
                 $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
                 echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
             }
+
         ?>
         </div>
     </div>
@@ -142,15 +167,28 @@
 
     ?>
 
-    
+    <!-- display the chart -->
     <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
+
+    <?php
+
+        }
+        
+    ?>
+
     <script>
+        // Submit the form when the user selects an option
         function submitForm() {
             document.getElementById("quizForm").submit();
         }
     </script>
+
     <script>
+
+        // Get the context of the canvas element want to select
         var ctx = document.getElementById('quizChart').getContext('2d');
+
+        // Set the data for the chart
         var dataChart = {
             labels: ['Correct - Question', 'Incorrect - Question'],
             datasets: [{
@@ -172,13 +210,14 @@
             type: 'pie',
             data: dataChart,
         });
-</script>
+    </script>
 </body>
 </html>
 
 
 <?php
 
+    // Function to calculate the total mark for a specific quiz attempt and user
     function quiz_total_mark($quiz_attempt_id, $user_id) {
         global $connection;
 
@@ -208,6 +247,7 @@
         return $total_mark;
     }
 
+    // Function to calculate the user's score for a specific quiz attempt and user
     function calculate_user_score($quiz_attempt_id, $user_id) {
         global $connection;
 

@@ -297,7 +297,7 @@
 <?php
 
         } else {
-            echo "You are not involved in any classrooms.";
+            echo "<div style='text-align: center; font-size: 24px; margin-top: 100px;'>You are not involved in any classrooms. </div>";
         }
     }
 

@@ -35,7 +35,7 @@
             <h2>New Chat</h2>
             <form id="newChatForm" method="post" action="#" enctype="multipart/form-data">
                 <label for="feedback-content">Feedback Content:</label>
-                <textarea id="feedback-content" name="feedback-content" cols="20" rows="5" required></textarea>
+                <textarea id="feedback-content" name="feedback-content" cols="20" rows="5" required style="resize: none"></textarea>
 
                 <label for="image">Select File:</label>
                 <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">

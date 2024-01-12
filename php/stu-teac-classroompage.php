@@ -102,8 +102,9 @@
             <input type="text" id="chatroom-title" name="chatroom-title" required>
 
             <label for="chat-content">Chat Content:</label>
-            <input type="text" id="chat-content" name="chat-content" required>
+            <textarea id="chat-content" name="chat-content" rows="4" cols="50" required style="resize: none;"></textarea>
 
+            <br>
             <label for="fileInput">Select File:</label>
             <input type="file" id="fileInput" name="fileInput">
 

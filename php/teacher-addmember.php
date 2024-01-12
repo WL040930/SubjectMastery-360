@@ -1,33 +1,30 @@
 <?php
 
+    // include all necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
     include "teacher-session.php";
 
+    // Get the user ID from the session
     $user_id_session = $_SESSION['id'];
     
+    // Fetch the classroom ID from the URL
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $fetchquery = "SELECT * FROM `classroom` WHERE `classroom_id` = '$id'";
         $fetchresult = mysqli_query($connection, $fetchquery);
         $fetchrow = mysqli_fetch_assoc($fetchresult);
-    
-
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $fetchquery = "SELECT * FROM `classroom` WHERE `classroom_id` = '$id'";
-        $fetchresult = mysqli_query($connection, $fetchquery);
-        $fetchrow = mysqli_fetch_assoc($fetchresult);
-    }
-
-    // Get the user ID from the session or wherever it's stored
-    $user_id_session = $_SESSION['id']; // Update this line based on your actual session variable
 
     // Handle member removal
     if (isset($_GET['remove_member'])) {
+
+        // Get the user ID to be removed from the URL
         $remove_user_id = mysqli_real_escape_string($connection, $_GET['remove_member']);
 
+        // Check if the user is trying to remove himself/herself from the classroom
         if (isset($user_id_session) && $user_id_session == $remove_user_id) {
+
+            // Alert the user that he/she cannot remove himself/herself from the classroom
             echo "<script>alert('You cannot remove yourself from the classroom!');</script>";
             echo "<script>window.location.href='teacher-addmember.php';</script>";
         } else {
@@ -39,7 +36,7 @@
             header("Location: teacher-addmember.php?id=$id");
             exit();
         }
-        }
+    }
 
     // Handle member addition
     if (isset($_POST['manage_member'])) {
@@ -117,10 +114,12 @@
             <th>Manage</th>
         </tr>
         <?php
-        $counter = 1;
+            // Number of the member
+            $counter = 1;
 
-        while ($row = ($result) ? mysqli_fetch_assoc($result) : null) {
+            while ($row = ($result) ? mysqli_fetch_assoc($result) : null) {
         ?>
+            <!-- Display the information in table column -->
             <tr>
                 <td><?php echo $counter; ?></td>
                 <td><?php echo $row['username']; ?></td>
@@ -129,17 +128,22 @@
                     <a href="teacher-addmember.php?id=<?php echo $id; ?>&remove_member=<?php echo $row['user_id']; ?>"><img src="../image/delete.png" alt="Remove" id="delete"></a>
                 </td>
             </tr>
+        
         <?php
             $counter++;
         }
         ?>
+
         <tr>
             <td colspan="4">
+
+                <!-- Form to add a new member -->
                 <form method="post" action="">
                     <label id="email_title" for="email"><b>Email:</b></label> <br>
                     <input id="email_con" type="email" name="email" placeholder="Enter the Email Here. " required> <br>
                     <button id="add_button" type="submit" name="manage_member">Add Member</button>
                 </form>
+
             </td>
         </tr>
     </table>
@@ -149,7 +153,9 @@
 <?php
 
     } else {
+        // Redirect to the index page if the classroom ID is not set
         header("Location: stu-teac-index.php");
         exit();
     }
+
 ?>

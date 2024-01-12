@@ -1,4 +1,6 @@
 <?php
+
+    // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
 
@@ -19,6 +21,7 @@
 <body id="classroom_body">
     <h1>Create Classroom</h1>
     <div id="container">
+        <!-- Form allows user to create classroom -->
         <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateCode()">
             <div class="inp-box">
                 <label for="name">Classroom Name: </label>
@@ -151,9 +154,10 @@
                 </select>
             </div><br>
             
+            <!-- Display the validation message -->
             <div id="validation-message"></div>
             <div class="submitbtn">
-            <input type="submit" value="Create" name="submit">
+                <input type="submit" value="Create" name="submit">
             </div>
         </form>
     </div>
@@ -163,33 +167,44 @@
 
 <?php
 
+    // Check if the user has submitted the form
     if(isset($_POST["submit"])){
+        // Check if the user has uploaded an image
         if($_FILES["image"]["error"] == 4){
+            // If the user has not uploaded an image, set the image name to null
             $newImageName = null;
         } else {
             $fileName = $_FILES["image"]["name"];
             $tmpName = $_FILES["image"]["tmp_name"];
 
+            // Check if the uploaded file is an image
             $validImageExtension = ['jpg', 'jpeg', 'png'];
             $imageExtension = explode('.', $fileName);
             $imageExtension = strtolower(end($imageExtension));
 
+            // Check if the uploaded image is a valid image
             if (!in_array($imageExtension, $validImageExtension) ){
                 echo "<script> alert('Invalid Image Extension');</script>";
                 exit();
             }
 
+            // Rename the image to a unique name
             $newImageName = uniqid() . '.' . $imageExtension;
+
+            // Move the image to the data folder
             move_uploaded_file($tmpName, '../data/image' . $newImageName);
         }
 
+        // Check if the classroom code already exists
         $code = $_POST['code'];
         $query = "SELECT classroom_code FROM `classroom` WHERE classroom_code = '$code'";
         $result = mysqli_query($connection, $query);
 
         if (mysqli_num_rows($result) > 0) {
+            // If the classroom code already exists, display an error message
             echo "<script>alert('Code already exists. Please choose a different code.');</script>";
         } else {
+            // Get the classroom details from the form
             $name = $_POST['name'];
             $description = $_POST['description'];
             $color = $_POST['color'];
@@ -198,13 +213,19 @@
             $insertQuery = "INSERT INTO `classroom` (`classroom_name`, `classroom_description`, `classroom_code`, `classroom_picture`, `classroom_color`) 
                             VALUES ('$name', '$description', '$code', " . ($newImageName ? "'$newImageName'" : "NULL") . ", '$color')";
 
+            // Check if the classroom has been inserted successfully
             if (mysqli_query($connection, $insertQuery)) {
+                // Get the classroom id of the newly created classroom
                 $fetchQuery = "SELECT * FROM `classroom` WHERE classroom_code = '$code'";
                 $fetchResult = mysqli_query($connection, $fetchQuery);
                 $fetchRow = mysqli_fetch_assoc($fetchResult);
                 $classroomId = $fetchRow['classroom_id'];
                 $ID = $_SESSION['id'];
+
+                // Insert the teacher into the classroom_member table
                 $insertsql = "INSERT INTO `classroom_member`(`user_id`, `classroom_id`) VALUES ('$ID','$classroomId')"; 
+
+                // Check if the teacher has been inserted successfully
                 if (mysqli_query($connection, $insertsql)) {
                     echo "<script>alert('Classroom created successfully.');</script>";
                 } else {

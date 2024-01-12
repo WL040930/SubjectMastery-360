@@ -1,11 +1,14 @@
 <?php
 
+    // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
     include "teacher-session.php";
 
+    // retrieve the user id from session
     $id = $_SESSION['id'];
 
+    // SQL query to fetch all the quizzes created by the teacher
     $fetchQuery = "SELECT cm.*, c.*, cq.*, q.*
                     FROM classroom_member cm 
                     JOIN classroom c ON cm.classroom_id = c.classroom_id
@@ -72,8 +75,12 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user'])) {
         // user_id and quiz_attempt_id are retrieved
         $quiz_attempt_id = $_POST['user'];
+
+        // calculate the total mark and user score
         $totalMark = quiz_total_mark($quiz_attempt_id); 
         $userScore = calculate_user_score($quiz_attempt_id);
+
+        // SQL query to fetch the quiz title and description
         $quiz_title_query = "SELECT q.*, qa.*, u.* FROM quiz_attempt qa
                                 JOIN quiz q ON qa.quiz_id = q.quiz_id
                                 JOIN user u ON qa.user_id = u.user_id
@@ -82,6 +89,7 @@
         $quiz_title_row = mysqli_fetch_assoc($quiz_title_result);
     ?>
     
+    <!-- Display the information in table -->
     <table border="1">
         <tr>
             <th>Quiz Attempt ID</th>
@@ -112,6 +120,7 @@
             <td><?php echo $userScore. " / ". $totalMark ?></td>
         </tr>
         <tr>
+            <!-- Form to update the feedback -->
             <form action="" method="post">
                 <?php
                 $feedback_query = "SELECT * FROM quiz_feedback WHERE quiz_attempt_id = '$quiz_attempt_id'";
@@ -129,6 +138,8 @@
     </table>
 
     <?php
+
+        // Fetch the questions, user answers for the selected quiz attempt
         $fetchResultQuery = "SELECT qq.*, qo.*, qua.*, qf.quiz_feedback_content 
                             FROM quiz_user_answer qua 
                             JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 
@@ -149,21 +160,23 @@
                 }
         ?>
 
+    <!-- Display the questions and answers in a box -->
     <div id="answer-box">
         <div id="quesnum"><?php echo $calnum; $calnum = $calnum + 1; ?> </div>
         <div id="quesques"><b><p>Question: </b><?php echo $row['quiz_question_text']; ?></p></div>
         <div id="quesans"><p><b>User Answer: </b><?php echo $row['option_text']; ?></p></div>
-        <div id="correctanswer"><?php
-            if ($row['iscorrect'] == TRUE) {
-                echo "<div id='correct'>CORRECT</div>"; 
-            } else {
-                echo "<div id='incorrect'>INCORRECT</div><br>";
-                $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
-                $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
-                $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
-                echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
-            }
-        ?>
+        <div id="correctanswer">
+            <?php
+                if ($row['iscorrect'] == TRUE) {
+                    echo "<div id='correct'>CORRECT</div>"; 
+                } else {
+                    echo "<div id='incorrect'>INCORRECT</div><br>";
+                    $fetchCorrectAnswer = "SELECT * FROM quiz_option WHERE quiz_question_id = ".$row['quiz_question_id']." AND iscorrect = 1";
+                    $fetchCorrectAnswerResult = mysqli_query($connection, $fetchCorrectAnswer);
+                    $correctAnswerRow = mysqli_fetch_assoc($fetchCorrectAnswerResult);
+                    echo "<div id='final_ans'><b>Correct Answer: </b></div>".$correctAnswerRow['option_text'];
+                }
+            ?>
         </div>
     </div>
     <?php
@@ -174,19 +187,22 @@
 
     ?>
 
-    <!-- Adjusted the size of the canvas for better performance -->
+    <!-- Graph -->
     <div class="chart-container"><canvas id="quizChart" width="400" height="200"></canvas></div>
 
     <script>
+        // submit the quizForm automatically when a quiz is selected
         function submitForm() {
             document.getElementById("quizForm").submit();
         }
 
+        // submit the userForm automatically when a user is selected
         function submitForm2() {
             document.getElementById("userForm").submit();
         }
     </script>
     <script>
+        // Get the context of the canvas element 
         var ctx = document.getElementById('quizChart').getContext('2d');
         var dataChart = {
             labels: ['Correct - Question', 'Incorrect - Question'],
@@ -215,15 +231,15 @@
 
 <?php
 
+    // Function to calculate the total mark for a specific quiz attempt
     function quiz_total_mark($quiz_attempt_id) {
         global $connection;
 
         // SQL query to calculate the total marks for a specific quiz attempt
-        $totalMarkQuery = "
-            SELECT SUM(qq.quiz_mark) AS total_mark
-            FROM quiz_user_answer qua
-            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-            WHERE qua.quiz_attempt_id = ?";
+        $totalMarkQuery = " SELECT SUM(qq.quiz_mark) AS total_mark
+                            FROM quiz_user_answer qua
+                            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+                            WHERE qua.quiz_attempt_id = ?";
 
         // Prepare and execute the query
         $stmt = $connection->prepare($totalMarkQuery);
@@ -239,16 +255,16 @@
         return $total_mark;
     }
 
+    // Function to calculate the user's score for a specific quiz attempt
     function calculate_user_score($quiz_attempt_id) {
         global $connection;
 
         // SQL query to calculate the user's score based on correctness of answers
-        $userScoreQuery = "
-            SELECT SUM(qq.quiz_mark * qo.iscorrect) AS user_score
-            FROM quiz_user_answer qua
-            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
-            INNER JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
-            WHERE qua.quiz_attempt_id = ?";
+        $userScoreQuery = " SELECT SUM(qq.quiz_mark * qo.iscorrect) AS user_score
+                            FROM quiz_user_answer qua
+                            INNER JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id
+                            INNER JOIN quiz_option qo ON qua.answer = qo.quiz_option_id
+                            WHERE qua.quiz_attempt_id = ?";
 
         // Prepare and execute the query
         $stmt = $connection->prepare($userScoreQuery);
@@ -264,18 +280,21 @@
         return $user_score;
     }
 ?>
+
 <?php
-if (isset($_POST['submitfeedback'])) {
-    $feedback = $_POST['feedback'];
-    $quiz_attempt_id = $_POST['quiz_attempt_id']; // Retrieve quiz_attempt_id from the form
+    // if the user clicks on submit feedback
+    if (isset($_POST['submitfeedback'])) {
+        $feedback = $_POST['feedback'];
+        $quiz_attempt_id = $_POST['quiz_attempt_id']; // Retrieve quiz_attempt_id from the form
 
-    $update_feedback_query = "UPDATE `quiz_feedback` SET `quiz_feedback_content`='$feedback' WHERE quiz_attempt_id = '$quiz_attempt_id'";
-    $update_feedback_result = mysqli_query($connection, $update_feedback_query);
+        // Update the feedback in the database
+        $update_feedback_query = "UPDATE `quiz_feedback` SET `quiz_feedback_content`='$feedback' WHERE quiz_attempt_id = '$quiz_attempt_id'";
+        $update_feedback_result = mysqli_query($connection, $update_feedback_query);
 
-    if ($update_feedback_result) {
-        echo "<script>alert('Feedback Updated Successfully');</script>";
-    } else {
-        echo "<script>alert('Feedback Update Failed');</script>";
+        if ($update_feedback_result) {
+            echo "<script>alert('Feedback Updated Successfully');</script>";
+        } else {
+            echo "<script>alert('Feedback Update Failed');</script>";
+        }
     }
-}
 ?>

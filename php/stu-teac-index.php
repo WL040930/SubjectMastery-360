@@ -77,4 +77,5 @@
 
     // Close the database connection
     mysqli_close($connection);
+    
 ?>

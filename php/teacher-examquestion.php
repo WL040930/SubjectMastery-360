@@ -1,16 +1,20 @@
 <?php
 
+    // include all necessary files
     include "dbconn.php"; 
     include "feature-usermenu.php";
     include "teacher-session.php";
 
+    // get the exam id from the url
     if(isset($_SESSION['id'])){
         $user_id = $_SESSION['id'];
     } else {
+        // if the user is not logged in, redirect to the logout page
         header("Location: feature-logout.php");
         exit(); 
     }
 
+    // get the exam id from the url
     if(isset($_GET['id'])) {
         $exam_id = $_GET['id'];
         $query = "SELECT * FROM exam WHERE exam_id = '$exam_id'";
@@ -31,87 +35,97 @@
 <body>
     
     <div class="container-add">
-    <h1 style="font-size: 36px; text-decoration: underline; padding: 10px">Add Question - <?php echo $row['exam_title'];?></h1>
-    <form action="" method="post" enctype="multipart/form-data" onsubmit ="return validate_mark()">
-        <div class="question">
-        <label for="question">Question: </label> <br>
-        <input type="text" name="question" id="question" placeholder="Enter Question" required> <br>
+        <!-- Display form allows user to add question for exam -->
+        <h1 style="font-size: 36px; text-decoration: underline; padding: 10px">Add Question - <?php echo $row['exam_title'];?></h1>
+        <form action="" method="post" enctype="multipart/form-data" onsubmit ="return validate_mark()">
+            <div class="question">
+                <label for="question">Question: </label> <br>
+                <textarea name="question" id="question" placeholder="Enter Question" required style="resize: none"></textarea> <br>
+            </div>
+            <div class="mark">
+                <label for="mark">Mark: </label> <br>
+                <input type="text" name="mark" placeholder="mark" id="mark" required> <br>
+            </div>
+            <div class="image">
+                <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"> <br>
+            </div>
+
+            <!-- Display the validation message -->
+            <div id="validation-message"></div> <br>
+            <div class="join">
+                <input type="submit" value="Confirm Add" name="submit" class="submit-btn">
+                <input type="button" value="Clear" onclick="clearForm()" class="clear-btn">
+            </div>
+        </form>
+
+        <!-- Exit button -->
+        <div class="exit-btn">
+            <button type="button" id="exit" onclick="exit()" class="exit-btn2">Exit</button>
         </div>
-        <div class="mark">
-        <label for="mark">Mark: </label> <br>
-        <input type="text" name="mark" placeholder="mark" id="mark" required> <br>
-        </div>
-        <div class="image">
-        <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"> <br>
-        </div>
-        <div id="validation-message"></div> <br>
-        <div class="join">
-        <input type="submit" value="Confirm Add" name="submit" class="submit-btn">
-        <input type="button" value="Clear" onclick="clearForm()" class="clear-btn">
-        </div>
-    </form>
-    <div class="exit-btn">
-    <button type="button" id="exit" onclick="exit()" class="exit-btn2">Exit</button>
+        <div style="clear: both"></div>
     </div>
-    <div style="clear: both"></div>
-    </div>
+
     <script>
+        // function to exit the page
         function exit() {
-            if (confirm('Do you want to leave the page? ONCE YOU LEAVE, YOU WILL NOT BE ABLE TO ADD QUESTION AGAIN.')) {
+            if (confirm('Do you want to leave the page?')) {
                 window.location.href = 'stu-teac-index.php';
             }
         }
     </script>
-
-    
     <script src="../script/clear-form.js"></script>
     <script src="../script/validation-mark.js"></script>
 
     <?php 
 
-if (isset($_POST['submit'])) {
-    $question = $_POST['question'];
-    $mark = $_POST['mark'];
+        // if the user click the submit button
+        if (isset($_POST['submit'])) {
+            $question = $_POST['question'];
+            $mark = $_POST['mark'];
+            
+            // insert the question into the database
+            $insertQuery = "INSERT INTO `exam_question`(`exam_id`, `exam_question`, `exam_marks`) 
+                            VALUES ('$exam_id','$question','$mark')";
 
-    $insertQuery = "INSERT INTO `exam_question`(`exam_id`, `exam_question`, `exam_marks`) 
-                    VALUES ('$exam_id','$question','$mark')";
+            if (mysqli_query($connection, $insertQuery)) {
+                // get the question id
+                $new_id = mysqli_insert_id($connection);
 
-    if (mysqli_query($connection, $insertQuery)) {
-        $new_id = mysqli_insert_id($connection);
+                // if the user upload an image, upload the image to the server
+                if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+                    $fileName = $_FILES["image"]["name"];
+                    $fileSize = $_FILES["image"]["size"];
+                    $tmpName = $_FILES["image"]["tmp_name"];
+                    
+                    // check the image extension
+                    $validImageExtension = ['jpg', 'jpeg', 'png'];
+                    $imageExtension = explode('.', $fileName);
+                    $imageExtension = strtolower(end($imageExtension));
 
-        if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-            $fileName = $_FILES["image"]["name"];
-            $fileSize = $_FILES["image"]["size"];
-            $tmpName = $_FILES["image"]["tmp_name"];
+                    if (!in_array($imageExtension, $validImageExtension)) {
+                        echo "<script> alert('Invalid Image Extension');</script>";
+                    } else if ($fileSize > 5000000) {
+                        echo " <script> alert('Image Size Is Too Large'); </script>";
+                    } else {
+                        $newImageName = uniqid();
+                        $newImageName .= '.' . $imageExtension;
 
-            $validImageExtension = ['jpg', 'jpeg', 'png'];
-            $imageExtension = explode('.', $fileName);
-            $imageExtension = strtolower(end($imageExtension));
+                        move_uploaded_file($tmpName, '../data/image' . $newImageName);
 
-            if (!in_array($imageExtension, $validImageExtension)) {
-                echo "<script> alert('Invalid Image Extension');</script>";
-            } else if ($fileSize > 5000000) {
-                echo " <script> alert('Image Size Is Too Large'); </script>";
+                        $updateQuery = "UPDATE `exam_question` SET `exam_attachment`='$newImageName' WHERE `exam_question_id` = '$new_id'";
+                        mysqli_query($connection, $updateQuery);
+
+                        echo "<script> alert('Successfully Added');</script>";
+                    }
+                } else {
+                    echo "<script> alert('Successfully Added');</script>";
+                }
             } else {
-                $newImageName = uniqid();
-                $newImageName .= '.' . $imageExtension;
-
-                move_uploaded_file($tmpName, '../data/image' . $newImageName);
-
-                $updateQuery = "UPDATE `exam_question` SET `exam_attachment`='$newImageName' WHERE `exam_question_id` = '$new_id'";
-                mysqli_query($connection, $updateQuery);
-
-                echo "<script> alert('Successfully Added');</script>";
+                echo "<script> alert('Error adding question, please try again later');</script>";
             }
-        } else {
-            echo "<script> alert('Successfully Added');</script>";
         }
-    } else {
-        echo "<script> alert('Error adding question, please try again later');</script>";
-    }
-}
 
-?>
+    ?>
 
 </body>
 </html>
@@ -120,6 +134,7 @@ if (isset($_POST['submit'])) {
 <?php
 
     } else {
+        // if the url does not contain the exam id, display the exam list
         $fetch = "SELECT 
                     cm.*,
                     c.*,
@@ -140,7 +155,8 @@ if (isset($_POST['submit'])) {
         $fetch_result = mysqli_query($connection, $fetch);
 
         if ($fetch_result) {
-        if(mysqli_num_rows($fetch_result) > 0) {
+            // if the user is involved in any of the classroom, display the classroom list
+            if(mysqli_num_rows($fetch_result) > 0) {
         
     ?>
 <!DOCTYPE html>
@@ -172,10 +188,10 @@ if (isset($_POST['submit'])) {
 
 <?php
             } else {
-                echo "You are not involved in any classroom.";
+                echo "<div style='text-align: center; font-size: 24px; margin-top: 100px;'>You did not create any exam before.</div>";
             }
         } else {
-        echo "Error in fetching data: " . mysqli_error($connection);
+            echo "Error in fetching data: " . mysqli_error($connection);
         }
     }
 ?>
