@@ -64,14 +64,22 @@
                 </table>
             </div>
             <?php
-                } else {
+                } else if($_SESSION['role'] == 'student' || $_SESSION['role'] == 'teacher') {
             ?>
             <table id="login">
-                    <th><a href="stu-teac-index.php" class="login_button" title="Back to View Classroom">Back To Classroom</a></th>
+                <th><a href="stu-teac-index.php" class="login_button" title="Back to View Classroom">Back To Classroom</a></th>
             </table>
             <?php
-                }
-                ?>
+            } else if($_SESSION['role'] == 'admin') {
+            ?>
+            <table id="login">
+                <th><a href="admin-index.php" class="login_button" title="Back to Admin Page">Back To Admin Page</a></th>
+            </table>
+            <?php
+            
+            }
+                
+            ?>
         </div>
         <br><br><br>
         <div id="objective">

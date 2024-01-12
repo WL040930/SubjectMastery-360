@@ -127,3 +127,19 @@ body {
 #menu ul li:hover ul li:hover ul {
     display: block;
 }
+
+#menu ul li:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+#menu ul li:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease-in-out;
+}
+
+#menu ul li ul li:hover {
+    transform: translateX(10px);
+    transition: transform 0.3s ease-in-out;
+}   

@@ -80,3 +80,17 @@ a:visited{
     text-decoration: none;
 }
 
+#result-box:hover{
+    background-color: #BCA37F;
+    transform: scale(1.05);
+    animation: scaleAnimation 0.3s ease;
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}

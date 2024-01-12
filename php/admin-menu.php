@@ -26,7 +26,7 @@
 <body>  
     <!-- Header section with the website logo, name, and system title -->
     <div id="header">
-        <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
+        <a href="mainpage.php" id="logo-web"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
             <h1>SubjectMastery360</h1>
         </div>

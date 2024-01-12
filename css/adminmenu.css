@@ -82,31 +82,53 @@ body {
 }
 
 
-    #table1 {
-        margin-left: 130px;
-        margin-top: 40px;
-        width: 80%;
-        height: 350px;
-        align-items: center;
-        border-spacing: 30px;
-    }
+#table1 {
+    margin-left: 130px;
+    margin-top: 40px;
+    width: 80%;
+    height: 350px;
+    align-items: center;
+    border-spacing: 30px;
+}
 
-    #th1, #td1 {
-        text-align: center;
-        align-items: center;
-        border: 3px solid black;
-        padding: 20px; /* Add 20px spacing for both th and td*/
-    }
+#th1, #td1 {
+    text-align: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 20px; /* Add 20px spacing for both th and td*/
+}
 
-    #th1 {
-        background-color: #7E6E57;
-        color: white;
-        font-size: 40px;
-        width: 16%;
-    }
+#th1 {
+    background-color: #7E6E57;
+    color: white;
+    font-size: 40px;
+    width: 16%;
+}
 
-    #td1 {
-        background-color: #edf1f7;
-        font-size: 38px;
-        width: 10%;
-    }
+#td1 {
+    background-color: #edf1f7;
+    font-size: 38px;
+    width: 10%;
+}
+
+#menu ul li {
+    transition: transform 0.3s ease-in-out;
+}
+
+#menu ul li:hover {
+    transform: translateY(-5px);
+}    
+
+#table1 {
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.3);
+    border-radius: 30px;
+    margin-bottom: 100px;
+}
+
+#logo-web {
+    transition: transform 0.3s ease-in-out;
+}
+
+#weblogo:hover {
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+}

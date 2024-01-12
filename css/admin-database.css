@@ -94,3 +94,22 @@ td{
     text-align: center;
     align-items: center;
 }
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+#edit,
+#delete {
+    transition: transform 0.3s ease-in-out;
+}
+
+#edit:hover,
+#delete:hover {
+    animation: scaleAnimation 0.3s ease-in-out infinite;
+}
