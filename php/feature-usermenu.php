@@ -17,6 +17,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
     <!--others font-->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* Add animation to the menu bar */
+        #menu ul li:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        
+        #menu ul li:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #menu ul li ul li:hover {
+            transform: translateX(10px);
+            transition: transform 0.3s ease-in-out;
+        }    
+    </style>
 </head>
 
 <body id="allmenu">
