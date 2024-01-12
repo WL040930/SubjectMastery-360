@@ -1,12 +1,14 @@
 <?php
 
+    // include all necessary files
     include "dbconn.php"; 
     include "feature-usermenu.php";
     include "student-session.php";
 
     $user_id = $_SESSION['id'];
 
-    // link is quiz id 
+    // fetch quiz id from url
+    // check if the user is allowed to take the quiz
     if(isset($_GET['id'])) {
         $quiz_id = $_GET['id'];
 
@@ -32,6 +34,7 @@
         if($checkResult) {
             $rowCheck = mysqli_num_rows($checkResult);
 
+            // user is allowed to take the exam
             if ($rowCheck == 1) {
                 $row = mysqli_fetch_assoc($checkResult);
 ?>
@@ -72,12 +75,19 @@
             
 <?php
 
+            // if the user click the start attempt button
             if(isset($_POST['submit'])){
+
+                // insert the quiz attempt into the database
                 $attemptQuery = "INSERT INTO `quiz_attempt`(`user_id`, `quiz_id`, `quiz_start_time`) 
                                 VALUES ('$user_id','$quiz_id', CURRENT_TIMESTAMP)";
                 $attemptResult = mysqli_query($connection, $attemptQuery);
+
                 if ($attemptResult) {
+                    // get the id of the quiz attempt
                     $new_id = mysqli_insert_id($connection);
+
+                    // create a new feedback for the quiz attempt
                     $feedbackquery = "INSERT INTO `quiz_feedback`(`quiz_attempt_id`)
                                         VALUES ('$new_id')";
                     if(mysqli_query($connection, $feedbackquery)){
@@ -93,24 +103,28 @@
             }
             
             } else if ($rowCheck == 0) {
+                // user is not allowed to take the exam
                 echo "<script> alert ('You are not allowed to take the Quiz. ');</script>";
                 echo "<script> window.location.href='stu-teac-index.php'; </script>";
                 exit(); 
             } else {
+                // unexpected error
                 echo "<script> alert ('Unexpected error occur. Please contact admin.');</script>";
                 echo "<script> window.location.href='stu-teac-index.php'; </script>";
                 exit();
             }
+        } else {
+            // uswer is not allowed to take the exam
+            echo "<script> alert ('You are not allowed to take the Quiz. ');</script>";
+            echo "<script> window.location.href='stu-teac-index.php'; </script>";
+            exit(); 
         }
 
-    
-    
-?>
-
-<?php
-
+    // if quiz id is not set
     } else {
         $user_id = $_SESSION['id'];
+
+        // fetch all the quiz that the user is allowed to take
         $classrooms_query = "SELECT
                                 cm.*,
                                 c.*,
@@ -129,6 +143,7 @@
                             ";
         $classrooms_result = mysqli_query($connection, $classrooms_query);
 
+        // if there is at least one quiz that the user is allowed to take
         if ($classrooms_result && mysqli_num_rows($classrooms_result) > 0) {
 ?>
 
@@ -152,7 +167,7 @@
         while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
             echo '<a class="linktoclassroom" href="student-quizattempt.php?id=' . $classroom_row['quiz_id'] . '"><li class="choose-classroom">' . $classroom_row['quiz_title'] . '</li></a>';
         }
-        ?>
+    ?>
     </ul>
 </body>
 </html>
@@ -160,6 +175,7 @@
 <?php
 
         } else {
+            // no quiz found
             echo "<script> alert ('No Quiz Found!'); </script>";
             echo "<script> window.location.href='stu-teac-index.php'; </script>";
         }

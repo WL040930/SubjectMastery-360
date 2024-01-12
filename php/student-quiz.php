@@ -1,21 +1,25 @@
 <?php
 
+    // include necessary file 
     include "dbconn.php"; 
     include "student-session.php";
 
+    // fetch quiz attempt id from url
     if(!isset($_GET['id'])) {
         header("location: stu-teac-index.php");
         exit(); 
     } else {
         $quiz_attempt_id = $_GET['id'];
     }
-
+    
+    // check if the user is allowed to take the quiz
     if (!isset($_SESSION['quiz_attempt_started']) || !$_SESSION['quiz_attempt_started']) {
         echo "<script>You are not allowed to join the quiz directly</script>";
         echo "<script>window.location.href='stu-teac-index.php'</script>";
         exit();
     }
 
+    // fetch quiz id from quiz attempt id
     $fetchQuery = "SELECT * FROM `quiz_attempt` WHERE quiz_attempt_id = '$quiz_attempt_id'";
     $fetchResult = mysqli_query($connection, $fetchQuery);
     if($fetchResult) {
@@ -26,10 +30,12 @@
         exit(); 
     }
 
+    // fetch all the questions from the quiz, and calculate the number of questios in the quiz
     $questionQuery = "SELECT * FROM `quiz_question` WHERE quiz_id = '$quiz_id'";
     $quetionResult = mysqli_query($connection, $questionQuery);
     $numQuestion = mysqli_num_rows($quetionResult);
 
+    // fetch all the questions with the specific quiz attempt id, and calculate the number of questions 
     $quizAttemptCheck = "SELECT 
                             qa.*, 
                             qua.*
@@ -42,6 +48,7 @@
                         $quizAttemptCheckResult = mysqli_query($connection, $quizAttemptCheck);
                         $numQuizAttemptCheck = mysqli_num_rows($quizAttemptCheckResult);
     
+    // check if the number of questions in the quiz is equal to the number of questions with the specific quiz attempt id
     if ($numQuestion == $numQuizAttemptCheck) {
         $quiz_name = "SELECT * FROM `quiz` WHERE quiz_id = '$quiz_id'";
         $quiz_name_result = mysqli_query($connection, $quiz_name);
@@ -149,50 +156,48 @@
         ?>
     </div>
 </body>
-
 </html>
 
 <?php
-    if (isset($_POST['submit'])) {
-        // Reset the result set pointer to the beginning
-        mysqli_data_seek($displayQuestionResult, 0);
+        if (isset($_POST['submit'])) {
+            // Reset the result set pointer to the beginning
+            mysqli_data_seek($displayQuestionResult, 0);
 
-        // Loop through each question
-        while ($displayQuestionRow = mysqli_fetch_assoc($displayQuestionResult)) {
-            $question_fetch_id = $displayQuestionRow['quiz_question_id'];
+            // Loop through each question
+            while ($displayQuestionRow = mysqli_fetch_assoc($displayQuestionResult)) {
+                $question_fetch_id = $displayQuestionRow['quiz_question_id'];
 
-            // Check if the corresponding radio button is selected
-            if (isset($_POST['question' . $question_fetch_id])) {
-                $selectedOptionId = $_POST['question' . $question_fetch_id];
+                // Check if the corresponding radio button is selected
+                if (isset($_POST['question' . $question_fetch_id])) {
+                    $selectedOptionId = $_POST['question' . $question_fetch_id];
 
-                // Update the selected option in the quiz_user_answer table
-                $updateAnswerQuery = "UPDATE quiz_user_answer 
-                                    SET answer = '$selectedOptionId'
-                                    WHERE quiz_attempt_id = '$quiz_attempt_id' 
-                                    AND quiz_question_id = '$question_fetch_id'";
-                $updateAnswerResult = mysqli_query($connection, $updateAnswerQuery);
+                    // Update the selected option in the quiz_user_answer table
+                    $updateAnswerQuery = "UPDATE quiz_user_answer 
+                                        SET answer = '$selectedOptionId'
+                                        WHERE quiz_attempt_id = '$quiz_attempt_id' 
+                                        AND quiz_question_id = '$question_fetch_id'";
+                    $updateAnswerResult = mysqli_query($connection, $updateAnswerQuery);
 
-                // Add error handling if needed
-                if (!$updateAnswerResult) {
-                    echo "Error: " . mysqli_error($connection);
+                    // Add error handling if needed
+                    if (!$updateAnswerResult) {
+                        echo "Error: " . mysqli_error($connection);
+                    }
                 }
             }
+
+            $updateQuery = "UPDATE `quiz_attempt` SET 
+                            `quiz_end_time`= CURRENT_TIMESTAMP WHERE `quiz_attempt_id` = '$quiz_attempt_id'";
+            mysqli_query($connection, $updateQuery);
+            unset($_SESSION['quiz_attempt_started']);
+            echo "<script> alert('Answer Submitted Successfully'); </script>";
+            echo "<script> window.location.href='stu-teac-index.php'; </script>";
+            exit(); 
         }
 
-        $updateQuery = "UPDATE `quiz_attempt` SET 
-                        `quiz_end_time`= CURRENT_TIMESTAMP WHERE `quiz_attempt_id` = '$quiz_attempt_id'";
-        mysqli_query($connection, $updateQuery);
-        unset($_SESSION['quiz_attempt_started']);
-        echo "<script> alert('Answer Submitted Successfully'); </script>";
-        echo "<script> window.location.href='stu-teac-index.php'; </script>";
-        exit(); 
-    }
-?>
-
-
-<?php
-
+    // if the number of questions in the quiz is not equal to the number of questions with the specific quiz attempt id
     } else {
+
+        // insert all the questions into the quiz_user_answer table
         while($questionRow = mysqli_fetch_assoc($quetionResult)) {
             $question_id = $questionRow['quiz_question_id'];
             $insertQuery =  "INSERT INTO `quiz_user_answer`(`quiz_attempt_id`, `quiz_question_id`) 
@@ -200,6 +205,7 @@
             $insertResult = mysqli_query($connection, $insertQuery);
         } 
 
+        // redirect to the same page
         header("Location: ".$_SERVER['PHP_SELF']."?id=".$quiz_attempt_id);
         exit();
     }

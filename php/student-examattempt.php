@@ -1,15 +1,18 @@
 <?php
 
+    // include necessary files
     include "dbconn.php"; 
     include "feature-usermenu.php";
     include "student-session.php";
 
+    // fetch user id
     $user_id = $_SESSION['id'];
 
-    // link is exam id 
+    // fetch the exam id from url 
     if(isset($_GET['id'])) {
         $exam_id = $_GET['id'];
 
+        // check if user is allowed to take the exam
         $checkQuery = "SELECT
                         cm.*,
                         c.*,
@@ -26,14 +29,18 @@
                     WHERE 
                         cm.user_id = '$user_id' AND 
                         ce.exam_id = '$exam_id'
-                    "; 
+                    ";        
         $checkResult = mysqli_query($connection, $checkQuery);
 
         if($checkResult) {
+
+            // fetch the number of results
             $rowCheck = mysqli_num_rows($checkResult);
 
+            // user are allowed to take exam
             if ($rowCheck == 1) {
                 $row = mysqli_fetch_assoc($checkResult);
+
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +57,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- container -->
     <div class="container">
         <div class="header">
             <h1><?php echo $row['exam_title']; ?></h1>
@@ -57,12 +66,16 @@
         <div id="description">
             <?php echo $row['exam_description'];?>
         </div>
+
+        <!-- important notes for exam -->  
         <div id="important">
             <b>
                 IMPORTANT: KINDLY AVOID NAVIGATING AWAY FROM THIS PAGE DURING THE EXAMINATION. <br>
                 THIS MAY RESULT IN YOUR RESPONSES NOT BEING REGISTERED IN THE SYSTEM. 
             </b>
         </div>
+
+        <!-- start attempt button -->
         <form action="" method="post">
             <input type="submit" value="Start Attempt" name="submit" class="btnstart">
         </form>
@@ -72,14 +85,26 @@
             
 <?php
 
+            // if user click start attempt button
             if(isset($_POST['submit'])){
+
+                // create a new exam attempt record in exam_attempt table
                 $attemptQuery = "INSERT INTO `exam_attempt`(`exam_id`, `user_id`, `exam_start_time`) 
                                 VALUES ('$exam_id','$user_id', CURRENT_TIMESTAMP)";
                 $attemptResult = mysqli_query($connection, $attemptQuery);
+
+                // if exam attempt record is created successfully
                 if ($attemptResult) {
+
+                    // fetch the exam attempt id
                     $new_id = mysqli_insert_id($connection);
+
+                    // create a feedback section for the exam attempt
                     $feedbackQuery = "INSERT INTO `exam_feedback`(`exam_attempt_id`) VALUES ('$new_id')";
+
                     if(mysqli_query($connection, $feedbackQuery)){
+
+                        // assign a special session for the user, allowing user to attempt the exam
                         $_SESSION['quiz_attempt_started'] = true;
                         header("Location: student-exam.php?id=$new_id");
                     } 
@@ -102,14 +127,11 @@
             }
         }
 
-    
-    
-?>
-
-<?php
-
+    // if exam id is not set in url
     } else {
         $user_id = $_SESSION['id'];
+
+        // fetch all the exam that user is allowed to take
         $classrooms_query = "SELECT
                                 cm.*,
                                 c.*,
@@ -128,6 +150,7 @@
                             ";
         $classrooms_result = mysqli_query($connection, $classrooms_query);
 
+        // if there is exam that user is allowed to take
         if ($classrooms_result && mysqli_num_rows($classrooms_result) > 0) {
 ?>
 
@@ -148,9 +171,10 @@
     <h1 align="center" style="margin: 20px;">Please Select The Exam </h1>
     <ul>
         <?php
-        while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
-            echo '<a class="linktoclassroom" href="student-examattempt.php?id=' . $classroom_row['exam_id'] . '"><li class="choose-classroom">' . $classroom_row['exam_title'] . '</li></a>';
-        }
+        // display all the exam that user is allowed to take
+            while ($classroom_row = mysqli_fetch_assoc($classrooms_result)) {
+                echo '<a class="linktoclassroom" href="student-examattempt.php?id=' . $classroom_row['exam_id'] . '"><li class="choose-classroom">' . $classroom_row['exam_title'] . '</li></a>';
+            }
         ?>
     <br>
     </ul>
@@ -161,6 +185,7 @@
 <?php
 
         } else {
+            // if there is no exam that user is allowed to take
             echo "<script> alert ('No Exam Found!'); </script>";
             echo "<script> window.location.href='stu-teac-index.php'; </script>";
         }

@@ -45,11 +45,18 @@
             $titleRow = mysqli_fetch_assoc($titleResult);
             $quiz_title = $titleRow['quiz_title'];
             $numofAttempt = quiz_attempt_count($quiz_id);
-            $totalMark = calculate_total_marks($quiz_id, $connection); 
-            $averageMark = $totalMark / $numofAttempt;
-            $fullMark = calculate_total_possible_marks($quiz_id, $connection); 
-            $percentage = ($averageMark / $fullMark) * 100;
-            $incorrect = 100 - $percentage; 
+            if ($numofAttempt > 0) {
+                $totalMark = calculate_total_marks($quiz_id, $connection); 
+                $averageMark = $totalMark / $numofAttempt;
+                $fullMark = calculate_total_possible_marks($quiz_id, $connection); 
+                $percentage = ($averageMark / $fullMark) * 100;
+                $incorrect = 100 - $percentage; 
+            } else {
+                $averageMark = 0;
+                $fullMark = 0;
+                $percentage = 0;
+                $incorrect = 0;
+            }
     ?>
 
         <table border="1">

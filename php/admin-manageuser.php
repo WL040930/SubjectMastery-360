@@ -48,7 +48,7 @@
 
     <div id="search-result">
         <div id="result-box">
-            <a href="admin-manageprofile.php?id=<?php echo $row['user_id'];?>">
+            <a class="link-user" href="admin-manageprofile.php?id=<?php echo $row['user_id'];?>">
                 <div>
                     <?php echo $row['username'] ; ?>
                 </div>

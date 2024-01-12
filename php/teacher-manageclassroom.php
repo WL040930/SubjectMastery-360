@@ -54,7 +54,7 @@
                 <th>Classroom Color: </th>
                 <td>
                     <select name="color" id="color">
-                        <option value=<?php $row['classroom_color']?>><?php echo $row['classroom_color'];?></option>
+                        <option value="<?php echo $row['classroom_color']; ?>" selected><?php echo $row['classroom_color']; ?></option>
                         <option value="AliceBlue">Alice Blue</option>
                         <option value="AntiqueWhite">Antique White</option>
                         <option value="Aqua">Aqua</option>
@@ -164,7 +164,7 @@
                 </td>
             </tr>
         </table>
-        <div id="validation-message"></div>
+        <div id="validation-message" align="center"></div>
         <div class="updatebtn">
         <input type="submit" value="Update" name="submit" class="submitbtn">
         </div>
@@ -195,52 +195,69 @@
 <script src="../script/teacher-codevalidation.js"></script>
 
 <?php
-if (isset($_POST['submit'])) {
-    // Form data
-    $classroom_name = $_POST['name'];
-    $classroom_description = $_POST['description'];
-    $classroom_code = $_POST['code'];
-    $classroom_color = $_POST['color'];
+    if (isset($_POST['submit'])) {
+        // Form data
+        $classroom_name = $_POST['name'];
+        $classroom_description = $_POST['description'];
+        $classroom_code = $_POST['code'];
+        $classroom_color = $_POST['color'];
 
-    // Initialize image variables
-    $newImageName = null;
+        // Initialize image variables
+        $newImageName = null;
 
-    // Image processing
-    if ($_FILES["image"]["error"] == 0) {
-        $fileName = $_FILES["image"]["name"];
-        $tmpName = $_FILES["image"]["tmp_name"];
+        // Check if classroom code already exists
+        $existingCodeQuery = "SELECT * FROM `classroom` WHERE `classroom_code`='$classroom_code'";
+        $existingCodeResult = mysqli_query($connection, $existingCodeQuery);
 
-        // Valid image extensions
-        $validImageExtension = ['jpg', 'jpeg', 'png'];
-        $imageExtension = explode('.', $fileName);
-        $imageExtension = strtolower(end($imageExtension));
-
-        if (!in_array($imageExtension, $validImageExtension)) {
-            echo "<script> alert('Invalid Image Extension');</script>";
-        } else {
-            // Move uploaded image to the destination folder
-            $newImageName = uniqid() . '.' . $imageExtension;
-            move_uploaded_file($tmpName, '../data/image' . $newImageName);
+        if (mysqli_num_rows($existingCodeResult) > 0) {
+            $existingCodeRow = mysqli_fetch_assoc($existingCodeResult);
+            if ($existingCodeRow['classroom_id'] == $classroom_id) {
+                // The existing classroom code belongs to the current classroom_id
+                // Proceed with the code approval logic here
+            } else {
+                // The existing classroom code belongs to a different classroom_id
+                echo "<script> alert('Classroom code already exists. Please choose a different code.');</script>";
+                exit();
+            }
         }
+
+        // Image processing
+        if ($_FILES["image"]["error"] == 0) {
+            $fileName = $_FILES["image"]["name"];
+            $tmpName = $_FILES["image"]["tmp_name"];
+
+            // Valid image extensions
+            $validImageExtension = ['jpg', 'jpeg', 'png'];
+            $imageExtension = explode('.', $fileName);
+            $imageExtension = strtolower(end($imageExtension));
+
+            if (!in_array($imageExtension, $validImageExtension)) {
+                echo "<script> alert('Invalid Image Extension');</script>";
+            } else {
+                // Move uploaded image to the destination folder
+                $newImageName = uniqid() . '.' . $imageExtension;
+                move_uploaded_file($tmpName, '../data/image' . $newImageName);
+            }
+        }
+
+        // Update classroom information in the 'classroom' table
+        $query = "UPDATE `classroom` SET `classroom_name`='$classroom_name',
+                    `classroom_description`='$classroom_description', `classroom_code`='$classroom_code',
+                    `classroom_color`='$classroom_color'";
+
+        // Include image information if it exists
+        if ($newImageName) {
+            $query .= ", `classroom_picture`='$newImageName'";
+        }
+
+        $query .= " WHERE `classroom_id`='$classroom_id'";
+
+        mysqli_query($connection, $query);
+
+        echo "<script> alert('Classroom Information Successfully Updated');</script>";
+        echo "<script> window.location.href = 'stu-teac-index.php'; </script>";
     }
 
-    // Update classroom information in the 'classroom' table
-    $query = "UPDATE `classroom` SET `classroom_name`='$classroom_name',
-              `classroom_description`='$classroom_description', `classroom_code`='$classroom_code',
-              `classroom_color`='$classroom_color'";
-
-    // Include image information if it exists
-    if ($newImageName) {
-        $query .= ", `classroom_picture`='$newImageName'";
-    }
-
-    $query .= " WHERE `classroom_id`='$classroom_id'";
-
-    mysqli_query($connection, $query);
-
-    echo "<script> alert('Classroom Information Successfully Updated');</script>";
-    echo "<script> window.location.href = 'stu-teac-index.php'; </script>";
-}
 ?>
 
 <?php

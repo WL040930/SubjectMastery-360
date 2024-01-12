@@ -73,8 +73,10 @@ body{
 
 a{
     text-decoration: none;
+    color: white; /* Add this line to set the link color to white */
 }
 
 a:visited{
     text-decoration: none;
 }
+
