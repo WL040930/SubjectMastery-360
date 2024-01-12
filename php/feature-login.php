@@ -1,29 +1,47 @@
 <?php
 
+    // include database connection file
     include 'dbconn.php';
-    session_start();
 
+    // start session if the session is not started
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    //  Check if the login form is submitted
     if (isset($_POST['btnLogin'])) {
+
+        // retrieve email and password from the login form
         $email = $_POST['email'];
         $password = $_POST['password'];
+
+        // SQL query to retrieve user information from the database based on the email and password
         $query = "SELECT user.*, role.role
                 FROM user
                 LEFT JOIN role ON user.role_id = role.role_id
                 WHERE email_address = '$email' AND password = '$password'";
-                
+        
+        // execute the query
         $result = mysqli_query($connection, $query);
     
+        // check if the query is successful
         if ($result) {
+
+            // fetch the query result as an associative array
             $row = mysqli_fetch_assoc($result);
     
+            // check if the user exists in the database
             if ($row) {
+
+                // store user information in the session
                 $_SESSION['id'] = $row['user_id'];
                 $_SESSION['first_name'] = $row['user_first_name'];
                 $_SESSION['last_name'] = $row['user_last_name'];
                 $_SESSION['email'] = $row['email_address'];
                 $_SESSION['role'] = $row['role'];
                 $role = $_SESSION['role'];
-    
+                
+                // redirect user to the appropriate page based on the role
                 if ($role == null) {
                     header("Location: feature-role.php");
                     exit();
@@ -35,6 +53,7 @@
                     exit();
                 }
             } else {
+                // Display error message if the user does not exist
                 echo "<script>alert('Invalid email or password');</script>";
             }
         } else {
@@ -70,6 +89,7 @@
             SUBJECTMASTERY360
         </div>
         <div id="input">
+            <!--login form-->
             <form action="" method="post">
                 <table>
                     <tr>
@@ -90,6 +110,8 @@
                 </table>
             </form>
         </div>
+
+        <!-- other than login form -->
         <div id="footer">
             <div id="sign-up">
                 Don't have a account? <b><a href="feature-registration.php">Sign up</a></b>
@@ -106,6 +128,7 @@
 
 <?php
 
+    // close the database connection
     mysqli_close($connection);
 
 ?>

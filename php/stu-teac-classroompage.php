@@ -1,15 +1,20 @@
 <?php
 
+    // start output buffering
     ob_start();
+
+    // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
     include "stu-teac-session.php";
 
+    // check id is not in URL
     if (!isset($_GET['id'])) {
         header("Location: stu-teac-index.php");
         exit();
     }
 
+    // check if user is a member of the classroom
     $id = $_GET['id'];
     $user_id = $_SESSION['id'];
 
@@ -24,6 +29,7 @@
         $classroom_member_id = $sqlrow['classroom_member_id'];
     }
 
+    // get classroom name
     $classroom_name_fetch = "SELECT c.* 
                              FROM classroom c 
                              WHERE `classroom_id` = '$id'";
@@ -48,12 +54,14 @@
 
 <body id="all">
 
+    <!-- header -->
     <div class="classroomname">
         <h1><?php echo $classroom_member_row['classroom_name']; ?></h1>
         <?php echo $classroom_member_row['classroom_description']; ?>
     </div>
 
     <?php
+        // get chatroom messages
         $chatquery = "SELECT cms.*, cm.*, u.* 
                       FROM chatroom_messages cms 
                       JOIN classroom_member cm ON cms.classroom_member_id = cm.classroom_member_id
@@ -63,6 +71,8 @@
         $chatresult = mysqli_query($connection, $chatquery); 
         while ($chatrow = mysqli_fetch_assoc($chatresult)) {
     ?>
+
+    <!-- display the chat in box -->
     <div id="chatbox">
         <a href="stu-teac-chat.php?id=<?php echo $chatrow['chatroom_messages_id']; ?>">
             <div id=chat_title>
@@ -76,11 +86,15 @@
             </div>
         </a>
     </div>
+
     <?php
         }
     ?>
+
+    <!-- new chat button -->
     <button onclick="toggleNewChatModal()" class="newchat">New Chat</button>
 
+    <!-- New chat form -->
     <div id="newChatContainer">
         <h2>New Chat</h2>
         <form id="newChatForm" method="post" action="#" enctype="multipart/form-data">
@@ -98,23 +112,27 @@
 
     </div>
 
+    <!-- back button -->
     <div id="backbtn">
         <button class="backbtn" onclick="backtomain()">Back</button>
     </div>
 
     <script>
+        // back to main page
         function backtomain() {
             window.location.href = "stu-teac-index.php";
         }
+
     </script>
 
-<script src="../script/classroom-newchat.js"></script>
+    <script src="../script/classroom-newchat.js"></script>
 
 </body>
 </html>
 
 <?php
 
+    // post new chat
     if(isset($_POST['submit'])) {
         $content = $_POST['chat-content'];
         $title = $_POST['chatroom-title'];
@@ -126,22 +144,31 @@
 
 
         if($result) {
+            
+            // get the chatroom messages id
             $chatid = mysqli_insert_id($connection);
+
+            // upload file
             if(isset($_FILES['fileInput'])) {
                 $file = $_FILES['fileInput'];
 
+                // check if there is no error
                 if($file['error'] == 0) {
                     $fileName = $file['name'];
                     $tmpName = $file['tmp_name'];
 
+                    // generate a unique file name
                     $newFileName = uniqid() . '_' . $fileName;
 
+                    // move the file to the final location
                     move_uploaded_file($tmpName, '../data/file' . $newFileName);
 
+                    // insert into the chatroom attachment table
                     $updateQuery = "INSERT INTO `chatroom_attachment`(`chatroom_messages_id`, `chatroom_attachment_name`)
                                      VALUES ('$chatid','$newFileName')";
                     mysqli_query($connection, $updateQuery);
 
+                    // echo the success message
                     echo "<script> alert('Successfully Added');</script>";
                 } else {
                     echo "<script> alert('Successfully Added');</script>";
@@ -157,7 +184,9 @@
         exit(); 
     }
 
+    // flush output buffer
     ob_end_flush();
+    
 ?>
 
 

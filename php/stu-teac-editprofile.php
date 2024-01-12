@@ -1,24 +1,31 @@
 <?php
+
+    // include necessary file
     include "dbconn.php";
     include "feature-usermenu.php";
 
+    // start the session if not started
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
+    // check if user is logged in
     if (!isset($_SESSION['id'])) {
-        header("Location: stu-teac-index.php");
+        header("Location: feature-logout.php");
         exit();
     } else {
         $user_id = $_SESSION['id'];
     }
 
     $url_id = $_GET['id'];
+
+    // check if user is trying to access another user's profile
     if ($user_id != $url_id) {
         header("Location: stu-teac-index.php");
         exit();
     }
 
+    // get user details
     $sql = "SELECT * FROM user WHERE user_id = '$user_id'";
     $result = mysqli_query($connection, $sql);
     if (mysqli_num_rows($result) == 1) {
@@ -42,9 +49,11 @@
 
 <body>
     <h1 align="center" style="margin: 20px;">Edit Profile - <?php echo $row['user_first_name'] . ' ' . $row['user_last_name']; ?></h1>
+    
+    <!-- display the information in table -->
     <form action="" method="post" enctype="multipart/form-data" onsubmit="return profile_validation()">
         <table border="1">
-        <tr>
+            <tr>
                 <td colspan="2">
                     <img src="../data/image<?php echo $row['profile_picture']; ?>" style="width: 150px; height: 150px;"
                         id="previewImage"> <br>
@@ -78,14 +87,23 @@
                 <td> <input type="text" name="institute" value="<?php echo $row['institute_name']; ?>"></td>
             </tr>
         </table>
+
+        <!-- validation message -->
         <div class="validation_message"></div>
+
+        <!-- submit button -->
         <div class="divsubmit">
-        <input type="submit" name="submit" value="submit" class="submitbtn">
+            <input type="submit" name="submit" value="submit" class="submitbtn">
         </div>
+
     </form>
+
+    <!-- back button -->
     <div class="divback">
-    <button onclick="goBack()" class="backbtn">Back</button>
+        <button onclick="goBack()" class="backbtn">Back</button>
     </div>
+    
+    <!-- include javascript -->
     <script src="../script/feature-back.js"></script>
     <script>
         function handleFileInput() {
@@ -158,12 +176,14 @@
         }
     </script>
 
-<?php } ?>
-</body>
+    <?php } ?>
 
+</body>
 </html>
 
 <?php
+
+    // update profile
     if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $firstname = $_POST['firstname'];
@@ -175,6 +195,7 @@
             $image = $_POST['image'];
         }
 
+        // Update the user details in the database
         $query = "UPDATE `user` SET `username`='$username',`user_first_name`='$firstname',`user_last_name`='$lastname',
                 `password`='$password',`institute_name`='$institute' WHERE user_id = '$user_id'";
         if (mysqli_query($connection, $query)) {
@@ -223,4 +244,5 @@
     }
     
     mysqli_close($connection);
+    
 ?>

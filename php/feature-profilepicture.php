@@ -1,10 +1,14 @@
 <?php 
 
+    // Include database connection file
     include "dbconn.php";
+
+    // Start session if the session is not started
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
 
+    // Check if the user is logged in
     if (isset($_SESSION['id'])) {
         $id = $_SESSION['id'];
     } else {
@@ -37,6 +41,7 @@
             $row = mysqli_fetch_assoc($result);
     ?>
 
+        <!-- Display the information in table -->
         <table border = "1" id=table>
             <tr>
                 <td colspan="2">
@@ -75,12 +80,22 @@
         <br>
         <input type="submit" name="submit" value="Submit" id="submit_button">
     </form>
-    <?php } ?>
+
+    <?php
+
+        } else {
+            // Display an error message if there is no result
+            echo "<script> alert('No Result Found');</script>";
+        }
+
+    ?>
 
 </body>
 </html>
 
     <script>
+
+        // Function to display the selected image in the preview image element
         function handleFileInput() {
             var fileInput = document.getElementById('image');
             var previewImage = document.getElementById('previewImage');
@@ -94,6 +109,7 @@
                 reader.readAsDataURL(selectedFile);
             }
         }
+
     </script>
 
 <?php
@@ -107,12 +123,14 @@
 
         // Check if an image is not provided
         if($_FILES["image"]["error"] == 4){
+
             // Display success message and redirect directly without uploading the image
             echo "<script> alert('Successfully Added');</script>";
             echo "<script>window.location.href='feature-logout.php';</script>";
             exit();
         }
         else{
+
             // Process and upload the new profile picture
             $fileName = $_FILES["image"]["name"];
             $fileSize = $_FILES["image"]["size"];
@@ -123,20 +141,25 @@
             $imageExtension = strtolower(end($imageExtension));
 
             if (!in_array($imageExtension, $validImageExtension) ){
-                 // Display an error message for invalid image extension
+
+                // Display an error message for invalid image extension
                 echo "<script> alert('Invalid Image Extension');</script>";
             } else if($fileSize > 1000000){
+
                 // Display an error message for large image size
                 echo " <script> alert('Image Size Is Too Large'); </script>";
             } else{
+
                 // Generate a unique image name and move the uploaded image to the server
                 $newImageName = uniqid();
                 $newImageName .= '.' . $imageExtension;
 
                 move_uploaded_file($tmpName, '../data/image' . $newImageName);
+
                 // Update the profile picture filename in the database
                 $query = "UPDATE `user` SET `profile_picture`='$newImageName' WHERE user_id = '$id'";
                 mysqli_query($connection, $query);
+                
                 // Display success message and redirect
                 echo "<script> alert('Successfully Added');</script>";
                 echo "<script>window.location.href='feature-logout.php';</script>";

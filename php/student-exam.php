@@ -1,8 +1,10 @@
 <?php
 
+    // include necessary files 
     include "dbconn.php"; 
     include "student-session.php"; 
 
+    // check user attempt id from url
     if(!isset($_GET['id'])) {
         header("location: stu-teac-index.php");
         exit(); 

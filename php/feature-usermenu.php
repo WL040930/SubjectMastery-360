@@ -1,5 +1,6 @@
 <?php
 
+    // include necessary files
     include "dbconn.php";
     include "stu-teac-session.php";
 
@@ -20,6 +21,7 @@
 
 <body id="allmenu">
 
+    <!--header-->
     <div id="header">
         <a href="mainpage.php"><img src="../image/pic_re.png" id="weblogo" alt="logo"></a>
         <div id="webname">
@@ -32,11 +34,14 @@
     </div>
 
     <?php
-    
+
+        // get the role of the user
         $role = $_SESSION['role']; 
         if ($role == 'student') {
 
     ?>
+
+    <!-- student menu -->
     <div id="menu">
         <ul>
             <li>Classroom
@@ -65,9 +70,13 @@
             </li>
         </ul>
     </div>
+
     <?php 
+
         } elseif ($role == 'teacher') {
     ?>
+
+    <!-- teacher menu -->
     <div id="menu">
         <ul>
             <li>Classroom
@@ -112,8 +121,11 @@
             </li>
         </ul>
     </div>
-    <?php 
+
+    <?php
+
         }
+    
     ?>
 </body>
 </html>

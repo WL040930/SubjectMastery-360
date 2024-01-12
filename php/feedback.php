@@ -1,5 +1,6 @@
 <?php
 
+    // include database connection file
     include "dbconn.php"; 
 
 ?>
@@ -35,20 +36,22 @@
     <br>
 
     <?php 
-    // SQL query to fetch user details and feedback
-    $query = "SELECT
-                *
-            FROM
-                user
-            INNER JOIN
-                feedback ON user.user_id = feedback.user_id";
-            
-    // Loop through the result set
-    $result = mysqli_query($connection, $query); 
-    while ($row = mysqli_fetch_assoc($result)) {
+
+        // SQL query to fetch user details and feedback
+        $query = "SELECT
+                    *
+                FROM
+                    user
+                INNER JOIN
+                    feedback ON user.user_id = feedback.user_id";
+                
+        // Loop through the result set
+        $result = mysqli_query($connection, $query); 
+        while ($row = mysqli_fetch_assoc($result)) {
 
     ?>
 
+    <!-- display the feedback content in table form -->
     <div id="feedback-page">
         <div class="feedback-box">
             <div id="profile-picture">
@@ -65,9 +68,12 @@
                     <?php echo "<b>FEEDBACK CONTENT: </b>". $row['feedback_content']; ?>
                 </div>
                 <?php 
+                    // SQL query to fetch feedback attachment
                     $fetchid = $row['feedback_id'];
                     $fetchquery = "SELECT * FROM feedback_attachment WHERE feedback_id = '$fetchid'"; 
                     $fetchresult = mysqli_query($connection, $fetchquery);
+
+                    // if there is attachment, display the attachment
                     if (mysqli_num_rows($fetchresult) > 0) {
                         while ($fetchrow = mysqli_fetch_assoc($fetchresult)) {
                             echo "<div id='attachment'><img src='../data/image". $fetchrow['feedback_file_name']."' height ='200' width='auto'></img></div>"; 

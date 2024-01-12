@@ -1,17 +1,24 @@
 <?php
+
+    // start output buffering
     ob_start(); 
+
+    // include database connection file
     include "dbconn.php";
 
+    // start session if the session is not started
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
+    // check if the user is logged in
     if(!isset($_SESSION['id'])) {
         header("Location: feature-logout.php");
         exit(); 
     } else {
         $user_id = $_SESSION['id'];
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -131,6 +138,7 @@
             <h1>Select Your Role</h1>
         </div>
 
+        <!-- Form allows user to choose their role (student or teacher) -->
         <form action="" method="post">
             <div class="box">
                 <img src="../image/student.png" alt="Student">
@@ -166,6 +174,7 @@
                 <input type="radio" name="role" value="teacher">
             </div>
 
+            <!-- Submit button -->
             <div id="btnSubmit">
                 <input type="submit" value="Next" name="btnNext">
             </div>
@@ -173,6 +182,8 @@
     </div>
 
     <script>
+
+        // Function to enlarge the box when clicked
         document.addEventListener("DOMContentLoaded", function () {
             var boxes = document.getElementsByClassName("box");
             for (var i = 0; i < boxes.length; i++) {
@@ -186,15 +197,21 @@
                 });
             }
         });
-    </script>
-</body>
 
+    </script>
+
+</body>
 </html>
 
 <?php
+
+    // Check if the next button is clicked
     if(isset($_POST['btnNext'])) {
+
+        // Get the selected role
         $selectedRole = $_POST['role']; 
         
+        // Set the role id based on the selected role
         switch ($selectedRole) {
             case 'student':
                 $roleId = 1;
@@ -206,8 +223,11 @@
                 break;
         }
 
+        // Update the role id in the database
         $insertQuery = "UPDATE `user` SET `role_id`='$roleId' WHERE user_id = '$user_id'";
-        $insertResult = mysqli_query($connection, $insertQuery); 
+        $insertResult = mysqli_query($connection, $insertQuery);
+        
+        // Check if the query is executed successfully
         if($insertResult) {
             $_SESSION['role'] = $selectedRole;
             header("Location: stu-teac-index.php"); 
@@ -217,5 +237,8 @@
             echo "<script> window.location.href='feature-logout.php'; </script>";
         }
     }
+
+    // end output buffering
     ob_end_flush(); 
+
 ?>
