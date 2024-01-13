@@ -59,6 +59,7 @@
     <title>Messages</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/stu-teac-chat.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

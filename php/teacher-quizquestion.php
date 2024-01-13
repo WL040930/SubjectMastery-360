@@ -30,6 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
     <link rel="stylesheet" href="../css/teacher-quizquestion.css">
+    <link rel="stylesheet" href="../css/animation.css">
 </head>
 <body>
     
@@ -174,6 +175,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Quiz</title>
     <link rel="stylesheet" href="../css/teacher-quizquestion.css">
+    <link rel="stylesheet" href="../css/animation.css">
 </head>
 <body>
     <h1 align="center">Choose the Quiz you would like to add a question</h1>

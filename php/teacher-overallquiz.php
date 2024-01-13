@@ -25,6 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz Result</title>
     <link rel="stylesheet" href="../css/teacher-overallquiz.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>

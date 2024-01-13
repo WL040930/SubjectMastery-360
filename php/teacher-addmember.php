@@ -125,7 +125,7 @@
                 <td><?php echo $row['username']; ?></td>
                 <td><?php echo $row['email_address']; ?></td>
                 <td>
-                    <a href="teacher-addmember.php?id=<?php echo $id; ?>&remove_member=<?php echo $row['user_id']; ?>"><img src="../image/delete.png" alt="Remove" id="delete"></a>
+                    <a href="teacher-addmember.php?id=<?php echo $id; ?>&remove_member=<?php echo $row['user_id']; ?>"><img src="../image/delete.png" alt="Remove" id="delete" class="deleteicon"></a>
                 </td>
             </tr>
         

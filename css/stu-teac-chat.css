@@ -149,3 +149,20 @@ h4{
 .backtopage:hover{
     background-color: #BCA37F;
 }
+
+.attachment-box {
+    border-style: none;
+}
+
+.attachment-box:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    border-style: none;
+}
+
+.download-link:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    border-style: none;
+    background-color: #BCA37F;
+}

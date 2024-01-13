@@ -19,6 +19,7 @@
     <title>Admin - Manage User</title>
     <link rel="stylesheet" href="../css/adminmenu.css">
     <link rel="stylesheet" href="../css/admin-manageuser.css">
+    <link rel="stylesheet" href="../css/animation.css">
 </head>
 
 

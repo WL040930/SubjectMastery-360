@@ -31,6 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
     <link rel="stylesheet" href="../css/teacher-examquestion.css">
+    <link rel="stylesheet" href="../css/animation.css">
 </head>
 <body>
     
@@ -166,6 +167,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose Exam</title>
     <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/animation.css">
     <link rel="stylesheet" href="../css/teacher-examquestion.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">

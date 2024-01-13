@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Classroom</title>
     <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/animation.css">
     <link rel="stylesheet" href="../css/teacher-createclassroom.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">

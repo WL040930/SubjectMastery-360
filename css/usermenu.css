@@ -133,7 +133,6 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
-
 #menu ul li:hover {
     transform: translateY(-5px);
     transition: transform 0.3s ease-in-out;
@@ -143,3 +142,11 @@ body {
     transform: translateX(10px);
     transition: transform 0.3s ease-in-out;
 }   
+
+#weblogo {
+    transition: transform 0.3s ease-in-out;
+}
+
+#logo-link:hover #weblogo {
+    transform: scale(1.2); /* Adjust the scale factor as needed */
+}

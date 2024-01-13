@@ -76,6 +76,7 @@
     <title>Login - SubjectMastery360</title>
     <link rel="stylesheet" href="../css/login.css">
     <link rel="icon" href="../image/icon.png">
+    <link rel="stylesheet" href="../css/animation.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

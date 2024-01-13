@@ -29,6 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Role Selection</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;

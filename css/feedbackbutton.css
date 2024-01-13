@@ -70,3 +70,13 @@ input[type="submit"]:hover {
     height: 40px;
     padding: 3px;
 }
+
+.feedback-btn:hover {
+    transform: scale(1.1);
+    animation: scaleAnimation 0.3s ease-in-out;
+}
+
+@keyframes scaleAnimation {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}

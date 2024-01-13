@@ -47,6 +47,7 @@
     <title>Quiz Attempt</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/student-quizexamattempt.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,6 +156,7 @@
     <title>Choose Quiz</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/student-quizexamattempt.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

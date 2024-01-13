@@ -74,3 +74,27 @@ input::placeholder {
     text-align: center;
     align-items: center;
 }
+
+.deleteicon{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.deleteicon:hover {
+    transition: transform 0.3s ease-in-out;
+}
+
+.deleteicon:hover {
+    animation: scaleAnimation 0.3s ease-in-out infinite;
+}

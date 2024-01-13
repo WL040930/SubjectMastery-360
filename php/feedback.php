@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/admin-viewfeedback.css">
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/mainpage.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <!--font-->
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>

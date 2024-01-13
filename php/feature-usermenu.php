@@ -19,17 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 
-<style>
-    #weblogo {
-    transition: transform 0.3s ease-in-out;
-}
-
-#logo-link:hover #weblogo {
-    transform: scale(1.2); /* Adjust the scale factor as needed */
-}
-
-</style>
-
 <body id="allmenu">
 
     <!--header-->

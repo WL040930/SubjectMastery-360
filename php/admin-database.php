@@ -59,6 +59,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Database</title>
     <link rel="stylesheet" href="../css/admin-database.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

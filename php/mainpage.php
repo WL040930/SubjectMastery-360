@@ -15,6 +15,7 @@
     <title>Home - SubjectMastery360</title>
     <link rel="icon" href="../image/icon.png">
     <link rel="stylesheet" href="../css/mainpage.css">
+    <link rel="stylesheet" href="../css/animation.css">
     <script src="../script/mainpage.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

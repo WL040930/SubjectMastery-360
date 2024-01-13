@@ -28,7 +28,7 @@
 
 <body>
     <!-- Feedback button triggering a modal -->
-    <button onclick="toggleNewChatModal()"><img src="../image/feedback.png" alt="feedback-image" id="image"></button>
+    <button onclick="toggleNewChatModal()" class="feedback-btn"><img src="../image/feedback.png" alt="feedback-image" id="image"></button>
 
         <!-- input field for feedback -->
         <div id="newChatContainer">
