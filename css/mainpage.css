@@ -67,6 +67,7 @@ body {
 
 .menu1, .menu2, .menu3{
     text-decoration: none;
+    color: white;
 }
 
 .menu1:visited, .menu2:visited, .menu3:visited{
