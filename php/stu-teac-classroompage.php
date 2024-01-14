@@ -170,18 +170,21 @@
                                      VALUES ('$chatid','$newFileName')";
                     mysqli_query($connection, $updateQuery);
 
-                    // echo the success message
+                    // echo the success message if the file is uploaded
                     echo "<script> alert('Successfully Added');</script>";
                 } else {
                     echo "<script> alert('Successfully Added');</script>";
+                    header('Location: stu-teac-classroompage.php?id=' . $_GET['id']);
+                    exit();
                 }
             } else {
                 echo "<script> alert('Successfully Added');</script>";
-                header('Location: stu-teac-classroompage.php');
             }
         } else {
             echo "<script> alert('Error creating chat') </script>";
+            exit();
         }
+
         header('Location: stu-teac-classroompage.php?id=' . $_GET['id']);
         exit(); 
     }
@@ -190,6 +193,3 @@
     ob_end_flush();
     
 ?>
-
-
-// CHECK
