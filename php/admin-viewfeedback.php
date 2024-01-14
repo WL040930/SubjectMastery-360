@@ -38,33 +38,50 @@
 
     ?>
 
-    <div id="feedback-page">
-        <div class="feedback-box">
-            <div id="profile-picture">
-                <img src="../data/<?php echo 'image' . $row["profile_picture"]; ?>" width="200" height="200" title="<?php echo $row['profile_picture']; ?>">
+    <div class="feedback-box">
+        <div class="personal-info">
+            <table class="table-feedback">
+                <tr>
+                    <td rowspan="2" class="feedback-column">
+                        <div id="profile-picture" style="border: 0px">
+                            <img class="profile-picture" src="../data/<?php echo 'image' . $row["profile_picture"]; ?>" width="50" height="50" title="<?php echo $row['profile_picture']; ?>">
+                        </div>
+                    </td>
+                    <td class="feedback-column">
+                        <b>User ID: </b>
+                    </td>
+                    <td class="feedback-column">
+                        <div id="user-id">
+                            <?php echo $row['user_id']; ?>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="feedback-column">
+                        <b>Username: </b>
+                    </td>
+                    <td class="feedback-column">
+                        <div id="username">
+                            <?php echo $row['username']; ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="feedback-content">
+            <div id="feedback-content">
+                <?php echo "<b>FEEDBACK CONTENT: <br></b>". $row['feedback_content']; ?>
             </div>
-            <div id="content-box">
-                <div id="user-id">
-                    <?php echo "<b>ID: </b>". $row['user_id']; ?>
-                </div>
-                <div id="username">
-                    <?php echo "<b>USERNAME: </b>". $row['username']; ?>
-                </div>
-                <div id="feedback-content">
-                    <?php echo "<b>FEEDBACK CONTENT: </b>". $row['feedback_content']; ?>
-                </div>
-                <?php 
-                    $fetchid = $row['feedback_id'];
-                    $fetchquery = "SELECT * FROM feedback_attachment WHERE feedback_id = '$fetchid'"; 
-                    $fetchresult = mysqli_query($connection, $fetchquery);
-                    if (mysqli_num_rows($fetchresult) > 0) {
-                        while ($fetchrow = mysqli_fetch_assoc($fetchresult)) {
-                            echo "<div id='attachment'><img src='../data/image". $fetchrow['feedback_file_name']."' height ='200' width='auto'></img></div>"; 
-                        }
+            <?php 
+                $fetchid = $row['feedback_id'];
+                $fetchquery = "SELECT * FROM feedback_attachment WHERE feedback_id = '$fetchid'"; 
+                $fetchresult = mysqli_query($connection, $fetchquery);
+                if (mysqli_num_rows($fetchresult) > 0) {
+                    while ($fetchrow = mysqli_fetch_assoc($fetchresult)) {
+                        echo "<div id='attachment'><img src='../data/image". $fetchrow['feedback_file_name']."' height ='200' width='auto'></img></div>"; 
                     }
-                ?>
-            </div>
-            <div style="clear: both"></div>
+                }
+            ?>
         </div>
     </div>
 </body>
