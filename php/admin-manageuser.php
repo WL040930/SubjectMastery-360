@@ -69,7 +69,7 @@
                 }
             } else {
                 // Display an error message if no email is entered
-                echo '<div id="error_msg">ERROR: Please Enter Your Email Address !</div>';
+                echo '<div id="error_msg">ERROR: Please Enter Email Address !</div>';
             }
         }
     

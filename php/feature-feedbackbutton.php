@@ -42,7 +42,6 @@
 
                 <input type="submit" value="Submit" name="submit">
             </form>
-
         </div>
 
     <script src="../script/classroom-newchat.js"></script>

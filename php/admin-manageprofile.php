@@ -139,12 +139,12 @@
                 //update Successful
             } else {
                 // Display an error message if the update is unsuccessful
-                echo "<div id='error_msg'><br>ERROR: Record Update Unsuccessful, Please Try Again.<br><br></div>";
+                echo "<div id='error_msg' style='text-align:center; '><br>ERROR: Record Update Unsuccessful, Please Try Again.<br><br></div>";
                 exit(); 
             }
         } else {
             // Display an error message if required fields are empty
-            echo "<div id='error_msg'><br>ERROR: Username, First Name, Last Name and Password Cannot be Null.<br><br></div>";
+            echo "<div id='error_msg' style='text-align:center;' ><br>ERROR: Username, First Name, Last Name and Password Cannot be Null.<br><br></div>";
             exit(); 
         }
 
@@ -182,7 +182,7 @@
                 mysqli_query($connection, $query);
                 // Display success message and redirect
                 echo "<script> alert('Successfully Added');</script>";
-                echo "<script>window.location.href='admin-manageuser.php';</script>";
+                echo "<script> window.location.href='admin-manageuser.php';</script>";
             }
         }
     }

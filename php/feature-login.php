@@ -17,9 +17,9 @@
 
         // SQL query to retrieve user information from the database based on the email and password
         $query = "SELECT user.*, role.role
-                FROM user
-                LEFT JOIN role ON user.role_id = role.role_id
-                WHERE email_address = '$email' AND password = '$password'";
+                  FROM user
+                  LEFT JOIN role ON user.role_id = role.role_id
+                  WHERE email_address = '$email' AND password = '$password'";
         
         // execute the query
         $result = mysqli_query($connection, $query);

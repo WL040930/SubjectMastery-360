@@ -23,17 +23,18 @@
 <body id="all">
 
     <?php 
-    // SQL query to fetch user details and feedback
-    $query = "SELECT
-                *
-            FROM
-                user
-            INNER JOIN
-                feedback ON user.user_id = feedback.user_id";
-            
-    // Loop through the result set
-    $result = mysqli_query($connection, $query); 
-    while ($row = mysqli_fetch_assoc($result)) {
+    
+        // SQL query to fetch user details and feedback
+        $query = "SELECT
+                    *
+                FROM
+                    user
+                INNER JOIN
+                    feedback ON user.user_id = feedback.user_id";
+                
+        // Loop through the result set
+        $result = mysqli_query($connection, $query); 
+        while ($row = mysqli_fetch_assoc($result)) {
 
     ?>
 

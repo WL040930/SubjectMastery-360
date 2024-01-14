@@ -13,7 +13,7 @@
 
     // Check if user is logged in
     if (!isset($_SESSION['id'])) {
-        header("Location: logout.php");
+        header("Location: feature-logout.php");
         exit();
     }
     

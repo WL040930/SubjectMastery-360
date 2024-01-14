@@ -27,13 +27,13 @@
         $queryResult = mysqli_query($connection, $checkquery);
         $queryRow = mysqli_fetch_assoc($queryResult);
         if ($queryRow['role'] == "admin") {
-           echo "<script> alert('You are not allowed to delete admin. ') </script>"; 
+            echo "<script> alert('You are not allowed to delete admin. ') </script>"; 
             exit();
         }
         // Construct delete query and execute
         $deleteQuery = "DELETE FROM `user` WHERE user_id = '$id'";
         mysqli_query($connection, $deleteQuery);
-        // You can add additional logic or redirection after deletion
+
         echo "<script>alert('Account deleted successfully!');";
     }
 

@@ -8,7 +8,6 @@
     include "feature-usermenu.php";
     include "stu-teac-session.php";
 
-    // check if user is logged in
     if(isset($_GET['id'])) {
         $messages_id = $_GET['id'];
 
@@ -46,8 +45,6 @@
         $checkRow = mysqli_fetch_assoc($checkResult);
         $classroom_member_id = $checkRow['classroom_member_id'];
     }
-
-    
 
 ?>
 
