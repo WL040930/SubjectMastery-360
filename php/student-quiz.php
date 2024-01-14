@@ -14,8 +14,8 @@
     
     // check if the user is allowed to take the quiz
     if (!isset($_SESSION['quiz_attempt_started']) || !$_SESSION['quiz_attempt_started']) {
-        echo "<script>You are not allowed to join the quiz directly</script>";
-        echo "<script>window.location.href='stu-teac-index.php'</script>";
+        echo "<script> alert('You are not allowed to join the quiz directly'); </script>";
+        echo "<script> window.location.href='stu-teac-index.php'</script>";
         exit();
     }
 
@@ -174,9 +174,9 @@
 
                     // Update the selected option in the quiz_user_answer table
                     $updateAnswerQuery = "UPDATE quiz_user_answer 
-                                        SET answer = '$selectedOptionId'
-                                        WHERE quiz_attempt_id = '$quiz_attempt_id' 
-                                        AND quiz_question_id = '$question_fetch_id'";
+                                          SET answer = '$selectedOptionId'
+                                          WHERE quiz_attempt_id = '$quiz_attempt_id' 
+                                          AND quiz_question_id = '$question_fetch_id'";
                     $updateAnswerResult = mysqli_query($connection, $updateAnswerQuery);
 
                     // Add error handling if needed

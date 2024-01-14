@@ -91,7 +91,8 @@
                     // create a new feedback for the quiz attempt
                     $feedbackquery = "INSERT INTO `quiz_feedback`(`quiz_attempt_id`)
                                         VALUES ('$new_id')";
-                    if(mysqli_query($connection, $feedbackquery)){
+                    if(mysqli_query($connection, $feedbackquery)) {
+                        // assign a temporary session variable, allows user to take the quiz
                         $_SESSION['quiz_attempt_started'] = true;
                         header("Location: student-quiz.php?id=$new_id");
                     } 
@@ -115,7 +116,7 @@
                 exit();
             }
         } else {
-            // uswer is not allowed to take the exam
+            // user is not allowed to take the exam
             echo "<script> alert ('You are not allowed to take the Quiz. ');</script>";
             echo "<script> window.location.href='stu-teac-index.php'; </script>";
             exit(); 

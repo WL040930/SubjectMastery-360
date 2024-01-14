@@ -42,6 +42,7 @@
             echo "<h2 align='center'>No Quiz Attempt</h2> <br>";
         } else {
             // if user has quiz attempt, display the message
+
     ?>
 
     <!-- A drop down list allows user to select the specific -->
@@ -118,7 +119,7 @@
 
     <?php
 
-        // fetch the question adn answer for the quiz attempt
+        // fetch the question and answer for the quiz attempt
         $fetchResultQuery = "SELECT qq.*, qo.*, qua.*, qf.quiz_feedback_content 
                              FROM quiz_user_answer qua 
                              JOIN quiz_question qq ON qua.quiz_question_id = qq.quiz_question_id 

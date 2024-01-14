@@ -14,7 +14,7 @@
 
     // check if user is allowed to join the exam
     if (!isset($_SESSION['quiz_attempt_started']) || !$_SESSION['quiz_attempt_started']) {
-        echo "<script>You are not allowed to join the exam directly</script>";
+        echo "<script> alert('You are not allowed to join the exam directly'); </script>";
         echo "<script>window.location.href='stu-teac-index.php'</script>";
         exit();
     }
