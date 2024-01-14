@@ -36,7 +36,7 @@
         </div>
         <br>
         <div id="ab_image">
-            <img src="../image/pug-03.jpg" alt="aboutus" id="ab_imagecon">
+            <img src="../image/aboutus.jpeg" alt="aboutus" id="ab_imagecon">
         </div>
         <div id="ab_content">
             <p id="ab_pcontent">

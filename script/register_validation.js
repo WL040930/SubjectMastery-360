@@ -40,6 +40,7 @@ function register_validation() {
         return false;
     }
 
+    //create an array to include all the requirement of the password
     var passwordRequirements = [
         uppercase,
         lowercase,
