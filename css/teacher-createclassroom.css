@@ -95,3 +95,11 @@ option:hover {
 .submitbtn {
     text-align: center;
 }
+
+form {
+    width: 80%;
+}
+
+input[type="text"] {
+    width: 100%
+}

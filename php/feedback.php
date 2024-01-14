@@ -62,21 +62,21 @@
                         </div>
                     </td>
                     <td class="feedback-column">
-                        <b>User ID: </b>
+                        <b>Username: </b>
                     </td>
                     <td class="feedback-column">
                         <div id="user-id">
-                            <?php echo $row['user_id']; ?>
+                            <?php echo $row['username']; ?>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="feedback-column">
-                        <b>Username: </b>
+                        <b>Email Address: </b>
                     </td>
                     <td class="feedback-column">
                         <div id="username">
-                            <?php echo $row['username']; ?>
+                            <?php echo $row['email_address']; ?>
                         </div>
                     </td>
                 </tr>

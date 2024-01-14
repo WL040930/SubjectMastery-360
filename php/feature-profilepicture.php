@@ -46,7 +46,7 @@
         <table border = "1" id=table>
             <tr>
                 <td colspan="2">
-                    <img src="../data/image<?php echo $row['profile_picture']; ?>" style="width: 150px; height: 150px;"
+                    <img src="../data/image<?php echo $row['profile_picture']; ?>" style="width: 150px; height: 150px; border-radius: 50%;"
                         id="previewImage"> <br>
                     <label for="image" class="custom-file-input">
                         <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" onchange="handleFileInput()">

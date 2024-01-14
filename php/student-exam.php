@@ -113,9 +113,10 @@
             ?>
             
             <br>
-            
-            <!--display the question and the answer box-->
-            <input id="exam_question" type="text" value="<?php echo $displayQuestionRow['exam_question']; ?>" disabled><br>
+            <div class="exam_question">
+            <?php echo $displayQuestionRow['exam_question']; ?>
+            </div>
+            <!--display the question and the answer box--><br>
             <textarea id="exam_ans" name="answers[]" style="resize: none; width: 80%; height: 100px; "><?php echo $displayQuestionRow['exam_user_answer']; ?></textarea><br>
     
             <?php
@@ -137,13 +138,21 @@
                     // the answer will be updated according to the exam_user_answer_id
                     foreach ($answers as $index => $answer) {
                         $exam_user_answer_id = ($array[$index]);
-                        $query = "UPDATE `exam_user_answer` SET 
-                                `exam_user_answer`='$answer' WHERE `exam_user_answer_id` = '$exam_user_answer_id'"; 
-                        $result = mysqli_query($connection, $query);
+                    
+                        // Use prepared statement to avoid SQL injection
+                        $query = "UPDATE `exam_user_answer` SET `exam_user_answer` = ? WHERE `exam_user_answer_id` = ?";
+                        $stmt = mysqli_prepare($connection, $query);
+                    
+                        // Bind parameters
+                        mysqli_stmt_bind_param($stmt, "si", $answer, $exam_user_answer_id);
+                    
+                        // Execute the statement
+                        $result = mysqli_stmt_execute($stmt);
+                    
                         if (!$result) {
                             die("Database query failed." . mysqli_error($connection));
                         }
-                    }
+                    }                    
 
                     // update the exam_end_time in exam_attempt table
                     $updateQuery = "UPDATE `exam_attempt` SET 

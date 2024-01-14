@@ -104,7 +104,7 @@
                         <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td rolspan="3" align="right" id="login_button">
+                        <td rolspan="3" id="login_button">
                             <input type="submit" value="Login" name="btnLogin" id="login_button">
                         </td>
                     </tr>

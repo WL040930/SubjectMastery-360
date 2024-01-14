@@ -88,7 +88,7 @@
             </tr>
             <tr>
                 <th>Profile Picture</th>
-                <td><img src="../data/image<?php echo $row['profile_picture']?>" style="width: 200px; height: 200px;"></td>
+                <td><img src="../data/image<?php echo $row['profile_picture']?>" style="width: 200px; height: 200px; border-radius: 50%;"></td>
             </tr>
         </table>
 

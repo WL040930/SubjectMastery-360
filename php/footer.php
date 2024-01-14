@@ -19,11 +19,11 @@
                 <table class="footer-table">
                     <tr>
                         <td><img src="../image/follow1.webp" alt="follow our instagram" id="fol_img1"></td>
-                        <td><a href="https://www.instagram.com/" id="fol_con1">@SubjectMastery360</a></td>
+                        <td><a href="https://www.instagram.com/" id="fol_con1" target="_blank">@SubjectMastery360</a></td>
                     </tr>
                     <tr>
                         <td><img src="../image/follow2.png" alt="follow our YouTube" id="fol_img2"></td>
-                        <td><a href="https://www.youtube.com/" id="fol_con2">SubjectMastery360</a></td>
+                        <td><a href="https://www.youtube.com/" id="fol_con2" target="_blank">SubjectMastery360</a></td>
                     </tr>
                 </table>
             </div>

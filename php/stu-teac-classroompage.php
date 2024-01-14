@@ -57,8 +57,10 @@
 
     <!-- header -->
     <div class="classroomname">
-        <h1><?php echo $classroom_member_row['classroom_name']; ?></h1>
-        <?php echo $classroom_member_row['classroom_description']; ?>
+        <h1 style="font-size: 45px; "><?php echo $classroom_member_row['classroom_name']; ?></h1>
+        <div class="description-class">
+            <?php echo $classroom_member_row['classroom_description']; ?>
+        </div>
     </div>
 
     <?php
@@ -136,14 +138,13 @@
 
     // post new chat
     if(isset($_POST['submit'])) {
-        $content = $_POST['chat-content'];
-        $title = $_POST['chatroom-title'];
+        $content = mysqli_real_escape_string($connection, $_POST['chat-content']);
+        $title = mysqli_real_escape_string($connection, $_POST['chatroom-title']);
 
         // Insert chat content into the database
         $query = "INSERT INTO `chatroom_messages`(`classroom_member_id`, `chatroom_messages_content`, `chatroom_title`, `chatroom_messages_timestamp`) 
                 VALUES ('$classroom_member_id', '$content', '$title', CURRENT_TIMESTAMP)";
         $result = mysqli_query($connection, $query);
-
 
         if($result) {
             

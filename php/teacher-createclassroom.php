@@ -30,8 +30,8 @@
             </div><br>
 
             <div class="inp-box">
-                <label for="description">Classroom Description: </label>
-                <input type="text" name="description">
+                <label for="description">Classroom Description: </label> <br>
+                <textarea name="description" style="resize: none; width: 100%; height: 120px;"></textarea>
             </div><br>
 
             <div class="inp-box">
@@ -45,7 +45,7 @@
             </div><br>
 
             <div class="inp-box">
-                <label for="color">Classroom's Background Color</label>
+                <label for="color">Classroom's Background Color: </label>
                 <select name="color" id="color">
                     <option value="AliceBlue">Alice Blue</option>
                     <option value="AntiqueWhite">Antique White</option>
@@ -173,7 +173,7 @@
         // Check if the user has uploaded an image
         if($_FILES["image"]["error"] == 4){
             // If the user has not uploaded an image, set the image name to null
-            $newImageName = null;
+            $newImageName = "book.jpg";
         } else {
             $fileName = $_FILES["image"]["name"];
             $tmpName = $_FILES["image"]["tmp_name"];

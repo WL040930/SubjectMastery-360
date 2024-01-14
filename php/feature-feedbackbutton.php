@@ -54,13 +54,13 @@
     if(isset($_POST['submit'])) {
 
         // retrieve feedback content from the page
-        $feedbackContent = $_POST['feedback-content'];
+        $feedbackContent = mysqli_real_escape_string($connection, $_POST['feedback-content']);
 
-        // insert feedback into database
+        // Form the SQL query
         $query = "INSERT INTO `feedback`(`user_id`, `feedback_content`) 
                 VALUES ('$user_id','$feedbackContent')";
 
-        // execute the query
+        // Execute the query
         $result = mysqli_query($connection, $query);
 
         // if the query is executed successfully

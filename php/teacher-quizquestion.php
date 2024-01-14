@@ -55,7 +55,7 @@
     <script>
         // Function to exit the page
         function exit() {
-            if (confirm('Do you want to leave the page? ONCE YOU LEAVE, YOU WILL NOT BE ABLE TO ADD QUESTION AGAIN.')) {
+            if (confirm('Do you want to leave the page?')) {
                 window.location.href = 'stu-teac-index.php';
             }
         }

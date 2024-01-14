@@ -146,3 +146,17 @@ input {
     transform: scale(1.02);
     transition: transform 0.3s ease;
 }
+
+.description-class {
+    font-size: 17px;
+    text-align: justify;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 25px;
+    border: 3px solid #BCA37F;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #EAD7BB;
+    word-spacing: 1.2;
+}
