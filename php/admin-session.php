@@ -5,7 +5,7 @@
         session_start();
     }
 
-    //check whether the user has login or not
+    // check whether the user has login or not
     if(!isset($_SESSION['id']) && !isset($_SESSION['role'])) {
         echo "<script> alert('Please Login First.');</script>";
         echo "<script> window.location.href='feature-logout.php' </script>";
