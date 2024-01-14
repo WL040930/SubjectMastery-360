@@ -1,0 +1,108 @@
+body{
+    background-color: #FFF2D8;
+    margin: 0;
+    padding: 0;
+}
+
+/*header*/
+#ab_logomenu{
+    width: auto;
+    height: 125px;
+    background-color: #EAD7BB;
+}
+
+#ab_weblogo{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    float: left;
+    justify-content: left;
+}
+
+#ab_webname{
+    float: left;
+    margin-left: 15px;
+    font-size: 22px;
+    font-style: italic;
+    font-family: 'Exo 2', sans-serif;
+    justify-content: right;
+    color: black;
+}
+
+/*menubar*/
+#ab_menubar {
+    height: 90px;
+    font-size: 20px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 35px;
+    background-color: #BCA37F;
+    color: white;
+    display: flex;
+    justify-content: right;
+    border-radius: 10px;
+}
+
+.ab_menubar_content {
+    border-spacing: 10px;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    color: black;
+    width: 100%;
+    justify-content: center;
+}
+
+.ab_menu1, .ab_menu2, .ab_menu3{
+    text-decoration: none;
+    color: white;
+}
+
+.ab_menu1:visited, .ab_menu2:visited, .ab_menu3:visited{
+    color: white;
+}
+
+.ab_menu1:hover, .ab_menu2:hover, .ab_menu3:hover{
+    color: #4c4438;
+}
+
+/*content*/
+/*#ab_title{
+    width: auto;
+    height: 85px;
+}
+*/
+#ab_titlecon{
+    text-align: center;
+    font-size: 50px;
+}
+
+#ab_content{
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+#ab_pcontent{
+    text-align: justify;
+    font-size: 20px;
+    word-spacing: 8px;
+}
+
+/*image*/
+#ab_image{
+    width: 90%;
+    height: 660px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#ab_imagecon{
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px 0px black;
+    border-radius: 8px;
+}

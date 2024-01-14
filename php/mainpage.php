@@ -35,7 +35,7 @@
                 <!--connect to HOME-->
                 <th><a href="mainpage.php" class="menu1">HOME</a></th>
                 <!--connect to ABOUT US-->
-                <th><a href="" class="menu2">ABOUT US</a></th>
+                <th><a href="aboutus.php" class="menu2">ABOUT US</a></th>
                 <!--connect to CUSTOMER FEEDBACK-->
                 <th><a href="feedback.php" class="menu3">CUSTOMER FEEDBACK</a></th>   
             </table>
