@@ -55,9 +55,7 @@
     <script>
         // Function to exit the page
         function exit() {
-            if (confirm('Do you want to leave the page?')) {
-                window.location.href = 'stu-teac-index.php';
-            }
+            window.location.href = "teacher-managequiz.php?id=<?php echo $quiz_id; ?>";
         }
     </script>
     <script src="../script/clear-form-quiz.js"></script>

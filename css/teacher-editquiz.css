@@ -1,0 +1,91 @@
+.headerquiz{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+table{
+margin-left: 95px;
+align-items: center;
+width: 85%;
+margin-top: 18px;
+border-spacing: 3px;
+}
+
+th, td{
+text-align: center;
+align-items: center;
+border: 3px solid black;
+padding: 10px;
+}
+
+th {
+background-color: #7E6E57;
+color: white;
+text-align: center;
+padding: 10px;
+font-size: 19px;
+}
+
+td{
+background-color: #edf1f7;
+font-size: 17px;
+}
+
+input[type="text"], input[type="password"] {
+width: 90%;
+padding: 10px;
+font-size: 16px;
+background-color: #edf1f7;
+border: none; /* Disable the border */
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+background-color: #D0E2F5;
+}
+
+.submitbtn {
+height: 35px;
+padding: 10px 20px;
+font-size: 18px;
+background-color: #7E6E57;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+text-align: center;
+}
+
+.submitbtn:hover{
+background-color: #BCA37F;
+}
+
+.divsubmit {
+text-align: center;
+margin: 25px;
+}
+
+.exit-btn2 {
+    height: 35px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #7E6E57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    }
+    
+.exit-btn2:hover{
+background-color: #BCA37F;
+}
+
+.exit-btn {
+text-align: center;
+margin: 25px;
+}

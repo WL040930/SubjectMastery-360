@@ -43,8 +43,19 @@
     <div id="container">
         <!-- form to create exam -->
         <form action="" method="post">
+            <table>
+                <tr>
+                    <th>Exam Name: </th>
+                    <td><input class="inp-box" type="text" name="exam_name" placeholder="Exam Name" required> <br></td>
+                </tr>
+                <tr>
+                    <th>Exam Description: </th>
+                    <td><textarea name="inp-box" id="description" name="exam_description" placeholder="Exam Description" cols="30" rows="10"></textarea></td>
+                </tr>
+            </table>
+            <!--
             <div id="exam_name">
-                <div class="name-con"><b>Exam Name: </b></div>
+                <div class="name-con"><b>Exam Name: </b></div> <br>
                 <input class="inp-box" type="text" name="exam_name" placeholder="exam name" required> <br>
             </div>
             <div style="clear: both"></div>
@@ -53,6 +64,7 @@
                 <input class="inp-box" id="description" type="text" name="exam_description" placeholder="exam description"> <br>
             </div>
             <div style="clear: both"></div>
+            -->
             <div id="classroomsubmit_button">
                 <input type="submit" value="Create" name="submit">
             </div>

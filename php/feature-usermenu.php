@@ -93,13 +93,13 @@
                     <li>Quiz
                         <ul>
                             <li><a href="teacher-createquiz.php">Create Quiz</a></li>
-                            <li><a href="teacher-quizquestion.php">Add Quiz Question</a></li>
+                            <li><a href="teacher-managequiz.php">Manage Quiz</a></li>
                         </ul>
                     </li>
                     <li>Exam
                         <ul>
                             <li><a href="teacher-createexam.php">Create Exam</a></li>
-                            <li><a href="teacher-examquestion.php">Add Exam Question</a></li>
+                            <li><a href="teacher-manageexam.php">Manage Exam</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -32,7 +32,7 @@
 
             <div class="inp-box">
                 <label for="description">Classroom Description: </label> <br>
-                <textarea name="description" style="resize: none; width: 100%; height: 120px;"></textarea>
+                <textarea style="resize: none; width: 100%; height: 120px;" name="description"></textarea>
             </div><br>
 
             <div class="inp-box">
@@ -170,7 +170,7 @@
 <?php
 
     // Check if the user has submitted the form
-    if(isset($_POST["submit"])){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])){
         // Check if the user has uploaded an image
         if($_FILES["image"]["error"] == 4){
             // If the user has not uploaded an image, set the image name to null
