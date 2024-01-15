@@ -3,6 +3,7 @@
     // include necessary files
     include "dbconn.php";
     include "feature-usermenu.php";
+    include "teacher-session.php";
 
 ?>
 

@@ -102,7 +102,7 @@
 
             <?php
                 if($displayQuestionRow['quiz_attachment'] != null) {
-                    echo "<img class='attachment-image' src='../data/image".$displayQuestionRow['quiz_attachment']."'>";
+                    echo "<img class='attachment-image' src='../data/image" . $displayQuestionRow['quiz_attachment'] . "'>";
                 }
             ?>
 
