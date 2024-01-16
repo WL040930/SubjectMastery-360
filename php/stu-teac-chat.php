@@ -131,7 +131,7 @@
 
         <div id="reply-box">
             <div id="username"><b>Username: </b><?php echo $replyRow['username']; ?> <br></div>
-            <div id="timestap"><b>Timestap: </b><?php echo $replyRow['reply_timestamp']; ?> <br></div>
+            <div id="timestap"><b>Timestamp: </b><?php echo $replyRow['reply_timestamp']; ?> <br></div>
             <div id="replytext"><b>Content: </b><?php echo $replyRow['reply_text']; ?></div>
         </div>
 

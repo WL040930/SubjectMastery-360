@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <th>Exam Description: </th>
-                    <td><textarea name="inp-box" id="description" name="exam_description" placeholder="Exam Description" cols="30" rows="10"></textarea></td>
+                    <td><textarea id="description" name="exam_description" placeholder="Exam Description" cols="30" rows="10"></textarea></td>
                 </tr>
             </table>
             <!--
