@@ -12,23 +12,23 @@ function register_validation() {
     var specialcharacter = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     var number = /[0-9]/;
     var length = /.{8,}/;
-    var username_length = /.{5,11}/;
-    var name_length = /.{1,15}/;
+    var username_length = /.{5,11}$/;
+    var name_length = /^.{1,15}$/;
     var email_pattern = /^\S+@\S+\.\S+$/;
 
-    if (!username.match(username_length)) {
+    if (!username.match(username_length) || username.length >11) {
         validate_message.textContent = "Username must be between 5 and 11 characters long";
         validate_message.style.color = "red";
         return false;
     }
 
-    if (!first_name.match(name_length)) {
+    if (!first_name.match(name_length) || first_name.length >15) {
         validate_message.textContent = "First name must be between 1 and 15 characters long";
         validate_message.style.color = "red";
         return false;
     }
 
-    if (!last_name.match(name_length)) {
+    if (!last_name.match(name_length) || last_name.length >15) {
         validate_message.textContent = "Last name must be between 1 and 15 characters long";
         validate_message.style.color = "red";
         return false;
