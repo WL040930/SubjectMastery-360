@@ -8,15 +8,16 @@
 
     if(isset($_GET['id'])) {
         $quiz_id = $_GET['id'];
-        $query =   "SELECT q.*, qq.*
-                    FROM quiz q
-                    JOIN quiz_question qq ON q.quiz_id = qq.quiz_id
-                    WHERE q.quiz_id = '$quiz_id'";
+        $query = "SELECT q.*, qq.*
+                  FROM quiz q
+                  JOIN quiz_question qq ON q.quiz_id = qq.quiz_id
+                  WHERE q.quiz_id = '$quiz_id'";
         $result = mysqli_query($connection, $query);
         $row = mysqli_fetch_assoc($result);
         $num = 0;
-    
 
+        mysqli_data_seek($result, 0);
+    
 ?>
 
 <!DOCTYPE html>
