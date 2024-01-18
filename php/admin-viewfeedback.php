@@ -4,6 +4,22 @@
     include "dbconn.php"; 
     include "admin-menu.php";
     include "admin-session.php";
+
+    if (isset($_POST['search_submit'])) {
+        // Get the entered email address
+        $searchEmail = mysqli_real_escape_string($connection, $_POST['search_email']);
+
+        // Modify the SQL query to include the search condition
+        $query = "SELECT * FROM user
+                  INNER JOIN feedback ON user.user_id = feedback.user_id
+                  WHERE user.email_address LIKE '%$searchEmail' 
+                  OR user.email_address LIKE '$searchEmail%'
+                  OR user.email_address LIKE '%$searchEmail%'";
+    } else {
+        // Default query without search condition
+        $query = "SELECT * FROM user
+                  INNER JOIN feedback ON user.user_id = feedback.user_id";
+    }
     
 ?>
 
@@ -21,16 +37,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
 <body id="all">
+    
+    <div class="form">
+        <form method="post" action="">
+            <label for="search-email">Search by Email:</label>
+            <input type="text" id="search-email" name="search_email" placeholder="Enter email address">
+            <button type="submit" name="search_submit" class="btnSubmit">Search</button>
+        </form>
+    </div>
 
     <?php 
-    
-        // SQL query to fetch user details and feedback
-        $query = "SELECT
-                    *
-                FROM
-                    user
-                INNER JOIN
-                    feedback ON user.user_id = feedback.user_id";
                 
         // Loop through the result set
         $result = mysqli_query($connection, $query); 
@@ -58,11 +74,11 @@
                 </tr>
                 <tr>
                     <td class="feedback-column">
-                        <b>Username: </b>
+                        <b>Email Addrress: </b>
                     </td>
                     <td class="feedback-column">
                         <div id="username">
-                            <?php echo $row['username']; ?>
+                            <?php echo $row['email_address']; ?>
                         </div>
                     </td>
                 </tr>

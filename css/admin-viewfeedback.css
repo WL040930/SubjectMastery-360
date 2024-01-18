@@ -54,3 +54,34 @@
 td {
     color:#fff;
 }
+
+.form {
+    width: 78%;
+    margin: 0 auto;
+    margin-top: 50px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #000;
+    padding: 15px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.btnSubmit {
+    background-color: #7E6E57;
+    color: white;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
