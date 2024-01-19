@@ -53,18 +53,6 @@
                     <td><textarea id="description" name="exam_description" placeholder="Exam Description" cols="30" rows="10"></textarea></td>
                 </tr>
             </table>
-            <!--
-            <div id="exam_name">
-                <div class="name-con"><b>Exam Name: </b></div> <br>
-                <input class="inp-box" type="text" name="exam_name" placeholder="exam name" required> <br>
-            </div>
-            <div style="clear: both"></div>
-            <div id="exam_description">
-                <b id="desc_con">Exam Description: </b>
-                <input class="inp-box" id="description" type="text" name="exam_description" placeholder="exam description"> <br>
-            </div>
-            <div style="clear: both"></div>
-            -->
             <div id="classroomsubmit_button">
                 <input type="submit" value="Create" name="submit">
             </div>
