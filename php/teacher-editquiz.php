@@ -1,18 +1,18 @@
 <?php
 
-include "dbconn.php";
-include "teacher-session.php";
-include "feature-usermenu.php";
+    include "dbconn.php";
+    include "teacher-session.php";
+    include "feature-usermenu.php";
 
-if (isset($_GET['id'])) {
-    $quiz_question_id = $_GET['id'];
-} else {
-    header("Location: teacher-managequiz.php");
-}
+    if (isset($_GET['id'])) {
+        $quiz_question_id = $_GET['id'];
+    } else {
+        header("Location: teacher-managequiz.php");
+    }
 
-$fetchQuery = "SELECT * FROM quiz_question WHERE quiz_question_id = '$quiz_question_id'";
-$fetchResult = mysqli_query($connection, $fetchQuery);
-$fetchRow = mysqli_fetch_assoc($fetchResult);
+    $fetchQuery = "SELECT * FROM quiz_question WHERE quiz_question_id = '$quiz_question_id'";
+    $fetchResult = mysqli_query($connection, $fetchQuery);
+    $fetchRow = mysqli_fetch_assoc($fetchResult);
 
 ?>
 
