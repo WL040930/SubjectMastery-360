@@ -71,7 +71,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
-<!-- Add these changes to your existing HTML -->
 
 <body>
     <div class="headerquiz">
