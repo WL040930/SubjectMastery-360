@@ -85,3 +85,7 @@ input[type=text] {
     cursor: pointer;
     font-size: 18px;
 }
+
+.feedback-box {
+    margin-bottom: 50px;
+}
