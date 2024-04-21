@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
 </head>
+    
 <body>
     <div id="ab_logomenu">
             <a href="mainpage.php"><img src="../image/pic_re.png" id="ab_weblogo" alt="logo"></a>
